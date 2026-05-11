@@ -1,6 +1,5 @@
 import AuthLayout from "../components/auth/AuthLayout";
 import AuthCard from "../components/auth/AuthCard";
-
 import Input from "../components/ui/Input";
 import PasswordInput from "../components/ui/PasswordInput";
 import Button from "../components/ui/Button";

@@ -17,7 +17,7 @@ const AuthLayout = ({ children }) => {
         to-[#FF6584]
       "
     >
-      {/* TOP BLUR */}
+   
       <div
         className="
           absolute
@@ -31,7 +31,7 @@ const AuthLayout = ({ children }) => {
         "
       />
 
-      {/* BOTTOM BLUR */}
+     
       <div
         className="
           absolute
@@ -45,7 +45,7 @@ const AuthLayout = ({ children }) => {
         "
       />
 
-      {/* CENTER CONTENT */}
+    
       <div
         className="
           relative
