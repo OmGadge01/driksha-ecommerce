@@ -4,3 +4,6 @@
   --color-primary: #6C63FF;
   --color-accent: #FF6584;
 }
+* {
+  font-family: 'Inter', sans-serif;
+}
