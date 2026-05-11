@@ -1,6 +1,14 @@
+import AuthLayout from "../components/auth/AuthLayout";
+import AuthCard from "../components/auth/AuthCard";
+import Input from "../components/ui/Input";
+import PasswordInput from "../components/ui/PasswordInput";
+import Button from "../components/ui/Button";
+import SocialButton from "../components/ui/SocialButton";
+import { motion } from "framer-motion";
+import google from "../../public/Google-logo.png";
 import { useState } from "react";
 
-function Login() {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -16,68 +24,91 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5ff] flex items-center justify-center px-4">
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-[#1a1a2e] text-xl font-medium mb-1">
-          Welcome back
-        </h2>
-        <p className="text-gray-400 text-sm mb-6">
-          Sign in to continue shopping
-        </p>
+    <AuthLayout>
+      <motion.div
+        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.45 }}
+        className="w-full flex justify-center"
+      >
+        <AuthCard>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="text-gray-500 text-sm mb-1 block">Email</label>
-            <input
+           <div className="text-center">
+              <h1
+                className="
+                  text-2xl
+                  font-semibold
+                  tracking-tight
+                 text-gray-800
+                "
+              >
+                Welcome back!
+                </h1>
+
+              <p
+                className="
+                  mt-1
+                  text-sm
+                  text-gray-900
+                "
+              >
+               Sign in to continue shopping.
+              </p>
+            </div>
+
+          <div className="space-y-4">
+
+            <Input
+              label="Email Address"
               type="email"
               name="email"
+              placeholder="john@example.com"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Enter your email"
-              className="w-full bg-[#f9f9ff] border border-[#e0e0ff] rounded-xl px-4 py-3 text-sm text-[#1a1a2e] outline-none placeholder-gray-300 focus:border-primary transition"
             />
-          </div>
-          <div>
-            <label className="text-gray-500 text-sm mb-1 block">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter your password"
-              className="w-full bg-[#f9f9ff] border border-[#e0e0ff] rounded-xl px-4 py-3 text-sm text-[#1a1a2e] outline-none placeholder-gray-300 focus:border-primary transition"
-            />
-            <div className="text-right mt-1">
-              <a href="#" className="text-primary text-xs">
-                Forgot password?
-              </a>
+
+            <div>
+              <PasswordInput
+                label="Password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <div className="text-right mt-1">
+                <span className="text-xs text-white/60 hover:text-white cursor-pointer transition">
+                  Forgot password?
+                </span>
+              </div>
             </div>
+
+            <div className="pt-2">
+              <Button onClick={handleSubmit}>
+                Sign In
+              </Button>
+            </div>
+
+            <div className="space-y-3">
+              <SocialButton
+                text="Continue with Google"
+                icon={google}
+              />
+            </div>
+
+            <div className="pt-3 text-center">
+              <p className="text-sm text-white/70">
+                Don't have an account?{" "}
+                <span className="text-white font-medium hover:underline cursor-pointer">
+                  Sign Up
+                </span>
+              </p>
+            </div>
+
           </div>
-          <button
-            type="submit"
-            className="w-full bg-primary hover:bg-[#5a52e0] text-white rounded-xl py-3 text-sm font-medium transition"
-          >
-            Sign In
-          </button>
-        </form>
-        <div className="flex items-center gap-3 my-5">
-          <div className="flex-1 h-px bg-[#ebebff]"></div>
-          <span className="text-gray-300 text-xs">OR</span>
-          <div className="flex-1 h-px bg-[#ebebff]"></div>
-        </div>
-        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#e0e0ff] rounded-xl py-3 text-sm text-gray-500 hover:border-primary transition">
-          <span className="text-accent font-semibold">G</span>
-          Continue with Google
-        </button>
-        <p className="text-center text-gray-400 text-sm mt-5">
-          Don't have an account?{" "}
-          <a href="#" className="text-primary font-medium">
-            Sign up
-          </a>
-        </p>
-      </div>
-    </div>
+        </AuthCard>
+      </motion.div>
+    </AuthLayout>
   );
-}
+};
 
 export default Login;
