@@ -26,7 +26,7 @@ const Signup = () => {
                   text-2xl
                   font-semibold
                   tracking-tight
-                  text-white
+                 text-gray-800
                 "
               >
                 Create Account
@@ -36,14 +36,14 @@ const Signup = () => {
                 className="
                   mt-1
                   text-sm
-                  text-white/70
+                  text-gray-900
                 "
               >
                 Start your modern shopping journey today.
               </p>
             </div>
 
-          {/* FORM */}
+          
 
           <div className="space-y-4">
 
@@ -92,11 +92,11 @@ const Signup = () => {
 
          
             <div className="pt-3 text-center">
-              <p className="text-sm text-black">
+              <p className="text-sm text-gray-900">
                 Already have an account?{" "}
                 <span
                   className="
-                    text-black
+                    text-gray-900
                     font-medium
                     hover:underline
                     cursor-pointer

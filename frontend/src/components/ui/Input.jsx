@@ -12,7 +12,7 @@ const Input = ({ label, type = "text", placeholder, value, onChange }) => {
         onChange={onChange}
         className="
             w-full
-            h-10
+            h-8
             px-4
             text-sm
             border
