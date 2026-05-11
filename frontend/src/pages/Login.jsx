@@ -34,7 +34,7 @@ function Login() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter your email"
-              className="w-full bg-[#f9f9ff] border border-[#e0e0ff] rounded-xl px-4 py-3 text-sm text-[#1a1a2e] outline-none placeholder-gray-300 focus:border-[#6C63FF] transition"
+              className="w-full bg-[#f9f9ff] border border-[#e0e0ff] rounded-xl px-4 py-3 text-sm text-[#1a1a2e] outline-none placeholder-gray-300 focus:border-primary transition"
             />
           </div>
           <div>
@@ -45,17 +45,17 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="w-full bg-[#f9f9ff] border border-[#e0e0ff] rounded-xl px-4 py-3 text-sm text-[#1a1a2e] outline-none placeholder-gray-300 focus:border-[#6C63FF] transition"
+              className="w-full bg-[#f9f9ff] border border-[#e0e0ff] rounded-xl px-4 py-3 text-sm text-[#1a1a2e] outline-none placeholder-gray-300 focus:border-primary transition"
             />
             <div className="text-right mt-1">
-              <a href="#" className="text-[#6C63FF] text-xs">
+              <a href="#" className="text-primary text-xs">
                 Forgot password?
               </a>
             </div>
           </div>
           <button
             type="submit"
-            className="w-full bg-[#6C63FF] hover:bg-[#5a52e0] text-white rounded-xl py-3 text-sm font-medium transition"
+            className="w-full bg-primary hover:bg-[#5a52e0] text-white rounded-xl py-3 text-sm font-medium transition"
           >
             Sign In
           </button>
@@ -65,13 +65,13 @@ function Login() {
           <span className="text-gray-300 text-xs">OR</span>
           <div className="flex-1 h-px bg-[#ebebff]"></div>
         </div>
-        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#e0e0ff] rounded-xl py-3 text-sm text-gray-500 hover:border-[#6C63FF] transition">
-          <span className="text-[#FF6584] font-semibold">G</span>
+        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#e0e0ff] rounded-xl py-3 text-sm text-gray-500 hover:border-primary transition">
+          <span className="text-accent font-semibold">G</span>
           Continue with Google
         </button>
         <p className="text-center text-gray-400 text-sm mt-5">
           Don't have an account?{" "}
-          <a href="#" className="text-[#6C63FF] font-medium">
+          <a href="#" className="text-primary font-medium">
             Sign up
           </a>
         </p>
