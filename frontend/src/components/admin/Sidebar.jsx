@@ -60,7 +60,7 @@ export default function Sidebar() {
   function handleLogout() {
     setLoggingOut(true);
     setTimeout(() => {
-      navigate("/admin/login");
+      navigate("/");
     }, 600);
   }
 
