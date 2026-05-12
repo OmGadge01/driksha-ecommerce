@@ -20,8 +20,16 @@ function App() {
           element={<Signup />}
         />
       </Routes>
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+
+        <Route path="/admin" element={<AdminLayout />} />
+      </Routes>
+
     </BrowserRouter>
   );
+
 }
 
-export default App
+export default App;
