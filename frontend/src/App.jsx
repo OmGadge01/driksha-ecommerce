@@ -3,7 +3,6 @@ import AdminLayout from './layout/AdminLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup'
-import Login from "../src/pages/Login"
 import {
   BrowserRouter,
   Routes,
@@ -36,10 +35,6 @@ function App() {
 
     </BrowserRouter>
   );
-<<<<<<< HEAD
-=======
-
->>>>>>> 22fa1c69a29979b434be97c66c97a272bb26dcb3
 }
 
 export default App;
