@@ -2,7 +2,7 @@ import AuthLayout from "../components/auth/AuthLayout";
 import AuthCard from "../components/auth/AuthCard";
 import Input from "../components/ui/Input";
 import PasswordInput from "../components/ui/PasswordInput";
-import Button from "../components/ui/Button";
+import Button from "../components/ui/SignUpButton";
 import SocialButton from "../components/ui/SocialButton";
 import Checkbox from "../components/ui/Checkbox";
 import { motion } from "framer-motion";
@@ -67,7 +67,7 @@ const Signup = () => {
               placeholder="Confirm password"
             />
 
-            {/* TERMS */}
+           
 
             <div className="pt-1">
               <Checkbox label="I agree to Terms & Privacy Policy" />

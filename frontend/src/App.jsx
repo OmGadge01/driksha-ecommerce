@@ -1,5 +1,7 @@
 import Navbar from './components/layout/Navbar'
+import AdminLayout from './layout/AdminLayout';
 import Home from './pages/Home';
+import Login from './pages/Login';
 import Signup from './pages/Signup'
 import Login from "../src/pages/Login"
 import {
@@ -25,8 +27,19 @@ function App() {
           element={<Login />}
         />
       </Routes>
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+
+        <Route path="/admin" element={<AdminLayout />} />
+      </Routes>
+
     </BrowserRouter>
   );
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22fa1c69a29979b434be97c66c97a272bb26dcb3
 }
 
-export default App
+export default App;
