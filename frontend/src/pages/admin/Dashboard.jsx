@@ -74,14 +74,14 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-1 bg-[#f5f5ff] p-4 md:p-6 space-y-6">
+    <div className="space-y-4 md:space-y-6">
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="bg-white rounded-2xl p-4 border border-[#e0e0ff]"
+            className="bg-white rounded-2xl p-3 md:p-4 border border-[#e0e0ff]"
           >
             <p className="text-xs text-gray-400 mb-1">{stat.label}</p>
             <p className="text-2xl font-medium text-[#1a1a2e]">{stat.value}</p>
@@ -99,7 +99,7 @@ export default function Dashboard() {
       </div>
 
       {/* Monthly Orders + Quick Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
 
         {/* Monthly Orders Chart */}
         <div className="bg-white rounded-2xl p-5 border border-[#e0e0ff]">
@@ -158,18 +158,38 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Orders */}
-      <div className="bg-white rounded-2xl p-5 border border-[#e0e0ff]">
+      <div className="bg-white rounded-2xl p-4 md:p-5 border border-[#e0e0ff]">
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm font-medium text-[#1a1a2e]">Recent orders</p>
-          <button
-            onClick={() => navigate("/admin/orders")}
-            className="text-xs text-[#6C63FF] hover:underline"
-          >
+          <button onClick={() => navigate("/admin/orders")} className="text-xs text-[#6C63FF] hover:underline">
             View all
           </button>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile: cards */}
+        <div className="flex flex-col gap-3 md:hidden">
+          {recentOrders.map((order) => (
+            <div key={order.id} className="border border-[#f0f0ff] rounded-xl p-3 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[#6C63FF] font-medium text-sm">{order.id}</span>
+                <span
+                  className="text-xs px-2.5 py-0.5 rounded-full font-medium"
+                  style={{ background: statusColors[order.status].bg, color: statusColors[order.status].text }}
+                >
+                  {order.status}
+                </span>
+              </div>
+              <p className="text-sm text-gray-700">{order.customer}</p>
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-gray-400 truncate mr-2">{order.product}</p>
+                <p className="text-sm font-medium text-gray-700 shrink-0">{order.amount}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: table */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[#f0f0ff]">
@@ -182,10 +202,7 @@ export default function Dashboard() {
             </thead>
             <tbody>
               {recentOrders.map((order) => (
-                <tr
-                  key={order.id}
-                  className="border-b border-[#f5f5ff] last:border-0 hover:bg-[#f9f9ff] transition"
-                >
+                <tr key={order.id} className="border-b border-[#f5f5ff] last:border-0 hover:bg-[#f9f9ff] transition">
                   <td className="py-3 text-[#6C63FF] font-medium">{order.id}</td>
                   <td className="py-3 text-gray-600">{order.customer}</td>
                   <td className="py-3 text-gray-600">{order.product}</td>
@@ -193,10 +210,7 @@ export default function Dashboard() {
                   <td className="py-3">
                     <span
                       className="text-xs px-3 py-1 rounded-full font-medium"
-                      style={{
-                        background: statusColors[order.status].bg,
-                        color: statusColors[order.status].text,
-                      }}
+                      style={{ background: statusColors[order.status].bg, color: statusColors[order.status].text }}
                     >
                       {order.status}
                     </span>
