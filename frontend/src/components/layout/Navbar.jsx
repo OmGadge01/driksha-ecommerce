@@ -1,220 +1,204 @@
-import React from "react";
-import {
-  Search,
-  ShoppingCart,
-  Heart,
-  User,
-} from "lucide-react";
+import { Search, ShoppingCart, Heart, User } from "lucide-react";
+
+const navLinks = ["Home", "Shop", "Categories", "Deals", "Contact"];
 
 const Navbar = () => {
   return (
     <header
       className="
+        fixed
+        top-0
+        left-0
+        z-50
         w-full
-        bg-white
         border-b
         border-gray-100
-        sticky
-        top-0
-        z-50
+        bg-white/90
+        backdrop-blur-md
       "
     >
       <div
         className="
-          max-w-7xl
           mx-auto
-          px-6
-          h-16
           flex
+          h-16
+          max-w-7xl
           items-center
           justify-between
+          px-6
         "
       >
- 
-        <div className="flex items-center gap-2 cursor-pointer">
+        <div className="flex items-center gap-3 cursor-pointer">
           <div
             className="
-              w-9
-              h-9
-              rounded-xl
-              bg-[#6C63FF]
               flex
+              h-10
+              w-10
               items-center
               justify-center
-              text-white
+              rounded-xl
+              bg-[#6C63FF]
+              text-sm
               font-bold
+              text-white
+              shadow-lg
+              shadow-[#6C63FF]/20
             "
           >
-           L
+            L
           </div>
 
-          <h1
-            className="
-              text-lg
-              font-semibold
-              text-gray-900
-            "
-          >
-            Logo Name
-          </h1>
+          <div>
+            <h1
+              className="
+                text-base
+                font-semibold
+                tracking-tight
+                text-gray-900
+              "
+            >
+              Luxe
+            </h1>
+
+            <p className="text-[11px] text-gray-500">Modern Commerce</p>
+          </div>
         </div>
 
-  
+        <nav className="hidden items-center gap-8 md:flex">
+          {navLinks.map((item, index) => (
+            <a
+              key={item}
+              href="#"
+              className={`
+                relative
+                text-sm
+                font-medium
+                transition-colors
+                duration-300
 
-        <nav className="hidden md:flex items-center gap-8">
-          
-          <a
-            href="#"
-            className="
-              text-sm
-              font-medium
-              text-[#6C63FF]
-              relative
-            "
-          >
-            Home
+                ${
+                  index === 0
+                    ? "text-[#6C63FF]"
+                    : "text-gray-500 hover:text-[#6C63FF]"
+                }
+              `}
+            >
+              {item}
 
-           
-            <span
-              className="
-                absolute
-                -bottom-1.5
-                left-0
-                w-full
-                h-[2px]
-                bg-[#6C63FF]
-                rounded-full
-              "
-            />
-          </a>
-
-          {["Shop", "Categories", "Deals", "Contact"].map(
-            (item) => (
-              <a
-                key={item}
-                href="#"
-                className="
-                  text-sm
-                  font-medium
-                  text-gray-500
-                  hover:text-[#6C63FF]
-                  transition-colors
-                  duration-300
-                "
-              >
-                {item}
-              </a>
-            )
-          )}
+              {index === 0 && (
+                <span
+                  className="
+                    absolute
+                    -bottom-[22px]
+                    left-0
+                    h-[2px]
+                    w-full
+                    rounded-full
+                    bg-[#6C63FF]
+                  "
+                />
+              )}
+            </a>
+          ))}
         </nav>
 
-       
-
         <div className="flex items-center gap-3">
-
-          
-
           <button
             className="
-              w-10
+              flex
               h-10
+              w-10
+              items-center
+              justify-center
               rounded-xl
               border
               border-gray-200
-              flex
-              items-center
-              justify-center
               text-gray-500
-              hover:text-[#6C63FF]
-              hover:border-[#6C63FF]/30
               transition-all
               duration-300
+              hover:border-[#6C63FF]/30
+              hover:text-[#6C63FF]
             "
           >
             <Search size={18} />
           </button>
 
-
-
           <button
             className="
-              w-10
+              flex
               h-10
+              w-10
+              items-center
+              justify-center
               rounded-xl
               border
               border-gray-200
-              flex
-              items-center
-              justify-center
               text-gray-500
-              hover:text-[#6C63FF]
-              hover:border-[#6C63FF]/30
               transition-all
               duration-300
+              hover:border-[#6C63FF]/30
+              hover:text-[#6C63FF]
             "
           >
             <Heart size={18} />
           </button>
 
-
           <button
             className="
               relative
-              w-10
+              flex
               h-10
+              w-10
+              items-center
+              justify-center
               rounded-xl
               border
               border-gray-200
-              flex
-              items-center
-              justify-center
               text-gray-500
-              hover:text-[#6C63FF]
-              hover:border-[#6C63FF]/30
               transition-all
               duration-300
+              hover:border-[#6C63FF]/30
+              hover:text-[#6C63FF]
             "
           >
             <ShoppingCart size={18} />
 
-     
-
             <span
               className="
                 absolute
-                -top-1
                 -right-1
-                w-5
-                h-5
-                rounded-full
-                bg-[#6C63FF]
-                text-white
-                text-[10px]
+                -top-1
                 flex
+                h-5
+                w-5
                 items-center
                 justify-center
+                rounded-full
+                bg-[#6C63FF]
+                text-[10px]
+                font-medium
+                text-white
               "
             >
               2
             </span>
           </button>
 
-   
-
           <button
             className="
-              w-10
-              h-10
-              rounded-xl
-              bg-[#6C63FF]
               flex
+              h-10
+              w-10
               items-center
               justify-center
+              rounded-xl
+              bg-[#6C63FF]
               text-white
-              shadow-md
-              hover:bg-[#5b52f5]
+              shadow-lg
+              shadow-[#6C63FF]/20
               transition-all
               duration-300
+              hover:bg-[#5b52f5]
             "
           >
             <User size={18} />
