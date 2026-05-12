@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
           {product.category}
         </span>
 
-        <h3 className="mt-1 text-lg font-semibold text-gray-900">
+        <h3 className="mt-1 text-base sm:text-lg font-semibold text-gray-900">
           {product.name}
         </h3>
 

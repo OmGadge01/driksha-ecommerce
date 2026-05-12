@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from '../components/admin/Sidebar'
 import TopHeader from '../components/admin/TopHeader'
 import Dashboard from '../pages/admin/Dashboard'
+import { Outlet } from 'react-router-dom'
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -13,9 +14,9 @@ const AdminLayout = () => {
         <div className="shrink-0">
           <TopHeader onMenuClick={() => setSidebarOpen(true)} />
         </div>
-        <div className="flex-1 overflow-y-auto bg-[#f5f5ff] p-3 sm:p-4 md:p-6">
-          <Dashboard />
-        </div>
+        <main className="flex-1 overflow-y-auto bg-[#f5f5ff] p-3 sm:p-4 md:p-6">
+          <Outlet />
+        </main>
       </div>
     </div>
   )
