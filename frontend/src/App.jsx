@@ -1,6 +1,7 @@
 import Navbar from './components/layout/Navbar'
 import Home from './pages/Home';
 import Signup from './pages/Signup'
+import Login from "../src/pages/Login"
 import {
   BrowserRouter,
   Routes,
@@ -18,6 +19,10 @@ function App() {
         <Route
           path="/signup"
           element={<Signup />}
+        />
+         <Route
+          path="/login"
+          element={<Login />}
         />
       </Routes>
     </BrowserRouter>

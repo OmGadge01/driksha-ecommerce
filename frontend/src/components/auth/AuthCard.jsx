@@ -25,34 +25,3 @@ const AuthCard = ({ children, title, subtitle }) => {
 };
 
 export default AuthCard;
-import React from "react";
-
-const AuthCard = ({ children, title, subtitle }) => {
-  return (
-    <div
-      className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 px-7 py-4"
-    >
-
-
-      <div className="text-center">
-        <h2 className="text-xl font-bold text-gray-900">
-          {title}
-        </h2>
-
-        {subtitle && (
-          <p className="mt-1 text-xs text-gray-500">
-            {subtitle}
-          </p>
-        )}
-      </div>
-
-      {/* Content */}
-
-      <div className="space-y-2.5">
-        {children}
-      </div>
-    </div>
-  );
-};
-
-export default AuthCard;
