@@ -12,17 +12,18 @@ const Input = ({ label, type = "text", placeholder, value, onChange }) => {
         onChange={onChange}
         className="
             w-full
-            h-8
             px-4
-            text-sm
+            py-2
             border
             border-gray-200
             rounded-xl
             outline-none
-            focus:ring-2
-            focus:ring-[#6C63FF]/20
-            focus:border-[#6C63FF]
             transition-all
+            duration-300
+            focus:border-[#6C63FF]
+            focus:ring-4
+            focus:ring-purple-100
+            bg-white
             "
       />
     </div>
