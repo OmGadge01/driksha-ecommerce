@@ -13,6 +13,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Customers from './pages/admin/Customers';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="products/edit/:id" element={<ProductForm /> } />
           <Route path="categories" element={<Categories />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="customers" element={<Customers />} />
         </Route>
          
 
