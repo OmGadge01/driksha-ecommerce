@@ -1,6 +1,7 @@
 import Navbar from './components/layout/Navbar'
 import AdminLayout from './layout/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
+import Categories from './pages/admin/Categories';
 import Orders from './pages/admin/Orders';
 import ProductForm from './pages/admin/ProductForm';
 import Products from './pages/admin/Products';
