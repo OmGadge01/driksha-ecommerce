@@ -1,7 +1,7 @@
 import Navbar from './components/layout/Navbar'
 import AdminLayout from './layout/AdminLayout';
-import Categories from './pages/admin/Categories';
 import Dashboard from './pages/admin/Dashboard';
+import Orders from './pages/admin/Orders';
 import ProductForm from './pages/admin/ProductForm';
 import Products from './pages/admin/Products';
 import Home from './pages/Home';
@@ -36,6 +36,7 @@ function App() {
           <Route path="products/add" element={<ProductForm /> } />
           <Route path="products/edit/:id" element={<ProductForm /> } />
           <Route path="categories" element={<Categories />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
          
 
