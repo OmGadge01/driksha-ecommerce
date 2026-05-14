@@ -1,15 +1,38 @@
+import { useState } from "react";
+
 const sizes = ["XS", "S", "M", "L", "XL"];
 
 const FilterSidebar = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All Products");
+  const [selectedSize, setSelectedSize] = useState("XS");
+  const [selectedColor, setSelectedColor] = useState("#111827");
+
+  const categories = [
+    "All Products",
+    "Outerwear",
+    "Knitwear",
+    "Accessories",
+  ];
+
+  const colors = [
+    "#111827",
+    "#E5E7EB",
+    "#6C63FF",
+    "#D4AF37",
+    "#334155",
+  ];
+
   return (
-    <aside className="w-full md:w-72">
-      <div className="sticky top-28 space-y-10">
+    <aside className="w-full md:w-72 p-4 md:p-0">
+      <div className="sticky top-28 space-y-8 md:space-y-10">
         
         <div>
           <h3
             className="
-              mb-5
-              text-sm
+              mb-4
+              md:mb-5
+              text-xs
+              md:text-sm
               font-semibold
               uppercase
               tracking-wider
@@ -19,13 +42,8 @@ const FilterSidebar = () => {
             Category
           </h3>
 
-          <div className="space-y-4">
-            {[
-              "All Products",
-              "Outerwear",
-              "Knitwear",
-              "Accessories",
-            ].map((item, index) => (
+          <div className="space-y-2 md:space-y-4">
+            {categories.map((item) => (
               <label
                 key={item}
                 className="
@@ -33,7 +51,10 @@ const FilterSidebar = () => {
                   cursor-pointer
                   items-center
                   gap-3
+                  transition-opacity
+                  hover:opacity-70
                 "
+                onClick={() => setSelectedCategory(item)}
               >
                 <div
                   className={`
@@ -44,9 +65,10 @@ const FilterSidebar = () => {
                     justify-center
                     rounded
                     border-2
+                    transition-all
 
                     ${
-                      index === 0
+                      selectedCategory === item
                         ? "border-[#6C63FF] bg-[#6C63FF]"
                         : "border-gray-300"
                     }
@@ -55,11 +77,13 @@ const FilterSidebar = () => {
 
                 <span
                   className={`
-                    text-sm
+                    text-xs
+                    md:text-sm
+                    transition-colors
 
                     ${
-                      index === 0
-                        ? "text-gray-900"
+                      selectedCategory === item
+                        ? "text-gray-900 font-medium"
                         : "text-gray-500"
                     }
                   `}
@@ -74,8 +98,10 @@ const FilterSidebar = () => {
         <div>
           <h3
             className="
-              mb-5
-              text-sm
+              mb-4
+              md:mb-5
+              text-xs
+              md:text-sm
               font-semibold
               uppercase
               tracking-wider
@@ -85,22 +111,26 @@ const FilterSidebar = () => {
             Size
           </h3>
 
-          <div className="grid grid-cols-3 gap-3">
-            {sizes.map((size, index) => (
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-3">
+            {sizes.map((size) => (
               <button
                 key={size}
+                onClick={() => setSelectedSize(size)}
                 className={`
-                  h-11
+                  h-9
+                  md:h-11
                   rounded-xl
                   border
-                  text-sm
+                  text-xs
+                  md:text-sm
                   font-medium
                   transition-all
+                  duration-200
 
                   ${
-                    index === 0
-                      ? "border-[#6C63FF] bg-[#6C63FF]/10 text-[#6C63FF]"
-                      : "border-gray-200 text-gray-500 hover:border-[#6C63FF]"
+                    selectedSize === size
+                      ? "border-[#6C63FF] bg-[#6C63FF]/10 text-[#6C63FF] shadow-md"
+                      : "border-gray-200 text-gray-500 hover:border-[#6C63FF] hover:text-gray-700"
                   }
                 `}
               >
@@ -113,8 +143,10 @@ const FilterSidebar = () => {
         <div>
           <h3
             className="
-              mb-5
-              text-sm
+              mb-4
+              md:mb-5
+              text-xs
+              md:text-sm
               font-semibold
               uppercase
               tracking-wider
@@ -124,26 +156,23 @@ const FilterSidebar = () => {
             Colors
           </h3>
 
-          <div className="flex gap-3">
-            {[
-              "#111827",
-              "#E5E7EB",
-              "#6C63FF",
-              "#D4AF37",
-              "#334155",
-            ].map((color, index) => (
+          <div className="flex gap-3 flex-wrap">
+            {colors.map((color) => (
               <button
                 key={color}
+                onClick={() => setSelectedColor(color)}
                 style={{ backgroundColor: color }}
                 className={`
                   h-8
                   w-8
                   rounded-full
+                  transition-all
+                  duration-200
 
                   ${
-                    index === 0
-                      ? "ring-2 ring-[#6C63FF] ring-offset-2"
-                      : ""
+                    selectedColor === color
+                      ? "ring-2 ring-[#6C63FF] ring-offset-2 scale-110"
+                      : "hover:scale-105 opacity-80 hover:opacity-100"
                   }
                 `}
               />

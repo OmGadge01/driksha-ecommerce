@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Navbar from "../layout/Navbar";
 
 const MainLayout = ({ children }) => {
@@ -13,20 +12,4 @@ const MainLayout = ({ children }) => {
   );
 };
 
-=======
-import Navbar from "../layout/Navbar";
-
-const MainLayout = ({ children }) => {
-  return (
-    <>
-      <Navbar />
-
-      <main>
-        {children}
-      </main>
-    </>
-  );
-};
-
->>>>>>> integration
 export default MainLayout;
