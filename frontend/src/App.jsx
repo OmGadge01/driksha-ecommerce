@@ -25,6 +25,7 @@ import Customers from "./pages/admin/Customers";
 import Settings from "./pages/admin/Settings";
 import Banner from "./pages/admin/Banner";
 import FaqManager from "./pages/admin/FaqManager";
+import Newsletter from "./pages/admin/NewsLetter";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="banner" element={<Banner />} />
           <Route path="faq" element={<FaqManager />} />
+          <Route path="newsletter" element={<Newsletter /> } />
           
         </Route>
 
