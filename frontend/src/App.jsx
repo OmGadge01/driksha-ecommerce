@@ -1,54 +1,60 @@
-import Navbar from './components/layout/Navbar'
-import AdminLayout from './layout/AdminLayout';
-import Dashboard from './pages/admin/Dashboard';
-import Categories from './pages/admin/Categories';
-import Orders from './pages/admin/Orders';
-import ProductForm from './pages/admin/ProductForm';
-import Products from './pages/admin/Products';
-import Home from './pages/Customer/Home';
-import Login from './pages/Customer/Product';
-import Signup from './pages/Signup'
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import Customers from './pages/admin/Customers';
+
+// Layouts
+import AdminLayout from "./layout/AdminLayout";
+
+// Public Pages
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
+// Customer Pages
+import Home from "./pages/customer/Home";
+import Collections from "./pages/Customer/Collection";
+
+// Admin Pages
+import Dashboard from "./pages/admin/Dashboard";
+import Products from "./pages/admin/Products";
+import ProductForm from "./pages/admin/ProductForm";
+import Categories from "./pages/admin/Categories";
+import Orders from "./pages/admin/Orders";
+import Customers from "./pages/admin/Customers";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/home"
-          element={<Home/>}
-        />
-        <Route
-          path="/signup"
-          element={<Signup />}
-        />
-         <Route
-          path="/login"
-          element={<Login />}
-        />
-      </Routes>
 
-      <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-        <Route path="/admin" element={<AdminLayout />} >
+        {/* Customer Routes */}
+        <Route path="/home" element={<Home />} />
+        <Route path="/collections" element={<Collections />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin" element={<AdminLayout />}>
+
           <Route index element={<Dashboard />} />
-          <Route path="products" element={<Products />} />
-          <Route path="products/add" element={<ProductForm /> } />
-          <Route path="products/edit/:id" element={<ProductForm /> } />
+
+          <Route path="products">
+            <Route index element={<Products />} />
+            <Route path="add" element={<ProductForm />} />
+            <Route path="edit/:id" element={<ProductForm />} />
+          </Route>
+
           <Route path="categories" element={<Categories />} />
           <Route path="orders" element={<Orders />} />
           <Route path="customers" element={<Customers />} />
+
         </Route>
-         
 
       </Routes>
-
     </BrowserRouter>
   );
 }
