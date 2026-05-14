@@ -5,8 +5,8 @@ import Categories from './pages/admin/Categories';
 import Orders from './pages/admin/Orders';
 import ProductForm from './pages/admin/ProductForm';
 import Products from './pages/admin/Products';
-import Home from './pages/Home';
-import Login from './pages/Login';
+import Home from './pages/Customer/Home';
+import Login from './pages/Customer/Product';
 import Signup from './pages/Signup'
 import {
   BrowserRouter,
