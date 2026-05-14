@@ -1,4 +1,5 @@
 import Navbar from './components/layout/Navbar'
+import Collection from './pages/Collection';
 import Home from './pages/Home';
 import Signup from './pages/Signup'
 import {
@@ -18,6 +19,10 @@ function App() {
         <Route
           path="/signup"
           element={<Signup />}
+        />
+        <Route
+          path="/collections"
+          element={<Collection />}
         />
       </Routes>
     </BrowserRouter>
