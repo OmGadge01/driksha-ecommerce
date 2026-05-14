@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react'
 
 function NewsLetter() {
@@ -7,14 +6,4 @@ function NewsLetter() {
   )
 }
 
-=======
-import React from 'react'
-
-function NewsLetter() {
-  return (
-    <div>NewsLetter</div>
-  )
-}
-
->>>>>>> integration
 export default NewsLetter
