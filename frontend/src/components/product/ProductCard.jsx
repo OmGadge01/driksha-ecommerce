@@ -1,20 +1,40 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="group cursor-pointer">
-      <div className="relative overflow-hidden rounded-2xl bg-gray-100 aspect-[3/4]">
+    <Link
+      to={`/product/${product.id}`}
+      className="group block cursor-pointer"
+    >
+      <div
+        className="
+          relative
+          aspect-[3/4]
+          overflow-hidden
+          rounded-2xl
+          bg-gray-100
+        "
+      >
         <img
           src={product.image}
           alt={product.name}
-          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+          className="
+            h-full
+            w-full
+            object-cover
+            transition
+            duration-700
+            group-hover:scale-105
+          "
         />
 
         <button
+          onClick={(e) => e.preventDefault()}
           className="
             absolute
-            top-4
             right-4
+            top-4
             flex
             h-10
             w-10
@@ -31,6 +51,7 @@ const ProductCard = ({ product }) => {
         </button>
 
         <button
+          onClick={(e) => e.preventDefault()}
           className="
             absolute
             bottom-4
@@ -55,19 +76,40 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="pt-4">
-        <span className="text-xs uppercase tracking-wider text-gray-500">
+        <span
+          className="
+            text-xs
+            uppercase
+            tracking-wider
+            text-gray-500
+          "
+        >
           {product.category}
         </span>
 
-        <h3 className="mt-1 text-base sm:text-lg font-semibold text-gray-900">
+        <h3
+          className="
+            mt-1
+            text-base
+            font-semibold
+            text-gray-900
+            sm:text-lg
+          "
+        >
           {product.name}
         </h3>
 
-        <p className="mt-1 font-medium text-[#6C63FF]">
+        <p
+          className="
+            mt-1
+            font-medium
+            text-[#6C63FF]
+          "
+        >
           {product.price}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
