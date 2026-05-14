@@ -1,6 +1,6 @@
 import Navbar from './components/layout/Navbar'
-import Collection from './pages/Collection';
-import Home from './pages/Home';
+import Collection from './pages/Customer/Collection';
+import Home from './pages/Customers/Home';
 import Signup from './pages/Signup'
 import {
   BrowserRouter,

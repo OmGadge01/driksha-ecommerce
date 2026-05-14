@@ -1,5 +1,4 @@
 import MainLayout from "../components/layout/MainLayout";
-
 import CollectionHeader from "../components/collection/CollectionHeader";
 import FilterSidebar from "../components/collection/FilterSidebar";
 import ProductGrid from "../components/collection/ProductGrid";
