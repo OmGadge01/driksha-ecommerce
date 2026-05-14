@@ -23,6 +23,7 @@ import Categories from "./pages/admin/Categories";
 import Orders from "./pages/admin/Orders";
 import Customers from "./pages/admin/Customers";
 import Settings from "./pages/admin/Settings";
+import Banner from "./pages/admin/Banner";
 
 function App() {
   return (
@@ -53,7 +54,8 @@ function App() {
           <Route path="orders" element={<Orders />} />
           <Route path="customers" element={<Customers />} />
           <Route path="settings" element={<Settings />} />
-
+          <Route path="banner" element={<Banner />} />
+          
         </Route>
 
       </Routes>

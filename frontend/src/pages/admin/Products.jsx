@@ -258,9 +258,9 @@ const handleDelete = () => {
               <tr>
                 <td colSpan={6} className="py-16 text-center">
                   <MdOutlineInventory2 size={36} className="text-gray-200 mx-auto mb-2" />
-                  <p className="text-sm text-gray-400">Koi product nahi mila</p>
+                  <p className="text-sm text-gray-400">No products found</p>
                   <p className="text-xs text-gray-300 mt-1">
-                    Search ya filter change karo
+                    Try changing the search or filter
                   </p>
                 </td>
               </tr>
