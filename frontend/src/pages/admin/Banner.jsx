@@ -49,12 +49,12 @@ import BannerModal from "../../components/admin/banner/BannerModal";
 
 export default function Banner() {
 
-  const [banners, setBanners]   = useState(INITIAL_BANNERS); 
-  const [modal, setModal]       = useState(null);            
+  const [banners, setBanners] = useState(INITIAL_BANNERS); 
+  const [modal, setModal] = useState(null);            
   const [deleteId, setDeleteId] = useState(null);        
-  function openAdd()        { setModal({ ...EMPTY_BANNER }); }   
+  function openAdd() { setModal({ ...EMPTY_BANNER }); }   
   function openEdit(banner) { setModal({ ...banner }); }         
-  function closeModal()     { setModal(null); }
+  function closeModal() { setModal(null); }
 
   function handleSave(form) {
     if (form.id) {
@@ -71,7 +71,7 @@ export default function Banner() {
     );
   }
 
-  function handleDelete(id)  { setDeleteId(id); }  
+  function handleDelete(id){ setDeleteId(id); }  
 
   function confirmDelete() {
     setBanners((prev) => prev.filter((b) => b.id !== deleteId));

@@ -1,11 +1,4 @@
-import {
-  MdOutlineDelete,
-  MdOutlineEdit,
-  MdOutlineDragIndicator,
-  MdOutlineVisibility,
-  MdOutlineVisibilityOff,
-  MdOutlineImage,
-} from "react-icons/md";
+import { MdOutlineDelete, MdOutlineEdit, MdOutlineDragIndicator,  MdOutlineVisibility, MdOutlineVisibilityOff, MdOutlineImage, } from "react-icons/md";
 
 export default function BannerCard({ banner, index, onEdit, onDelete, onToggle }) {
   return (
