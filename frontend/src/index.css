@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 body {
@@ -7,3 +8,12 @@ body {
 }
 
 @import "tailwindcss";
+=======
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6C63FF;
+  --color-accent: #FF6584;
+}
+
+>>>>>>> integration
