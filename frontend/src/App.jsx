@@ -22,6 +22,7 @@ import ProductForm from "./pages/admin/ProductForm";
 import Categories from "./pages/admin/Categories";
 import Orders from "./pages/admin/Orders";
 import Customers from "./pages/admin/Customers";
+import Settings from "./pages/admin/Settings";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="categories" element={<Categories />} />
           <Route path="orders" element={<Orders />} />
           <Route path="customers" element={<Customers />} />
+          <Route path="settings" element={<Settings />} />
 
         </Route>
 
