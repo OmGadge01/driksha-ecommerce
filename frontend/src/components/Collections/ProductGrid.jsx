@@ -1,7 +1,29 @@
 import ProductCard from "../product/ProductCard";
-import collectionProducts from "../../data/products";
 
-const ProductGrid = () => {
+const ProductGrid = ({ products }) => {
+  if (!products.length) {
+    return (
+      <div
+        className="
+          flex
+          min-h-[300px]
+          items-center
+          justify-center
+        "
+      >
+        <h2
+          className="
+            text-2xl
+            font-semibold
+            text-gray-400
+          "
+        >
+          No Products Found
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div
       className="
@@ -12,7 +34,7 @@ const ProductGrid = () => {
         lg:grid-cols-3
       "
     >
-      {collectionProducts.map((product) => (
+      {products.map((product) => (
         <ProductCard
           key={product.id}
           product={product}

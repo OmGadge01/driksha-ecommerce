@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, ShoppingBag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   "Home & Garden",
@@ -16,10 +17,30 @@ const categories = [
 const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  return (
-    <header className="w-full sticky top-0 z-50 bg-white border-b border-gray-200">
-      {/* TOP NAVBAR */}
+  const [searchQuery, setSearchQuery] = useState("");
 
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (!searchQuery.trim()) return;
+
+    navigate(`/collections?search=${encodeURIComponent(searchQuery)}`);
+  };
+
+  return (
+    <header
+      className="
+        sticky
+        top-0
+        z-50
+        w-full
+        border-b
+        border-gray-200
+        bg-white
+      "
+    >
       <div
         className="
           mx-auto
@@ -31,16 +52,13 @@ const Navbar = () => {
           px-6
         "
       >
-        {/* LOGO */}
-
-        <div className="min-w-fit">
+        <div className="min-w-fit cursor-pointer">
           <h1
             className="
               text-4xl
               font-light
               tracking-[0.25em]
               text-black
-              cursor-pointer
             "
           >
             Company Logo
@@ -53,16 +71,14 @@ const Navbar = () => {
               text-xs
               tracking-[0.4em]
               text-gray-500
-              cursor-pointer
             "
           >
             Location
           </p>
         </div>
 
-        {/* SEARCH */}
-
-        <div
+        <form
+          onSubmit={handleSearch}
           className="
             mx-12
             hidden
@@ -76,7 +92,15 @@ const Navbar = () => {
         >
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => {
+              const value = e.target.value;
+              setSearchQuery(value);
+              if (!value.trim()) {
+                navigate("/collections");
+              }
+            }}
             className="
               flex-1
               border-none
@@ -102,34 +126,35 @@ const Navbar = () => {
           </select>
 
           <button
+            type="submit"
             className="
               flex
               w-14
               items-center
               justify-center
-            bg-[#6C63FF]
-            text-white
-              text-sm
-              font-medium
-            hover:bg-[#5b52f5]
-              cursor-pointer
+              bg-[#6C63FF]
+              text-white
+              transition-all
+              hover:bg-[#5b52f5]
             "
           >
             <Search size={18} />
           </button>
-        </div>
-
-        {/* RIGHT */}
+        </form>
 
         <div className="flex items-center gap-8">
-          <div className="hidden md:block cursor-pointer">
+          <div className="hidden cursor-pointer md:block">
             <p className="text-sm text-gray-500">Login / Signup</p>
 
-            <p className="font-medium text-black ">My account</p>
+            <p className="font-medium text-black">My account</p>
           </div>
 
-          <button className="relative cursor-pointer ">
-            <ShoppingBag size={28} strokeWidth={1.5} className="text-[#6C63FF]" />
+          <button className="relative cursor-pointer">
+            <ShoppingBag
+              size={28}
+              strokeWidth={1.5}
+              className="text-[#6C63FF]"
+            />
 
             <span
               className="
@@ -153,8 +178,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* CATEGORY NAV */}
-
       <div className="border-t border-gray-100">
         <div
           className="
@@ -166,7 +189,6 @@ const Navbar = () => {
             gap-8
             overflow-x-auto
             px-6
-            cursor-pointer
           "
         >
           {categories.map((item, index) => (
@@ -178,7 +200,7 @@ const Navbar = () => {
                 whitespace-nowrap
                 text-sm
                 transition-colors
-                cursor-pointer
+
                 ${
                   index === activeIndex
                     ? "font-medium text-[#6C63FF]"
@@ -197,7 +219,6 @@ const Navbar = () => {
                     h-[2px]
                     w-full
                     bg-[#6C63FF]
-                    cursor-pointer
                   "
                 />
               )}
