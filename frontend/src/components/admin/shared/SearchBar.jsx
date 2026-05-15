@@ -1,7 +1,7 @@
 import { MdOutlineSearch, MdOutlineClose } from "react-icons/md";
 export default function SearchBar({ value, onChange, placeholder = "Search...", className = "" }) {
   return (
-    <div className={`flex items-center gap-2 bg-white border border-[#e0e0ff] rounded-xl px-3 py-2 ${className}`}>
+    <div className={`flex items-center gap-2 bg-white border border-[#e0e0ff] rounded-xl px-3 py-2 focus-within:border-[#6C63FF] focus-within:ring-2 focus-within:ring-[#6C63FF]/10 transition ${className}`}>
       <MdOutlineSearch size={17} className="text-gray-400 shrink-0" />
       <input
         type="text"
