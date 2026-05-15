@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  MdOutlineAdd,
-  MdOutlineEdit,
-  MdOutlineDelete,
-  MdOutlineSearch,
-  MdOutlineFilterList,
-  MdOutlineInventory2,
-  MdOutlineClose,
-} from "react-icons/md";
+import { MdOutlineAdd, MdOutlineEdit, MdOutlineDelete, MdOutlineSearch, MdOutlineFilterList, MdOutlineInventory2, MdOutlineClose,} from "react-icons/md";
+import DeleteModal from "../../components/admin/shared/DeleteModal";
 
 const DUMMY_PRODUCTS = [
   {
@@ -109,46 +102,16 @@ function TogglePill({ label, value, onChange }) {
   );
 }
 
-function DeleteModal({ product, onConfirm, onCancel }) {
-  if (!product) return null;
-  return (
-    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-xl p-6 w-80 mx-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-semibold text-gray-800">Delete Product?</h3>
-          <button onClick={onCancel} className="text-gray-400 hover:text-gray-600">
-            <MdOutlineClose size={18} />
-          </button>
-        </div>
-        <p className="text-sm font-medium text-gray-800 mb-5">"{product.name}"</p>
-        <div className="flex gap-2">
-          <button
-            onClick={onCancel}
-            className="flex-1 py-2 rounded-xl border border-gray-200 text-sm text-gray-500 hover:bg-gray-50 transition"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={onConfirm}
-            className="flex-1 py-2 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 export default function Products() {
   const navigate = useNavigate();
 
-  const [products, setProducts]         = useState(DUMMY_PRODUCTS);
-  const [search, setSearch]             = useState("");
+  const [products, setProducts] = useState(DUMMY_PRODUCTS);
+  const [search, setSearch] = useState("");
   const [selectedCategory, setCategory] = useState("All");
   const [deleteTarget, setDeleteTarget] = useState(null); 
 
   const filtered = products.filter((p) => {
-    const matchSearch   = p.name.toLowerCase().includes(search.toLowerCase());
+    const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
     const matchCategory =
       selectedCategory === "All" ||
       p.category.toLowerCase().startsWith(selectedCategory.toLowerCase());
@@ -354,9 +317,10 @@ const handleDelete = () => {
         </table>
       </div>
 
-      {/* ── Delete confirm modal ── */}
       <DeleteModal
-        product={deleteTarget}
+        isOpen={!!deleteTarget}
+        title="Delete Product?"
+        message={`"${deleteTarget?.name}" will be permanently deleted.`}
         onConfirm={handleDelete}
         onCancel={() => setDeleteTarget(null)}
       />

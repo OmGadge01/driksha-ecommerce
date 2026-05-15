@@ -1,4 +1,5 @@
 import { MdOutlineClose, MdOutlineEmail, MdOutlinePhone, MdOutlineLocationOn } from "react-icons/md";
+import StatusBadge from "../shared/StatusBadge";
 
 export default function CustomerDetailModal({ customer, onClose }) {
   if (!customer) return null;
@@ -74,7 +75,7 @@ export default function CustomerDetailModal({ customer, onClose }) {
                   <p className="text-xs font-semibold text-gray-700">
                     ₹{order.amount.toLocaleString()}
                   </p>
-                  <span
+                  {/* <span
                     className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
                       order.status === "Delivered" ? "bg-green-100 text-green-600"  :
                       order.status === "Pending" ? "bg-orange-100 text-orange-600" :
@@ -82,7 +83,9 @@ export default function CustomerDetailModal({ customer, onClose }) {
                     }`}
                   >
                     {order.status}
-                  </span>
+                  </span> */}
+                                  <StatusBadge status={order.status} />
+                  
                 </div>
               ))}
             </div>

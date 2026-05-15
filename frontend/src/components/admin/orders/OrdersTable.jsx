@@ -1,11 +1,5 @@
 import { MdOutlineVisibility, MdOutlineInbox } from "react-icons/md";
-
-const statusStyle = {
-  Pending:    "bg-orange-100 text-orange-600",
-  Processing: "bg-purple-100 text-purple-600",
-  Delivered:  "bg-green-100 text-green-600",
-  Cancelled:  "bg-red-100 text-red-600",
-};
+import StatusBadge from "../shared/StatusBadge";
 
 export default function OrdersTable({ orders, onView }) {
     
@@ -82,13 +76,8 @@ export default function OrdersTable({ orders, onView }) {
               </td>
 
               <td className="px-4 py-3">
-                <span
-                  className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                    statusStyle[order.status] || "bg-gray-100 text-gray-500"
-                  }`}
-                >
-                  {order.status}
-                </span>
+              <StatusBadge status={order.status} />
+
               </td>
 
               <td className="px-4 py-3">

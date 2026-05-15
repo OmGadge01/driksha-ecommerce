@@ -1,14 +1,9 @@
 import { useState } from "react";
-import {
-  MdOutlineSearch,
-  MdOutlineClose,
-  MdOutlineShoppingCart,
-  MdOutlineHourglassEmpty,
-  MdOutlineLocalShipping,
-  MdOutlineCancel,
-} from "react-icons/md";
+import {MdOutlineSearch,MdOutlineClose,MdOutlineShoppingCart,MdOutlineHourglassEmpty,MdOutlineLocalShipping, MdOutlineCancel,} from "react-icons/md";
 import OrdersTable from "../../components/admin/orders/OrdersTable";
 import OrderDetailModal from "../../components/admin/orders/OrderDetailModal";
+import StatCard from "../../components/admin/shared/StatCard";
+import SearchBar from "../../components/admin/shared/SearchBar";
 
 const DUMMY_ORDERS = [
   {
@@ -88,34 +83,15 @@ const DUMMY_ORDERS = [
 
 const STATUS_FILTERS = ["All", "Pending", "Processing", "Delivered", "Cancelled"];
 
-function StatCard({ icon: Icon, label, count, color }) {
-  return (
-    <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 flex items-center gap-3">
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
-        <Icon size={20} className="text-white" />
-      </div>
-      <div>
-        <p className="text-xs text-gray-400">{label}</p>
-        <p className="text-xl font-semibold text-gray-800">{count}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function Orders() {
-  const [orders, setOrders]           = useState(DUMMY_ORDERS);
-  const [search, setSearch]           = useState("");
-  const [activeFilter, setFilter]     = useState("All");
+  const [orders, setOrders] = useState(DUMMY_ORDERS);
+  const [search, setSearch] = useState("");
+  const [activeFilter, setFilter] = useState("All");
   const [selectedOrder, setSelectedOrder] = useState(null); 
 
   const filteredOrders = orders.filter((order) => {
-    const matchSearch =
-      order.customer.toLowerCase().includes(search.toLowerCase()) ||
-      String(order.id).includes(search);
-
-    const matchStatus =
-      activeFilter === "All" || order.status === activeFilter;
-
+    const matchSearch = order.customer.toLowerCase().includes(search.toLowerCase()) || String(order.id).includes(search);
+    const matchStatus = activeFilter === "All" || order.status === activeFilter;
     return matchSearch && matchStatus;
   });
 
@@ -167,21 +143,12 @@ export default function Orders() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <div className="flex items-center gap-2 bg-white border border-[#e0e0ff] rounded-xl px-3 py-2 w-64">
-          <MdOutlineSearch size={17} className="text-gray-400 shrink-0" />
-          <input
-            type="text"
-            placeholder="Search by name or order ID..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="text-sm text-gray-700 outline-none w-full placeholder:text-gray-300"
-          />
-          {search && (
-            <button onClick={() => setSearch("")} className="text-gray-300 hover:text-gray-500">
-              <MdOutlineClose size={15} />
-            </button>
-          )}
-        </div>
+        <SearchBar 
+          value={search}
+          onChange={setSearch}
+          placeholder="Search by name or order ID..."
+          className="w-64"
+        />  
 
         <div className="flex items-center gap-1.5 flex-wrap">
           {STATUS_FILTERS.map((filter) => (

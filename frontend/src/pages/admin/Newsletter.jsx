@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { MdOutlineSearch, MdOutlineClose,  MdOutlineEmail, MdOutlineDownload, MdOutlinePeopleAlt, MdOutlineCalendarToday, MdOutlineDelete, } from "react-icons/md";
+import { MdOutlineSearch, MdOutlineClose,  MdOutlineEmail, MdOutlineDownload, MdOutlinePeopleAlt, MdOutlineCalendarToday, MdOutlineDelete, MdOutlineShoppingCart, } from "react-icons/md";
+import StatCard from "../../components/admin/shared/StatCard";
+import SearchBar from "../../components/admin/shared/SearchBar";
 
 const DUMMY_SUBSCRIBERS = [
   {
@@ -78,36 +80,21 @@ export default function Newsletter() {
         </button>
       </div>
 
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 flex items-center gap-3 mb-6 w-fit">
-        <div className="w-10 h-10 rounded-xl bg-[#6C63FF] flex items-center justify-center">
-          <MdOutlinePeopleAlt size={20} className="text-white" />
-        </div>
-        <div>
-          <p className="text-xs text-gray-400">Total Subscribers</p>
-          <p className="text-xl font-semibold text-gray-800">
-            {subscribers.length}
-          </p>
-        </div>
+      <div className="mb-6 w-fit">
+        <StatCard
+          icon={MdOutlinePeopleAlt}
+          label="Total Subscribers"
+          value={subscribers.length}
+          color="bg-[#6C63FF]"
+        />
       </div>
 
-      <div className="flex items-center gap-2 bg-white border border-[#e0e0ff] rounded-xl px-3 py-2 w-72 mb-5">
-        <MdOutlineSearch size={17} className="text-gray-400 shrink-0" />
-        <input
-          type="text"
-          placeholder="Search by name or email..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="text-sm text-gray-700 outline-none w-full placeholder:text-gray-300"
-        />
-        {search && (
-          <button
-            onClick={() => setSearch("")}
-            className="text-gray-300 hover:text-gray-500"
-          >
-            <MdOutlineClose size={15} />
-          </button>
-        )}
-      </div>
+       <SearchBar
+        value={search}
+        onChange={setSearch}
+        placeholder="Search by name or email ID..."
+        className="w-64 mb-5"
+      />
 
       <div className="hidden md:block">
         {filtered.length === 0 ? (

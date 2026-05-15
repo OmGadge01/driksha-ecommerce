@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import StatusBadge from "../../components/admin/shared/StatusBadge";
 
 const stats = [
   { label: "Total products", value: "102", change: "+5 this week", color: "#6C63FF" },
@@ -62,11 +63,6 @@ const recentOrders = [
   { id: "#1039", customer: "Ankit Roy", product: "Cotton Kurta", amount: "₹149", status: "Delivered" },
 ];
 
-const statusColors = {
-  Delivered: { bg: "#edfff6", text: "#10b981" },
-  Processing: { bg: "#f0efff", text: "#6C63FF" },
-  Pending: { bg: "#fff8ed", text: "#f59e0b" },
-};
 
 const maxVal = Math.max(...monthlyOrders.map((o) => o.value));
 
@@ -75,8 +71,6 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-4 md:space-y-6">
-
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         {stats.map((stat) => (
           <div
@@ -98,10 +92,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Monthly Orders + Quick Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
-
-        {/* Monthly Orders Chart */}
         <div className="bg-white rounded-2xl p-5 border border-[#e0e0ff]">
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm font-medium text-[#1a1a2e]">Monthly orders</p>
@@ -126,7 +117,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Quick Actions */}
         <div className="bg-white rounded-2xl p-5 border border-[#e0e0ff]">
           <p className="text-sm font-medium text-[#1a1a2e] mb-4">Quick actions</p>
           <div className="flex flex-col gap-3">
@@ -157,7 +147,6 @@ export default function Dashboard() {
 
       </div>
 
-      {/* Recent Orders */}
       <div className="bg-white rounded-2xl p-4 md:p-5 border border-[#e0e0ff]">
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm font-medium text-[#1a1a2e]">Recent orders</p>
@@ -166,18 +155,12 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* Mobile: cards */}
         <div className="flex flex-col gap-3 md:hidden">
           {recentOrders.map((order) => (
             <div key={order.id} className="border border-[#f0f0ff] rounded-xl p-3 flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
                 <span className="text-[#6C63FF] font-medium text-sm">{order.id}</span>
-                <span
-                  className="text-xs px-2.5 py-0.5 rounded-full font-medium"
-                  style={{ background: statusColors[order.status].bg, color: statusColors[order.status].text }}
-                >
-                  {order.status}
-                </span>
+                <StatusBadge status={order.status} />
               </div>
               <p className="text-sm text-gray-700">{order.customer}</p>
               <div className="flex items-center justify-between">
@@ -188,7 +171,6 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* Desktop: table */}
         <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -208,12 +190,7 @@ export default function Dashboard() {
                   <td className="py-3 text-gray-600">{order.product}</td>
                   <td className="py-3 text-gray-700 font-medium">{order.amount}</td>
                   <td className="py-3">
-                    <span
-                      className="text-xs px-3 py-1 rounded-full font-medium"
-                      style={{ background: statusColors[order.status].bg, color: statusColors[order.status].text }}
-                    >
-                      {order.status}
-                    </span>
+                  <StatusBadge status={order.status} />
                   </td>
                 </tr>
               ))}
