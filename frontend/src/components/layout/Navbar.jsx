@@ -1,32 +1,56 @@
 import { useState } from "react";
-import { Search, ShoppingBag } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+
+import {
+  Search,
+  ShoppingBag,
+  ArrowLeft,
+} from "lucide-react";
+
+import {
+  useNavigate,
+} from "react-router-dom";
+
+import { useCart } from "../../context/CartContext";
 
 const categories = [
-  "Home & Garden",
-  "Furniture & Lights",
-  "Electricals",
-  "Women",
-  "Men",
-  "Beauty",
-  "Baby & Kids",
-  "Sport & Travel",
-  "Sale & Offers",
+  "Home",
+  "Collections",
+  "New Arrivals",
+  "Best Sellers",
+  "Essentials",
+  "Luxury",
+  "Accessories",
+  "Lifestyle",
+  "Exclusive Deals",
 ];
 
 const Navbar = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] =
+    useState(0);
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] =
+    useState("");
 
   const navigate = useNavigate();
+
+  const { cartItems } = useCart();
+
+  const cartCount = cartItems.reduce(
+    (total, item) =>
+      total + item.quantity,
+    0
+  );
 
   const handleSearch = (e) => {
     e.preventDefault();
 
     if (!searchQuery.trim()) return;
 
-    navigate(`/collections?search=${encodeURIComponent(searchQuery)}`);
+    navigate(
+      `/collections?search=${encodeURIComponent(
+        searchQuery
+      )}`
+    );
   };
 
   return (
@@ -52,29 +76,61 @@ const Navbar = () => {
           px-6
         "
       >
-        <div className="min-w-fit cursor-pointer">
-          <h1
+        <div className="flex items-center">
+          
+          <button
+            onClick={() => navigate(-1)}
             className="
-              text-4xl
-              font-light
-              tracking-[0.25em]
-              text-black
+              mr-4
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-xl
+              border
+              border-gray-200
+              text-gray-600
+              transition-all
+              hover:border-[#6C63FF]
+              hover:text-[#6C63FF]
             "
           >
-            Company Logo
-          </h1>
+            <ArrowLeft size={18} />
+          </button>
 
-          <p
+          <div
+            onClick={() =>
+              navigate("/home")
+            }
             className="
-              mt-1
-              text-center
-              text-xs
-              tracking-[0.4em]
-              text-gray-500
+              min-w-fit
+              cursor-pointer
             "
           >
-            Location
-          </p>
+            <h1
+              className="
+                text-4xl
+                font-light
+                tracking-[0.25em]
+                text-black
+              "
+            >
+              Company Logo
+            </h1>
+
+            <p
+              className="
+                mt-1
+                text-center
+                text-xs
+                tracking-[0.4em]
+                text-gray-500
+              "
+            >
+              Location
+            </p>
+          </div>
         </div>
 
         <form
@@ -95,10 +151,15 @@ const Navbar = () => {
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => {
-              const value = e.target.value;
+              const value =
+                e.target.value;
+
               setSearchQuery(value);
+
               if (!value.trim()) {
-                navigate("/collections");
+                navigate(
+                  "/collections"
+                );
               }
             }}
             className="
@@ -113,16 +174,18 @@ const Navbar = () => {
           <select
             className="
               w-44
+              cursor-pointer
               border-l
               border-gray-300
               bg-white
               px-4
               text-sm
               outline-none
-              cursor-pointer
             "
           >
-            <option>All categories</option>
+            <option>
+              All categories
+            </option>
           </select>
 
           <button
@@ -143,37 +206,66 @@ const Navbar = () => {
         </form>
 
         <div className="flex items-center gap-8">
-          <div className="hidden cursor-pointer md:block">
-            <p className="text-sm text-gray-500">Login / Signup</p>
+          
+          <div
+            onClick={() =>
+              navigate("/login")
+            }
+            className="
+              hidden
+              cursor-pointer
+              md:block
+            "
+          >
+            <p className="text-sm text-gray-500">
+              Login / Signup
+            </p>
 
-            <p className="font-medium text-black">My account</p>
+            <p
+              className="
+                font-medium
+                text-black
+              "
+            >
+              My account
+            </p>
           </div>
 
-          <button className="relative cursor-pointer">
+          <button
+            onClick={() =>
+              navigate("/cart")
+            }
+            className="
+              relative
+              cursor-pointer
+            "
+          >
             <ShoppingBag
               size={28}
               strokeWidth={1.5}
               className="text-[#6C63FF]"
             />
 
-            <span
-              className="
-                absolute
-                -right-2
-                -top-2
-                flex
-                h-5
-                w-5
-                items-center
-                justify-center
-                rounded-full
-                bg-[#6C63FF]
-                text-[10px]
-                text-white
-              "
-            >
-              0
-            </span>
+            {cartCount > 0 && (
+              <span
+                className="
+                  absolute
+                  -right-2
+                  -top-2
+                  flex
+                  h-5
+                  w-5
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-[#6C63FF]
+                  text-[10px]
+                  text-white
+                "
+              >
+                {cartCount}
+              </span>
+            )}
           </button>
         </div>
       </div>
@@ -191,39 +283,60 @@ const Navbar = () => {
             px-6
           "
         >
-          {categories.map((item, index) => (
-            <button
-              key={item}
-              onClick={() => setActiveIndex(index)}
-              className={`
-                relative
-                whitespace-nowrap
-                text-sm
-                transition-colors
+          {categories.map(
+            (item, index) => (
+              <button
+                key={item}
+                onClick={() => {
+                  setActiveIndex(index);
 
-                ${
-                  index === activeIndex
-                    ? "font-medium text-[#6C63FF]"
-                    : "text-gray-600 hover:text-[#6C63FF]"
-                }
-              `}
-            >
-              {item}
+                  if (
+                    item === "Home"
+                  ) {
+                    navigate("/home");
+                  }
 
-              {index === activeIndex && (
-                <span
-                  className="
-                    absolute
-                    -bottom-[18px]
-                    left-0
-                    h-[2px]
-                    w-full
-                    bg-[#6C63FF]
-                  "
-                />
-              )}
-            </button>
-          ))}
+                  if (
+                    item ===
+                    "Collections"
+                  ) {
+                    navigate(
+                      "/collections"
+                    );
+                  }
+                }}
+                className={`
+                  relative
+                  whitespace-nowrap
+                  text-sm
+                  transition-colors
+
+                  ${
+                    index ===
+                    activeIndex
+                      ? "font-medium text-[#6C63FF]"
+                      : "text-gray-600 hover:text-[#6C63FF]"
+                  }
+                `}
+              >
+                {item}
+
+                {index ===
+                  activeIndex && (
+                  <span
+                    className="
+                      absolute
+                      -bottom-[18px]
+                      left-0
+                      h-[2px]
+                      w-full
+                      bg-[#6C63FF]
+                    "
+                  />
+                )}
+              </button>
+            )
+          )}
         </div>
       </div>
     </header>
