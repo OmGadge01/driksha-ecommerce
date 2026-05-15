@@ -32,7 +32,7 @@ export default function BannerModal({ banner, onClose, onSave }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm px-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md flex flex-col gap-5 p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-semibold text-gray-800">
@@ -120,7 +120,7 @@ export default function BannerModal({ banner, onClose, onSave }) {
             className={`relative w-11 h-6 rounded-full transition-colors ${form.active ? "bg-[#6C63FF]" : "bg-gray-200"}`}
           >
             <div
-              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${form.active ? "translate-x-5.5" : "translate-x-0.5"}`}
+              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${form.active ? "translate-x-5" : "translate-x-0.5"}`}
             />
           </button>
         </div>

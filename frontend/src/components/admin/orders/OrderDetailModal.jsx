@@ -3,13 +3,6 @@ import { MdOutlineClose } from "react-icons/md";
 
 const STATUS_OPTIONS = ["Pending", "Processing", "Delivered", "Cancelled"];
 
-const statusStyle = {
-  Pending:    "bg-orange-100 text-orange-600",
-  Processing: "bg-purple-100 text-purple-600",
-  Delivered:  "bg-green-100 text-green-600",
-  Cancelled:  "bg-red-100 text-red-600",
-};
-
 export default function OrderDetailModal({ order, onClose, onStatusChange }) {
   const [status, setStatus] = useState(order?.status || "Pending");
 
@@ -21,30 +14,27 @@ export default function OrderDetailModal({ order, onClose, onStatusChange }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 px-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#f0f0f0]">
+    <div className="fixed inset-0 bg-black/30 flex items-end sm:items-center justify-center z-50 px-4 pb-4 sm:pb-0">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
+
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#f0f0f0] shrink-0">
           <div>
-            <h3 className="text-sm font-semibold text-gray-800">
-              Order #{order.id}
-            </h3>
+            <h3 className="text-sm font-semibold text-gray-800">Order #{order.id}</h3>
             <p className="text-xs text-gray-400 mt-0.5">{order.date}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition"
-          >
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition">
             <MdOutlineClose size={18} />
           </button>
         </div>
 
-        <div className="px-6 py-4 flex flex-col gap-4">
+        <div className="px-5 py-4 flex flex-col gap-4 overflow-y-auto">
+
           <div className="bg-[#f8f8ff] rounded-xl p-3">
             <p className="text-xs text-gray-400 mb-2 font-medium uppercase tracking-wide">
               Customer
             </p>
             <p className="text-sm font-medium text-gray-700">{order.customer}</p>
-            <p className="text-xs text-gray-400 mt-0.5">{order.email}</p>
+            <p className="text-xs text-gray-400 mt-0.5 break-all">{order.email}</p>
             <p className="text-xs text-gray-400 mt-0.5">{order.address}</p>
           </div>
 
@@ -56,13 +46,13 @@ export default function OrderDetailModal({ order, onClose, onStatusChange }) {
               {order.items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between py-2 border-b border-[#f5f5f5] last:border-0"
+                  className="flex items-center justify-between gap-3 py-2 border-b border-[#f5f5f5] last:border-0"
                 >
-                  <div>
-                    <p className="text-sm text-gray-700">{item.name}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-700 truncate">{item.name}</p>
                     <p className="text-xs text-gray-400">Qty: {item.qty}</p>
                   </div>
-                  <p className="text-sm font-medium text-gray-700">
+                  <p className="text-sm font-medium text-gray-700 shrink-0">
                     ₹{(item.price * item.qty).toLocaleString()}
                   </p>
                 </div>
@@ -85,9 +75,7 @@ export default function OrderDetailModal({ order, onClose, onStatusChange }) {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="flex-1 border border-[#e0e0ff] rounded-xl px-3 py-2.5 text-sm
-                           text-gray-700 outline-none focus:border-[#6C63FF]
-                           focus:ring-2 focus:ring-[#6C63FF]/10 transition"
+                className="flex-1 border border-[#e0e0ff] rounded-xl px-3 py-2.5 text-sm text-gray-700 outline-none focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/10 transition"
               >
                 {STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>{s}</option>
@@ -95,14 +83,14 @@ export default function OrderDetailModal({ order, onClose, onStatusChange }) {
               </select>
               <button
                 onClick={handleStatusSave}
-                className="px-4 py-2 bg-[#6C63FF] hover:bg-[#5a52e0] text-white
-                           text-sm font-medium rounded-xl transition"
+                className="px-4 py-2 bg-[#6C63FF] hover:bg-[#5a52e0] text-white text-sm font-medium rounded-xl transition shrink-0"
               >
                 Save
               </button>
             </div>
           </div>
-]        </div>
+
+        </div>
       </div>
     </div>
   );
