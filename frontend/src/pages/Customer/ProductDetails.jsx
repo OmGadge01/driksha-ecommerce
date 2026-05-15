@@ -7,6 +7,10 @@ import ProductInfo from "../../components/product/ProductInfo";
 import ProductSelectors from "../../components/product/ProductSelectors";
 import ProductActions from "../../components/product/ProductActions";
 
+import ProductShipping from "../../components/product/ProductShipping";
+import ProductTabs from "../../components/product/ProductTabs";
+import RelatedProducts from "../../components/product/RelatedProducts";
+
 import Footer from "../../components/layout/Footer";
 
 import products from "../../data/products";
@@ -42,6 +46,9 @@ const ProductDetails = () => {
   return (
     <MainLayout>
       <div className="mx-auto max-w-7xl px-6 py-12">
+        
+        {/* PRODUCT SECTION */}
+
         <div
           className="
             grid
@@ -67,8 +74,23 @@ const ProductDetails = () => {
             <ProductActions
               product={product}
             />
+
+            <ProductShipping
+              shipping={product.shipping}
+            />
           </div>
         </div>
+
+        {/* PRODUCT TABS */}
+
+        <ProductTabs product={product} />
+
+        {/* RELATED PRODUCTS */}
+
+        <RelatedProducts
+          products={products}
+          currentProductId={product.id}
+        />
       </div>
 
       <Footer />
