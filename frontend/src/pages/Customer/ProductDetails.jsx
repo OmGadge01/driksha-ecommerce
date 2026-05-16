@@ -1,13 +1,17 @@
 import { useParams } from "react-router-dom";
 
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/customer/layout/MainLayout";
 
-import ProductGallery from "../../components/product/ProductGallery";
-import ProductInfo from "../../components/product/ProductInfo";
-import ProductSelectors from "../../components/product/ProductSelectors";
-import ProductActions from "../../components/product/ProductActions";
+import ProductGallery from "../../components/customer/product/ProductGallery";
+import ProductInfo from "../../components/customer/product/ProductInfo";
+import ProductSelectors from "../../components/customer/product/ProductSelectors";
+import ProductActions from "../../components/customer/product/ProductActions";
 
-import Footer from "../../components/layout/Footer";
+import ProductShipping from "../../components/customer/product/ProductShipping";
+import ProductTabs from "../../components/customer/product/ProductTabs";
+import RelatedProducts from "../../components/customer/product/RelatedProducts";
+
+import Footer from "../../components/customer/layout/Footer";
 
 import products from "../../data/products";
 
@@ -42,6 +46,9 @@ const ProductDetails = () => {
   return (
     <MainLayout>
       <div className="mx-auto max-w-7xl px-6 py-12">
+        
+        {/* PRODUCT SECTION */}
+
         <div
           className="
             grid
@@ -67,8 +74,23 @@ const ProductDetails = () => {
             <ProductActions
               product={product}
             />
+
+            <ProductShipping
+              shipping={product.shipping}
+            />
           </div>
         </div>
+
+        {/* PRODUCT TABS */}
+
+        <ProductTabs product={product} />
+
+        {/* RELATED PRODUCTS */}
+
+        <RelatedProducts
+          products={products}
+          currentProductId={product.id}
+        />
       </div>
 
       <Footer />

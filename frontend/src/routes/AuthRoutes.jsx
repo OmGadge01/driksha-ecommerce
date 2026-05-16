@@ -2,11 +2,12 @@ import { Route } from "react-router-dom";
 
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Home from "../pages/customer/Home";
 
 const AuthRoutes = () => {
   return (
     <>
-      <Route path="/" element={<Login />} />
+  
 
       <Route path="/login" element={<Login />} />
 

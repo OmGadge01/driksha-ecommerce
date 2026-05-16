@@ -2,15 +2,36 @@ import { ShoppingBag } from "lucide-react";
 
 import toast from "react-hot-toast";
 
-import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
-const ProductActions = ({ product }) => {
+import { useCart } from "../../../context/CartContext";
+import { useCheckout } from "../../../context/CheckoutContext";
+
+const ProductActions = ({
+  product,
+}) => {
+  const navigate = useNavigate();
+
   const { addToCart } = useCart();
+
+  const { startCheckout } =
+    useCheckout();
 
   const handleAddToCart = () => {
     addToCart(product);
 
     toast.success("Added to cart");
+  };
+
+  const handleBuyNow = () => {
+    startCheckout([
+      {
+        ...product,
+        quantity: 1,
+      },
+    ]);
+
+    navigate("/checkout");
   };
 
   return (
@@ -39,6 +60,7 @@ const ProductActions = ({ product }) => {
       </button>
 
       <button
+        onClick={handleBuyNow}
         className="
           h-14
           w-full

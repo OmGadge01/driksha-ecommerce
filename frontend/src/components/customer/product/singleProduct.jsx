@@ -5,7 +5,7 @@ const singleProduct = {
 
   category: "Premium Collection",
 
-  price: "$850",
+  price: "Rs850",
 
   rating: 4.8,
 

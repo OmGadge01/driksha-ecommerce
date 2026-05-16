@@ -91,15 +91,15 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-150 w-full
-                     ${isActive ? "bg-[#6C63FF] text-white font-medium" : "text-gray-500 hover:bg-[#f5f5ff] hover:text-[#6C63FF]"}`
+                     Rs{isActive ? "bg-[#6C63FF] text-white font-medium" : "text-gray-500 hover:bg-[#f5f5ff] hover:text-[#6C63FF]"}`
                   }
                 >
                   {({ isActive }) => (
                     <>
-                      <Icon size={19} className={`shrink-0 ${isActive ? "text-white" : "text-gray-400"}`} />
+                      <Icon size={19} className={`shrink-0 Rs{isActive ? "text-white" : "text-gray-400"}`} />
                       <span className="flex-1">{item.name}</span>
                       {item.badge && (
-                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${isActive ? "bg-white/30 text-white" : "bg-[#FF6584] text-white"}`}>
+                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full Rs{isActive ? "bg-white/30 text-white" : "bg-[#FF6584] text-white"}`}>
                           {item.badge}
                         </span>
                       )}
@@ -139,13 +139,13 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         <SidebarContent />
       </div>
       <div
-        className={`md:hidden fixed inset-0 z-40 flex transition-all duration-300 ${isOpen ? "visible" : "invisible"}`}
+        className={`md:hidden fixed inset-0 z-40 flex transition-all duration-300 Rs{isOpen ? "visible" : "invisible"}`}
       >
         <div
-          className={`fixed inset-0 bg-black/30 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
+          className={`fixed inset-0 bg-black/30 transition-opacity duration-300 Rs{isOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsOpen(false)}
         />
-        <div className={`relative z-50 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`relative z-50 transition-transform duration-300 Rs{isOpen ? "translate-x-0" : "-translate-x-full"}`}>
           <SidebarContent />
         </div>
       </div>

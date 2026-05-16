@@ -1,7 +1,36 @@
 import { Heart } from "lucide-react";
+
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ product }) => {
+import toast from "react-hot-toast";
+
+import { useWishlist } from "../../../context/WishlistContext";
+
+const ProductCard = ({
+  product,
+}) => {
+  const {
+    toggleWishlist,
+    isInWishlist,
+  } = useWishlist();
+
+  const wished =
+    isInWishlist(product.id);
+
+  const handleWishlist = (
+    e
+  ) => {
+    e.preventDefault();
+
+    toggleWishlist(product);
+
+    toast.success(
+      wished
+        ? "Removed from wishlist"
+        : "Added to wishlist"
+    );
+  };
+
   return (
     <Link
       to={`/product/${product.id}`}
@@ -30,7 +59,7 @@ const ProductCard = ({ product }) => {
         />
 
         <button
-          onClick={(e) => e.preventDefault()}
+          onClick={handleWishlist}
           className="
             absolute
             right-4
@@ -42,16 +71,23 @@ const ProductCard = ({ product }) => {
             justify-center
             rounded-full
             bg-white/90
-            text-gray-700
             transition
-            hover:text-[#6C63FF]
           "
         >
-          <Heart size={18} />
+          <Heart
+            size={18}
+            className={
+              wished
+                ? "fill-[#6C63FF] text-[#6C63FF]"
+                : "text-gray-700"
+            }
+          />
         </button>
 
         <button
-          onClick={(e) => e.preventDefault()}
+          onClick={(e) =>
+            e.preventDefault()
+          }
           className="
             absolute
             bottom-4

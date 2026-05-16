@@ -1,12 +1,21 @@
-import { useState } from "react";
+import {
+  useEffect,
+  useState,
+} from "react";
 
-const ProductGallery = ({ images }) => {
+const ProductGallery = ({
+  images,
+}) => {
   if (!images || images.length === 0) {
     return null;
   }
 
   const [activeImage, setActiveImage] =
     useState(images[0]);
+
+  useEffect(() => {
+    setActiveImage(images[0]);
+  }, [images]);
 
   return (
     <div
@@ -47,13 +56,15 @@ const ProductGallery = ({ images }) => {
         {images.map((image) => (
           <button
             key={image}
-            onClick={() => setActiveImage(image)}
+            onClick={() =>
+              setActiveImage(image)
+            }
             className={`
               overflow-hidden
               rounded-2xl
               border-2
 
-              ${
+              Rs{
                 activeImage === image
                   ? "border-[#6C63FF]"
                   : "border-transparent"

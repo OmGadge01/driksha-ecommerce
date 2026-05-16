@@ -1,4 +1,4 @@
-import Navbar from "../layout/Navbar";
+import Navbar from "./Navbar";
 
 const MainLayout = ({ children }) => {
   return (

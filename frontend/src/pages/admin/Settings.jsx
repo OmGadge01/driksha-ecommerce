@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import {
   MdOutlineSave,
   MdOutlineCloudUpload,
@@ -7,6 +7,7 @@ import {
   MdOutlinePhone,
   MdOutlineLocationOn,
 } from "react-icons/md";
+
 import {
   RiFacebookLine,
   RiInstagramLine,
@@ -14,112 +15,128 @@ import {
   RiYoutubeLine,
 } from "react-icons/ri";
 
-// ─── Dummy Data ───────────────────────────────────────────────────────────────
-// Replace with API call once backend is ready:
-// useEffect(() => { axios.get("/api/admin/settings").then(r => setForm(r.data)) }, [])
 const INITIAL_SETTINGS = {
-  siteName:    "Driksha Infotech",
-  tagline:     "Your one-stop online shopping destination",
-  email:       "support@driksha.com",
-  phone:       "+91 98765 43210",
-  address:     "42 MG Road, Indore, Madhya Pradesh 452001",
-  facebook:    "https://facebook.com/driksha",
-  instagram:   "https://instagram.com/driksha",
-  twitter:     "https://twitter.com/driksha",
-  youtube:     "",
+  siteName: "Driksha Infotech",
+  tagline: "Your one-stop online shopping destination",
+  email: "support@driksha.com",
+  phone: "+91 98765 43210",
+  address: "42 MG Road, Indore, Madhya Pradesh 452001",
+  facebook: "https://facebook.com/driksha",
+  instagram: "https://instagram.com/driksha",
+  twitter: "https://twitter.com/driksha",
+  youtube: "",
 };
 
-// ─── Reusable Input Field ─────────────────────────────────────────────────────
-function SettingField({ label, icon: Icon, type = "text", placeholder, value, onChange }) {
+function InputField({
+  label,
+  icon: Icon,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+}) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <label className="text-sm font-medium text-gray-700">{label}</label>
-      <div className="flex items-center gap-2 border border-[#e0e0ff] rounded-xl px-3 py-2.5 focus-within:border-[#6C63FF] focus-within:ring-2 focus-within:ring-[#6C63FF]/10 transition bg-white">
-        {Icon && <Icon size={17} className="text-gray-400 shrink-0" />}
+    <div className="flex flex-col gap-2">
+      <label className="text-sm font-medium text-gray-700">
+        {label}
+      </label>
+
+      <div className="flex items-center gap-3 border border-[#e4e4ff] rounded-xl px-3 py-3 bg-white focus-within:border-[#6C63FF]">
+        {Icon && (
+          <Icon className="text-gray-400 text-lg shrink-0" />
+        )}
+
         <input
           type={type}
-          placeholder={placeholder}
           value={value}
+          placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
-          className="text-sm text-gray-700 outline-none w-full placeholder:text-gray-300"
+          className="w-full outline-none text-sm text-gray-700 placeholder:text-gray-300 bg-transparent"
         />
       </div>
     </div>
   );
 }
 
-// ─── Section Card wrapper ─────────────────────────────────────────────────────
-function SectionCard({ title, subtitle, children }) {
+function Card({ title, subtitle, children }) {
   return (
-    <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4">
-      <div>
-        <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
-        <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>
+    <div className="bg-white border border-[#e4e4ff] rounded-2xl p-4 sm:p-5">
+      <div className="mb-5">
+        <h2 className="text-base font-semibold text-gray-800">
+          {title}
+        </h2>
+
+        <p className="text-sm text-gray-400 mt-1">
+          {subtitle}
+        </p>
       </div>
-      {children}
+
+      <div className="flex flex-col gap-4">
+        {children}
+      </div>
     </div>
   );
 }
 
-// ─── Settings Page ────────────────────────────────────────────────────────────
 export default function Settings() {
-  const [form, setForm]         = useState(INITIAL_SETTINGS);
-  const [logo, setLogo]         = useState(null);   // logo preview URL
-  const [saving, setSaving]     = useState(false);
-  const [saved, setSaved]       = useState(false);  // show success message
-  const logoInputRef            = useRef(null);
+  const [form, setForm] = useState(INITIAL_SETTINGS);
+  const [logo, setLogo] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
-  // Update a single field
-  function update(field, value) {
-    setForm((prev) => ({ ...prev, [field]: value }));
+  const logoInputRef = useRef(null);
+
+  function updateField(field, value) {
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   }
 
-  // Logo upload handler
   function handleLogoUpload(e) {
     const file = e.target.files[0];
+
     if (!file) return;
+
     const reader = new FileReader();
-    reader.onload = (ev) => setLogo(ev.target.result);
+
+    reader.onload = (event) => {
+      setLogo(event.target.result);
+    };
+
     reader.readAsDataURL(file);
   }
 
-  // Save settings
   function handleSave() {
     setSaving(true);
-
-    // Replace with API call once backend is ready:
-    // const formData = new FormData();
-    // Object.entries(form).forEach(([k, v]) => formData.append(k, v));
-    // if (logoFile) formData.append("logo", logoFile);
-    // axios.post("/api/admin/settings", formData).then(() => { ... })
 
     setTimeout(() => {
       setSaving(false);
       setSaved(true);
-      // Hide success message after 3 seconds
-      setTimeout(() => setSaved(false), 3000);
-    }, 800);
+
+      setTimeout(() => {
+        setSaved(false);
+      }, 3000);
+    }, 1000);
   }
 
   return (
-    <div className="p-6 min-h-screen bg-[#f8f8ff]">
-
-      {/* Page heading */}
-      <div className="flex items-center justify-between mb-6">
+    <div className="min-h-screen bg-[#f8f8ff] p-4 sm:p-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
         <div>
-          <h1 className="text-lg font-semibold text-gray-800">Settings</h1>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <h1 className="text-xl font-semibold text-gray-800">
+            Settings
+          </h1>
+
+          <p className="text-sm text-gray-400 mt-1">
             Manage your site information and preferences
           </p>
         </div>
 
-        {/* Save button */}
         <button
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-2 px-4 py-2.5 bg-[#6C63FF] hover:bg-[#5a52e0]
-                     text-white text-sm font-medium rounded-xl transition
-                     disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#6C63FF] hover:bg-[#5d55f6] text-white px-5 py-3 rounded-xl text-sm font-medium transition disabled:opacity-60"
         >
           {saving ? (
             <>
@@ -128,56 +145,58 @@ export default function Settings() {
             </>
           ) : (
             <>
-              <MdOutlineSave size={17} />
+              <MdOutlineSave size={18} />
               Save Changes
             </>
           )}
         </button>
       </div>
 
-      {/* Success message */}
       {saved && (
-        <div className="flex items-center gap-2 bg-green-50 border border-green-200 text-green-700
-                        text-sm rounded-xl px-4 py-3 mb-5">
-          <span>✓</span>
-          <span>Settings saved successfully!</span>
+        <div className="mb-5 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm">
+          Settings saved successfully!
         </div>
       )}
 
       <div className="flex flex-col gap-5">
-
-        {/* ── General Settings ── */}
-        <SectionCard
+        <Card
           title="General"
           subtitle="Basic information about your site"
         >
-          {/* Logo upload */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-gray-700">Site Logo</label>
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col gap-3">
+            <label className="text-sm font-medium text-gray-700">
+              Site Logo
+            </label>
 
-              {/* Logo preview */}
-              <div className="w-16 h-16 rounded-xl border border-[#e0e0ff] bg-[#f8f8ff] flex items-center justify-center overflow-hidden shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="w-20 h-20 border border-[#e4e4ff] rounded-xl overflow-hidden bg-[#f8f8ff] flex items-center justify-center shrink-0">
                 {logo ? (
-                  <img src={logo} alt="Logo" className="w-full h-full object-contain" />
+                  <img
+                    src={logo}
+                    alt="logo"
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
-                  <span className="text-xs text-gray-300">No logo</span>
+                  <span className="text-xs text-gray-300">
+                    No Logo
+                  </span>
                 )}
               </div>
 
-              {/* Upload button */}
-              <div>
+              <div className="flex-1">
                 <button
                   type="button"
                   onClick={() => logoInputRef.current.click()}
-                  className="flex items-center gap-2 px-3 py-2 border border-[#e0e0ff]
-                             rounded-xl text-sm text-gray-500 hover:border-[#6C63FF]
-                             hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 border border-[#e4e4ff] hover:border-[#6C63FF] hover:text-[#6C63FF] px-4 py-3 rounded-xl text-sm text-gray-600 transition"
                 >
-                  <MdOutlineCloudUpload size={16} />
+                  <MdOutlineCloudUpload size={18} />
                   Upload Logo
                 </button>
-                <p className="text-xs text-gray-400 mt-1">PNG, JPG — recommended 200x200px</p>
+
+                <p className="text-xs text-gray-400 mt-2">
+                  PNG or JPG recommended
+                </p>
+
                 <input
                   ref={logoInputRef}
                   type="file"
@@ -189,96 +208,118 @@ export default function Settings() {
             </div>
           </div>
 
-          {/* Site name */}
-          <SettingField
+          <InputField
             label="Site Name"
             icon={MdOutlineLanguage}
-            placeholder="e.g. Driksha Infotech"
             value={form.siteName}
-            onChange={(v) => update("siteName", v)}
+            placeholder="Enter site name"
+            onChange={(value) =>
+              updateField("siteName", value)
+            }
           />
 
-          {/* Tagline */}
-          <SettingField
+          <InputField
             label="Tagline"
             icon={MdOutlineLanguage}
-            placeholder="e.g. Your one-stop online shopping destination"
             value={form.tagline}
-            onChange={(v) => update("tagline", v)}
+            placeholder="Enter tagline"
+            onChange={(value) =>
+              updateField("tagline", value)
+            }
           />
-        </SectionCard>
+        </Card>
 
-        {/* ── Contact Information ── */}
-        <SectionCard
+        <Card
           title="Contact Information"
-          subtitle="This will be shown in the footer and contact page"
+          subtitle="This information will appear on your website"
         >
-          <SettingField
+          <InputField
             label="Email Address"
             icon={MdOutlineEmail}
             type="email"
-            placeholder="support@yoursite.com"
             value={form.email}
-            onChange={(v) => update("email", v)}
+            placeholder="Enter email address"
+            onChange={(value) =>
+              updateField("email", value)
+            }
           />
-          <SettingField
+
+          <InputField
             label="Phone Number"
             icon={MdOutlinePhone}
             type="tel"
-            placeholder="+91 98765 43210"
             value={form.phone}
-            onChange={(v) => update("phone", v)}
+            placeholder="Enter phone number"
+            onChange={(value) =>
+              updateField("phone", value)
+            }
           />
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-gray-700">Address</label>
-            <div className="flex items-start gap-2 border border-[#e0e0ff] rounded-xl px-3 py-2.5 focus-within:border-[#6C63FF] focus-within:ring-2 focus-within:ring-[#6C63FF]/10 transition bg-white">
-              <MdOutlineLocationOn size={17} className="text-gray-400 shrink-0 mt-0.5" />
+
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-gray-700">
+              Address
+            </label>
+
+            <div className="flex gap-3 border border-[#e4e4ff] rounded-xl px-3 py-3 bg-white focus-within:border-[#6C63FF]">
+              <MdOutlineLocationOn className="text-gray-400 text-lg mt-1 shrink-0" />
+
               <textarea
-                placeholder="Enter your full address"
+                rows={3}
                 value={form.address}
-                onChange={(e) => update("address", e.target.value)}
-                rows={2}
-                className="text-sm text-gray-700 outline-none w-full placeholder:text-gray-300 resize-none"
+                placeholder="Enter address"
+                onChange={(e) =>
+                  updateField("address", e.target.value)
+                }
+                className="w-full outline-none text-sm text-gray-700 placeholder:text-gray-300 resize-none bg-transparent"
               />
             </div>
           </div>
-        </SectionCard>
+        </Card>
 
-        {/* ── Social Links ── */}
-        <SectionCard
+        <Card
           title="Social Media Links"
-          subtitle="Leave empty if you don't have a profile on that platform"
+          subtitle="Add your social media profile links"
         >
-          <SettingField
+          <InputField
             label="Facebook"
             icon={RiFacebookLine}
-            placeholder="https://facebook.com/yourpage"
             value={form.facebook}
-            onChange={(v) => update("facebook", v)}
+            placeholder="Facebook link"
+            onChange={(value) =>
+              updateField("facebook", value)
+            }
           />
-          <SettingField
+
+          <InputField
             label="Instagram"
             icon={RiInstagramLine}
-            placeholder="https://instagram.com/yourpage"
             value={form.instagram}
-            onChange={(v) => update("instagram", v)}
+            placeholder="Instagram link"
+            onChange={(value) =>
+              updateField("instagram", value)
+            }
           />
-          <SettingField
+
+          <InputField
             label="Twitter / X"
             icon={RiTwitterXLine}
-            placeholder="https://twitter.com/yourpage"
             value={form.twitter}
-            onChange={(v) => update("twitter", v)}
+            placeholder="Twitter link"
+            onChange={(value) =>
+              updateField("twitter", value)
+            }
           />
-          <SettingField
+
+          <InputField
             label="YouTube"
             icon={RiYoutubeLine}
-            placeholder="https://youtube.com/yourchannel"
             value={form.youtube}
-            onChange={(v) => update("youtube", v)}
+            placeholder="YouTube link"
+            onChange={(value) =>
+              updateField("youtube", value)
+            }
           />
-        </SectionCard>
-
+        </Card>
       </div>
     </div>
   );

@@ -56,12 +56,12 @@ function ToggleSwitch({ label, value, onChange }) {
       <span className="text-sm text-gray-600">{label}</span>
       <div
         onClick={() => onChange(!value)}
-        className={`w-10 h-5 rounded-full transition-all duration-200 relative ${
+        className={`w-10 h-5 rounded-full transition-all duration-200 relative Rs{
           value ? "bg-[#6C63FF]" : "bg-gray-200"
         }`}
       >
         <div
-          className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200 ${
+          className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200 Rs{
             value ? "left-5" : "left-0.5"
           }`}
         />
@@ -89,15 +89,11 @@ function ImageUploadBox({ images, onAdd, onRemove }) {
     <div>
       <div
         onClick={() => inputRef.current.click()}
-        className="border-2 border-dashed border-[#e0e0ff] rounded-xl p-6 text-center cursor-pointer hover:border-[#6C63FF] hover:bg-[#f5f5ff] transition-all duration-150"
+        className="border-2 border-dashed border-[#e0e0ff] rounded-xl p-5 sm:p-6 text-center cursor-pointer hover:border-[#6C63FF] hover:bg-[#f5f5ff] transition-all duration-150"
       >
-        <MdOutlineCloudUpload size={32} className="text-[#6C63FF] mx-auto mb-2" />
-        <p className="text-sm font-medium text-gray-600">
-          Click to upload images
-        </p>
-        <p className="text-xs text-gray-400 mt-1">
-          PNG, JPG, WEBP — You can select multiple files
-        </p>
+        <MdOutlineCloudUpload size={28} className="text-[#6C63FF] mx-auto mb-2" />
+        <p className="text-sm font-medium text-gray-600">Click to upload images</p>
+        <p className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP — Multiple files allowed</p>
         <input
           ref={inputRef}
           type="file"
@@ -115,14 +111,12 @@ function ImageUploadBox({ images, onAdd, onRemove }) {
               <img
                 src={img.preview}
                 alt={img.name}
-                className="w-20 h-20 object-cover rounded-xl border border-[#e0e0ff]"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl border border-[#e0e0ff]"
               />
               <button
                 type="button"
                 onClick={() => onRemove(idx)}
-                className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white
-                           rounded-full flex items-center justify-center opacity-0
-                           group-hover:opacity-100 transition"
+                className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
               >
                 <MdOutlineClose size={11} />
               </button>
@@ -135,9 +129,7 @@ function ImageUploadBox({ images, onAdd, onRemove }) {
           ))}
           <div
             onClick={() => inputRef.current.click()}
-            className="w-20 h-20 border-2 border-dashed border-[#e0e0ff] rounded-xl
-                       flex flex-col items-center justify-center cursor-pointer
-                       hover:border-[#6C63FF] hover:bg-[#f5f5ff] transition"
+            className="w-16 h-16 sm:w-20 sm:h-20 border-2 border-dashed border-[#e0e0ff] rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-[#6C63FF] hover:bg-[#f5f5ff] transition"
           >
             <MdOutlineAdd size={20} className="text-gray-300" />
             <span className="text-[10px] text-gray-300 mt-0.5">Add more</span>
@@ -160,19 +152,21 @@ function Field({ label, required, children, hint }) {
     </div>
   );
 }
+
 const inputCls =
   "w-full border border-[#e0e0ff] rounded-xl px-3 py-2.5 text-sm text-gray-700 " +
   "outline-none focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/10 " +
   "placeholder:text-gray-300 transition";
+
 export default function ProductForm() {
-  const navigate   = useNavigate();
-  const { id }     = useParams(); 
+  const navigate = useNavigate();
+  const { id } = useParams();
   const isEditMode = Boolean(id);
 
-  const [form, setForm]       = useState(EMPTY_FORM);
-  const [images, setImages]   = useState([]); 
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [saving, setSaving]   = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (!isEditMode) return;
@@ -193,14 +187,14 @@ export default function ProductForm() {
       });
       setImages([
         {
-          preview:
-            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80&h=80&fit=crop",
+          preview: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=80&h=80&fit=crop",
           name: "sneaker.jpg",
         },
       ]);
       setLoading(false);
     }, 400);
   }, [id, isEditMode]);
+
   function update(field, value) {
     setForm((prev) => {
       const next = { ...prev, [field]: value };
@@ -214,20 +208,21 @@ export default function ProductForm() {
       return next;
     });
   }
+
   const topOptions = Object.keys(CATEGORY_DATA);
-  const midOptions = form.topCategory
-    ? Object.keys(CATEGORY_DATA[form.topCategory])
+  const midOptions = form.topCategory ? Object.keys(CATEGORY_DATA[form.topCategory]) : [];
+  const endOptions = form.topCategory && form.midCategory
+    ? CATEGORY_DATA[form.topCategory][form.midCategory]
     : [];
-  const endOptions =
-    form.topCategory && form.midCategory
-      ? CATEGORY_DATA[form.topCategory][form.midCategory]
-      : [];
+
   function handleAddImage(img) {
     setImages((prev) => [...prev, img]);
   }
+
   function handleRemoveImage(idx) {
     setImages((prev) => prev.filter((_, i) => i !== idx));
   }
+
   function validate() {
     if (!form.name.trim())   return "Please enter the product name";
     if (!form.price)         return "Please enter the sale price";
@@ -239,11 +234,12 @@ export default function ProductForm() {
     if (images.length === 0) return "Please upload at least one image";
     return null;
   }
+
   async function handleSubmit(e) {
     e.preventDefault();
     const error = validate();
     if (error) {
-      alert(error); 
+      alert(error);
       return;
     }
     setSaving(true);
@@ -265,30 +261,31 @@ export default function ProductForm() {
   }
 
   return (
-    <div className="p-6 min-h-screen bg-[#f8f8ff]">
-      <div className="flex items-center gap-3 mb-6">
+    <div className="p-4 sm:p-6 min-h-screen bg-[#f8f8ff]">
+
+      <div className="flex items-center gap-3 mb-5">
         <button
           onClick={() => navigate("/admin/products")}
-          className="w-8 h-8 flex items-center justify-center rounded-xl border border-[#e0e0ff]text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-white transition"
+          className="w-8 h-8 flex items-center justify-center rounded-xl border border-[#e0e0ff] text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-white transition shrink-0"
         >
           <MdOutlineArrowBack size={17} />
         </button>
         <div>
-          <h1 className="text-lg font-semibold text-gray-800">
+          <h1 className="text-base sm:text-lg font-semibold text-gray-800">
             {isEditMode ? "Edit Product" : "Add New Product"}
           </h1>
           <p className="text-xs text-gray-400 mt-0.5">
-            {isEditMode
-              ? "Update the product details below"
-              : "Fill in the details to add a new product"}
+            {isEditMode ? "Update the product details below" : "Fill in the details to add a new product"}
           </p>
         </div>
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-3 gap-5">
-          <div className="col-span-2 flex flex-col gap-5">
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4">
+        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 sm:gap-5">
+
+          <div className="lg:col-span-2 flex flex-col gap-4 sm:gap-5">
+
+            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 sm:p-5 flex flex-col gap-4">
               <h2 className="text-sm font-semibold text-gray-700">Basic Info</h2>
               <Field label="Product Name" required>
                 <input
@@ -299,7 +296,6 @@ export default function ProductForm() {
                   className={inputCls}
                 />
               </Field>
-
               <Field
                 label="Description"
                 hint="Describe the product in detail - material, size, color, features"
@@ -313,10 +309,11 @@ export default function ProductForm() {
                 />
               </Field>
             </div>
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4">
+
+            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 sm:p-5 flex flex-col gap-4">
               <h2 className="text-sm font-semibold text-gray-700">Pricing & Stock</h2>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <Field label="Sale Price (₹)" required>
                   <input
                     type="number"
@@ -327,7 +324,6 @@ export default function ProductForm() {
                     min={0}
                   />
                 </Field>
-
                 <Field
                   label="Original Price / MRP (₹)"
                   required
@@ -342,7 +338,6 @@ export default function ProductForm() {
                     min={0}
                   />
                 </Field>
-
                 <Field label="Stock Quantity" required>
                   <input
                     type="number"
@@ -354,21 +349,21 @@ export default function ProductForm() {
                   />
                 </Field>
               </div>
+
               {form.price && form.originalPrice && (
-                <div className="flex items-center gap-2 bg-green-50 border border-green-100 rounded-xl px-3 py-2">
+                <div className="flex flex-wrap items-center gap-2 bg-green-50 border border-green-100 rounded-xl px-3 py-2">
                   <span className="text-xs text-green-600 font-medium">Discount:</span>
                   <span className="text-xs text-green-700 font-semibold">
-                    {Math.round(
-                      ((form.originalPrice - form.price) / form.originalPrice) * 100
-                    )}% off
+                    {Math.round(((form.originalPrice - form.price) / form.originalPrice) * 100)}% off
                   </span>
-                  <span className="text-xs text-green-500 ml-auto">
+                  <span className="text-xs text-green-500 sm:ml-auto">
                     Customer saves ₹{form.originalPrice - form.price}
                   </span>
                 </div>
               )}
             </div>
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4">
+
+            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 sm:p-5 flex flex-col gap-4">
               <h2 className="text-sm font-semibold text-gray-700">
                 Product Images
                 <span className="text-xs font-normal text-gray-400 ml-2">
@@ -381,9 +376,12 @@ export default function ProductForm() {
                 onRemove={handleRemoveImage}
               />
             </div>
+
           </div>
-          <div className="flex flex-col gap-5">
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4">
+
+          <div className="flex flex-col gap-4 sm:gap-5">
+
+            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 sm:p-5 flex flex-col gap-4">
               <h2 className="text-sm font-semibold text-gray-700">Category</h2>
               <Field label="Top Category" required>
                 <select
@@ -397,6 +395,7 @@ export default function ProductForm() {
                   ))}
                 </select>
               </Field>
+
               {form.topCategory && (
                 <Field label="Mid Category" required>
                   <select
@@ -411,6 +410,7 @@ export default function ProductForm() {
                   </select>
                 </Field>
               )}
+
               {form.midCategory && (
                 <Field label="End Category" required>
                   <select
@@ -425,46 +425,30 @@ export default function ProductForm() {
                   </select>
                 </Field>
               )}
+
               {form.endCategory && (
                 <div className="flex items-center gap-1 flex-wrap bg-[#f5f5ff] rounded-xl px-3 py-2">
-                  <span className="text-[11px] text-[#6C63FF] font-medium">
-                    {form.topCategory}
-                  </span>
+                  <span className="text-[11px] text-[#6C63FF] font-medium">{form.topCategory}</span>
                   <span className="text-gray-300 text-xs">›</span>
-                  <span className="text-[11px] text-[#6C63FF] font-medium">
-                    {form.midCategory}
-                  </span>
+                  <span className="text-[11px] text-[#6C63FF] font-medium">{form.midCategory}</span>
                   <span className="text-gray-300 text-xs">›</span>
-                  <span className="text-[11px] text-[#6C63FF] font-medium">
-                    {form.endCategory}
-                  </span>
+                  <span className="text-[11px] text-[#6C63FF] font-medium">{form.endCategory}</span>
                 </div>
               )}
             </div>
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4">
+
+            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 sm:p-5 flex flex-col gap-4">
               <div>
                 <h2 className="text-sm font-semibold text-gray-700">Product Tags</h2>
                 <p className="text-xs text-gray-400 mt-0.5">
                   Choose where this product appears on the homepage
                 </p>
               </div>
-
-              <ToggleSwitch
-                label="Featured"
-                value={form.featured}
-                onChange={(v) => update("featured", v)}
-              />
-              <ToggleSwitch
-                label="Latest"
-                value={form.latest}
-                onChange={(v) => update("latest", v)}
-              />
-              <ToggleSwitch
-                label="Popular"
-                value={form.popular}
-                onChange={(v) => update("popular", v)}
-              />
+              <ToggleSwitch label="Featured" value={form.featured} onChange={(v) => update("featured", v)} />
+              <ToggleSwitch label="Latest" value={form.latest} onChange={(v) => update("latest", v)} />
+              <ToggleSwitch label="Popular" value={form.popular} onChange={(v) => update("popular", v)} />
             </div>
+
             <div className="flex flex-col gap-2">
               <button
                 type="submit"

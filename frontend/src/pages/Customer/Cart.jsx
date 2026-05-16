@@ -1,14 +1,15 @@
-import MainLayout from "../../components/layout/MainLayout";
-
+import MainLayout from "../../components/customer/layout/MainLayout";
 import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../../context/CheckoutContext";
 
 const Cart = () => {
-  const {
-    cartItems,
-    increaseQuantity,
-    decreaseQuantity,
-    totalPrice,
-  } = useCart();
+  const { cartItems, increaseQuantity, decreaseQuantity, totalPrice } =
+    useCart();
+
+  const navigate = useNavigate();
+
+  const { startCheckout } = useCheckout();
 
   return (
     <MainLayout>
@@ -90,9 +91,7 @@ const Cart = () => {
                       {item.name}
                     </h2>
 
-                    <p className="mt-2 text-gray-500">
-                      {item.category}
-                    </p>
+                    <p className="mt-2 text-gray-500">{item.category}</p>
 
                     <p
                       className="
@@ -114,11 +113,7 @@ const Cart = () => {
                       "
                     >
                       <button
-                        onClick={() =>
-                          decreaseQuantity(
-                            item.id
-                          )
-                        }
+                        onClick={() => decreaseQuantity(item.id)}
                         className="
                           h-10
                           w-10
@@ -129,16 +124,10 @@ const Cart = () => {
                         -
                       </button>
 
-                      <span className="font-medium">
-                        {item.quantity}
-                      </span>
+                      <span className="font-medium">{item.quantity}</span>
 
                       <button
-                        onClick={() =>
-                          increaseQuantity(
-                            item.id
-                          )
-                        }
+                        onClick={() => increaseQuantity(item.id)}
                         className="
                           h-10
                           w-10
@@ -182,9 +171,7 @@ const Cart = () => {
                     justify-between
                   "
                 >
-                  <span className="text-gray-500">
-                    Total
-                  </span>
+                  <span className="text-gray-500">Total</span>
 
                   <span
                     className="
@@ -193,21 +180,26 @@ const Cart = () => {
                       text-[#6C63FF]
                     "
                   >
-                    ${totalPrice}
+                    Rs{totalPrice}
                   </span>
                 </div>
 
                 <button
+                  onClick={() => {
+                    startCheckout(cartItems);
+
+                    navigate("/checkout");
+                  }}
                   className="
-                    mt-8
-                    h-14
-                    w-full
-                    rounded-2xl
-                    bg-[#6C63FF]
-                    text-lg
-                    font-semibold
-                    text-white
-                  "
+    mt-8
+    h-14
+    w-full
+    rounded-2xl
+    bg-[#6C63FF]
+    text-lg
+    font-semibold
+    text-white
+  "
                 >
                   Checkout
                 </button>
