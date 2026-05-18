@@ -115,7 +115,7 @@ export default function Categories() {
           <button
             key={tab}
             onClick={() => setActiveStep(i + 1)}
-            className={`flex-1 py-2.5 text-xs font-medium transition Rs{
+            className={`flex-1 py-2.5 text-xs font-medium transition ${
               activeStep === i + 1
                 ? "bg-[#6C63FF] text-white"
                 : "text-gray-500 hover:bg-[#f5f5ff]"
@@ -152,7 +152,7 @@ export default function Categories() {
           ) : (
             <CategorySection
               title="Mid Categories"
-              subtitle={`Inside "Rs{selectedTop.name}"`}
+              subtitle={`Inside "${selectedTop.name}"`}
               items={currentMidItems}
               onAdd={addMidCategory}
               onEdit={editMidCategory}
@@ -175,7 +175,7 @@ export default function Categories() {
           ) : (
             <CategorySection
               title="End Categories"
-              subtitle={`Inside "Rs{selectedMid.name}"`}
+              subtitle={`Inside "${selectedMid.name}"`}
               items={currentEndItems}
               onAdd={addEndCategory}
               onEdit={editEndCategory}
@@ -206,7 +206,7 @@ export default function Categories() {
           ) : (
             <CategorySection
               title="Mid Categories"
-              subtitle={`Inside "Rs{selectedTop.name}"`}
+              subtitle={`Inside "${selectedTop.name}"`}
               items={currentMidItems}
               onAdd={addMidCategory}
               onEdit={editMidCategory}
@@ -223,7 +223,7 @@ export default function Categories() {
           ) : (
             <CategorySection
               title="End Categories"
-              subtitle={`Inside "Rs{selectedMid.name}"`}
+              subtitle={`Inside "${selectedMid.name}"`}
               items={currentEndItems}
               onAdd={addEndCategory}
               onEdit={editEndCategory}
@@ -247,7 +247,7 @@ export default function Categories() {
                 setSelectedMid(null);
                 setActiveStep(2);
               }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition Rs{
+              className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition ${
                 selectedTop?.id === item.id
                   ? "bg-[#6C63FF] text-white border-[#6C63FF]"
                   : "bg-white text-gray-500 border-gray-200 hover:border-[#6C63FF] hover:text-[#6C63FF]"
@@ -271,7 +271,7 @@ export default function Categories() {
                     setSelectedMid(item);
                     setActiveStep(3);
                   }}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition Rs{
+                  className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition ${
                     selectedMid?.id === item.id
                       ? "bg-[#FF6584] text-white border-[#FF6584]"
                       : "bg-white text-gray-500 border-gray-200 hover:border-[#FF6584] hover:text-[#FF6584]"

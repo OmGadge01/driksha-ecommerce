@@ -80,7 +80,7 @@ export default function FaqManager() {
             <button
               key={cat}
               onClick={() => setFilterCat(cat)}
-              className={`text-xs px-2.5 md:px-3 py-1 md:py-1.5 rounded-xl font-medium transition Rs{
+              className={`text-xs px-2.5 md:px-3 py-1 md:py-1.5 rounded-xl font-medium transition ${
                 filterCat === cat
                   ? "bg-[#6C63FF] text-white"
                   : "bg-[#f0f0ff] text-[#6C63FF] hover:bg-[#e8e8ff]"

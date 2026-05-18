@@ -6,7 +6,7 @@ import {
 export default function BannerCard({ banner, index, onEdit, onDelete, onToggle }) {
   return (
     <div
-      className={`bg-white rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 border transition Rs{
+      className={`bg-white rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 border transition ${
         banner.active ? "border-[#e0e0ff]" : "border-gray-200 opacity-60"
       }`}
     >

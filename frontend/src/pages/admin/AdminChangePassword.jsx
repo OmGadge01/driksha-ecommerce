@@ -186,7 +186,7 @@ export default function AdminChangePassword() {
 
                 <div className="flex flex-col gap-2">
                   <p
-                    className={`text-xs Rs{
+                    className={`text-xs ${
                       form.newPassword.length >= 8
                         ? "text-green-500"
                         : "text-gray-400"
@@ -199,7 +199,7 @@ export default function AdminChangePassword() {
                   </p>
 
                   <p
-                    className={`text-xs Rs{
+                    className={`text-xs ${
                       /[A-Z]/.test(form.newPassword)
                         ? "text-green-500"
                         : "text-gray-400"
@@ -212,7 +212,7 @@ export default function AdminChangePassword() {
                   </p>
 
                   <p
-                    className={`text-xs Rs{
+                    className={`text-xs ${
                       /[0-9]/.test(form.newPassword)
                         ? "text-green-500"
                         : "text-gray-400"

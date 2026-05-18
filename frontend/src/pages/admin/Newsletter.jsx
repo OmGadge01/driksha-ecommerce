@@ -41,7 +41,7 @@ export default function Newsletter() {
 
   function handleExport() {
     const header = "Name,Email,Subscribed Date\n";
-    const rows   = subscribers.map((s) => `Rs{s.name},Rs{s.email},Rs{s.date}`).join("\n");
+    const rows   = subscribers.map((s) => `${s.name},${s.email},${s.date}`).join("\n");
     const blob   = new Blob([header + rows], { type: "text/csv" });
     const url    = URL.createObjectURL(blob);
     const link   = document.createElement("a");
@@ -111,7 +111,7 @@ export default function Newsletter() {
                 {filtered.map((subscriber, idx) => (
                   <tr
                     key={subscriber.id}
-                    className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition Rs{
+                    className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${
                       idx === filtered.length - 1 ? "border-b-0" : ""
                     }`}
                   >
@@ -193,7 +193,7 @@ export default function Newsletter() {
       <DeleteModal
         isOpen={!!deleteTarget}
         title="Remove Subscriber?"
-        message={`Rs{deleteTarget?.name} — Rs{deleteTarget?.email} will be removed.`}
+        message={`${deleteTarget?.name} — ${deleteTarget?.email} will be removed.`}
         onCancel={() => setDeleteTarget(null)}
         onConfirm={handleDelete}
       />

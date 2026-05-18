@@ -73,7 +73,7 @@ export default function Dashboard() {
                 <div
                   className="w-full rounded-t-md transition-all"
                   style={{
-                    height: `Rs{(item.value / maxVal) * 100}%`,
+                    height: `${(item.value / maxVal) * 100}%`,
                     background: item.month === "May" ? "#6C63FF" : "#e0e0ff",
                   }}
                 />
@@ -96,7 +96,7 @@ export default function Dashboard() {
                   className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: action.bg }}
                 >
-                  <i className={`ti Rs{action.icon} text-lg`} style={{ color: action.color }} aria-hidden="true" />
+                  <i className={`ti ${action.icon} text-lg`} style={{ color: action.color }} aria-hidden="true" />
                 </div>
                 <div>
                   <p className="text-sm text-[#1a1a2e]">{action.title}</p>

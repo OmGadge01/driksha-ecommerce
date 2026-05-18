@@ -229,7 +229,7 @@ export default function TopHeader({ pageTitle, breadcrumb, onMenuClick }) {
             </div>
             <MdOutlineKeyboardArrowDown
               size={15}
-              className={`text-gray-400 transition-transform duration-200 Rs{
+              className={`text-gray-400 transition-transform duration-200 ${
                 profileOpen ? "rotate-180" : ""
               }`}
             />
