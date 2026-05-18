@@ -26,7 +26,7 @@ function TogglePill({ label, value, onChange }) {
   return (
     <button
       onClick={() => onChange(!value)}
-      className={`text-[10px] font-medium px-2 py-0.5 rounded-full border transition-all duration-150 Rs{
+      className={`text-[10px] font-medium px-2 py-0.5 rounded-full border transition-all duration-150 ${
         value
           ? "bg-[#6C63FF] text-white border-[#6C63FF]"
           : "bg-white text-gray-400 border-gray-200 hover:border-[#6C63FF] hover:text-[#6C63FF]"
@@ -101,7 +101,7 @@ export default function Products() {
             <button
               key={cat}
               onClick={() => setCategory(cat)}
-              className={`text-xs px-3 py-1.5 rounded-xl border transition-all duration-150 Rs{
+              className={`text-xs px-3 py-1.5 rounded-xl border transition-all duration-150 ${
                 selectedCategory === cat
                   ? "bg-[#6C63FF] text-white border-[#6C63FF]"
                   : "bg-white text-gray-500 border-gray-200 hover:border-[#6C63FF] hover:text-[#6C63FF]"
@@ -141,7 +141,7 @@ export default function Products() {
                   <p className="text-xs text-gray-300 line-through">₹{product.originalPrice.toLocaleString()}</p>
                 </div>
                 <span
-                  className={`text-xs font-medium px-2 py-0.5 rounded-full Rs{
+                  className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                     product.stock === 0
                       ? "bg-red-100 text-red-500"
                       : product.stock < 10
@@ -149,7 +149,7 @@ export default function Products() {
                       : "bg-green-100 text-green-600"
                   }`}
                 >
-                  {product.stock === 0 ? "Out of stock" : `Rs{product.stock} left`}
+                  {product.stock === 0 ? "Out of stock" : `${product.stock} left`}
                 </span>
               </div>
 
@@ -161,7 +161,7 @@ export default function Products() {
 
               <div className="flex items-center gap-2 pt-1 border-t border-[#f5f5ff]">
                 <button
-                  onClick={() => navigate(`/admin/products/edit/Rs{product.id}`)}
+                  onClick={() => navigate(`/admin/products/edit/${product.id}`)}
                   className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-[#e0e0ff] text-sm text-gray-500 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
                 >
                   <MdOutlineEdit size={16} /> Edit
@@ -204,7 +204,7 @@ export default function Products() {
               filtered.map((product, idx) => (
                 <tr
                   key={product.id}
-                  className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition Rs{idx === filtered.length - 1 ? "border-b-0" : ""}`}
+                  className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${idx === filtered.length - 1 ? "border-b-0" : ""}`}
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
@@ -218,8 +218,8 @@ export default function Products() {
                     <p className="text-xs text-gray-300 line-through">₹{product.originalPrice.toLocaleString()}</p>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full Rs{product.stock === 0 ? "bg-red-100 text-red-500" : product.stock < 10 ? "bg-orange-100 text-orange-500" : "bg-green-100 text-green-600"}`}>
-                      {product.stock === 0 ? "Out of stock" : `Rs{product.stock} left`}
+                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${product.stock === 0 ? "bg-red-100 text-red-500" : product.stock < 10 ? "bg-orange-100 text-orange-500" : "bg-green-100 text-green-600"}`}>
+                      {product.stock === 0 ? "Out of stock" : `${product.stock} left`}
                     </span>
                   </td>
                   <td className="px-4 py-4">
@@ -232,7 +232,7 @@ export default function Products() {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <button
-                        onClick={() => navigate(`/admin/products/edit/Rs{product.id}`)}
+                        onClick={() => navigate(`/admin/products/edit/${product.id}`)}
                         className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#e0e0ff] text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
                       >
                         <MdOutlineEdit size={16} />
@@ -255,7 +255,7 @@ export default function Products() {
       <DeleteModal
         isOpen={!!deleteTarget}
         title="Delete Product?"
-        message={`"Rs{deleteTarget?.name}" will be permanently deleted.`}
+        message={`"${deleteTarget?.name}" will be permanently deleted.`}
         onConfirm={handleDelete}
         onCancel={() => setDeleteTarget(null)}
       />

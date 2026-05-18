@@ -71,7 +71,7 @@ export default function OrdersTable({ orders, onView }) {
             {orders.map((order, idx) => (
               <tr
                 key={order.id}
-                className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition Rs{
+                className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${
                   idx === orders.length - 1 ? "border-b-0" : ""
                 }`}
               >

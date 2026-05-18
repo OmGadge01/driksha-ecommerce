@@ -9,7 +9,7 @@ export default function StatusBadge({ status }) {
   const style = STATUS_STYLES[status] || "bg-gray-100 text-gray-500";
 
   return (
-    <span className={`text-xs font-medium px-2.5 py-1 rounded-full Rs{style}`}>
+    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${style}`}>
       {status}
     </span>
   );

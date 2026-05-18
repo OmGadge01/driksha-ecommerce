@@ -41,7 +41,7 @@ export default function CategorySection({
   }
 
   return (
-    <div className={`bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4 Rs{disabled ? "opacity-50 pointer-events-none" : ""}`}>
+    <div className={`bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
@@ -103,7 +103,7 @@ export default function CategorySection({
         }}
         onSave={handleSave}
         editItem={editItem}
-        title={editItem ? `Edit Rs{title.replace(" Categories", "")} Category` : `Add Rs{title.replace(" Categories", "")} Category`}
+        title={editItem ? `Edit ${title.replace(" Categories", "")} Category` : `Add ${title.replace(" Categories", "")} Category`}
       />
 
       {deleteTarget && (

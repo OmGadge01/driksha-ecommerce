@@ -105,7 +105,7 @@ export default function Orders() {
             <button
               key={filter}
               onClick={() => setFilter(filter)}
-              className={`text-xs px-3 py-1.5 rounded-xl border transition-all duration-150 Rs{
+              className={`text-xs px-3 py-1.5 rounded-xl border transition-all duration-150 ${
                 activeFilter === filter
                   ? "bg-[#6C63FF] text-white border-[#6C63FF]"
                   : "bg-white text-gray-500 border-gray-200 hover:border-[#6C63FF] hover:text-[#6C63FF]"

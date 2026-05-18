@@ -56,12 +56,12 @@ function ToggleSwitch({ label, value, onChange }) {
       <span className="text-sm text-gray-600">{label}</span>
       <div
         onClick={() => onChange(!value)}
-        className={`w-10 h-5 rounded-full transition-all duration-200 relative Rs{
+        className={`w-10 h-5 rounded-full transition-all duration-200 relative ${
           value ? "bg-[#6C63FF]" : "bg-gray-200"
         }`}
       >
         <div
-          className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200 Rs{
+          className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200 ${
             value ? "left-5" : "left-0.5"
           }`}
         />

@@ -77,7 +77,7 @@ export default function CustomersTable({ customers, onView }) {
             {customers.map((customer, idx) => (
               <tr
                 key={customer.id}
-                className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition Rs{
+                className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${
                   idx === customers.length - 1 ? "border-b-0" : ""
                 }`}
               >

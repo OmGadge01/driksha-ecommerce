@@ -105,7 +105,7 @@ export default function Customers() {
         <StatCard
           icon={MdOutlineStarBorder}
           label="Top Spender"
-          count={`₹Rs{topSpender.totalSpent.toLocaleString()}`}
+          count={`₹${topSpender.totalSpent.toLocaleString()}`}
           color="bg-amber-400"
         />
       </div>

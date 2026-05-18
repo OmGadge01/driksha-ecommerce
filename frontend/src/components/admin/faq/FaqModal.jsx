@@ -75,11 +75,11 @@ export default function FaqModal({ faq, onClose, onSave }) {
           </div>
           <button
             onClick={() => update("active", !form.active)}
-            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 Rs{form.active ? "bg-[#6C63FF]" : "bg-gray-200"
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${form.active ? "bg-[#6C63FF]" : "bg-gray-200"
             }`}
           >
             <div
-              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200 Rs{form.active ? "left-5" : "left-0.5"
+              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200 ${form.active ? "left-5" : "left-0.5"
               }`}
             />
           </button>

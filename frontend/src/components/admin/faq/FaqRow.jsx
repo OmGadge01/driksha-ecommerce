@@ -7,7 +7,7 @@ export default function FaqRow({ faq, onEdit, onDelete, onToggle }) {
 
   return (
     <div
-      className={`bg-white border rounded-2xl overflow-hidden transition Rs{
+      className={`bg-white border rounded-2xl overflow-hidden transition ${
         faq.active ? "border-[#e0e0ff]" : "border-gray-200 opacity-60"
       }`}
     >
@@ -29,13 +29,13 @@ export default function FaqRow({ faq, onEdit, onDelete, onToggle }) {
         </span>
         <div
           title={faq.active ? "Visible on site" : "Hidden from site"}
-          className={`w-2 h-2 rounded-full shrink-0 Rs{faq.active ? "bg-green-400" : "bg-gray-300"
+          className={`w-2 h-2 rounded-full shrink-0 ${faq.active ? "bg-green-400" : "bg-gray-300"
           }`}
         />
         <div className="flex items-center gap-0.5 md:gap-1 shrink-0">
           <button
             onClick={() => onToggle(faq.id)}
-            className={`text-[10px] px-1.5 md:px-2 py-0.5 md:py-1 rounded-lg border font-medium transition hidden sm:block Rs{
+            className={`text-[10px] px-1.5 md:px-2 py-0.5 md:py-1 rounded-lg border font-medium transition hidden sm:block ${
               faq.active
                 ? "border-gray-200 text-gray-400 hover:border-red-200 hover:text-red-400"
                 : "border-green-200 text-green-500 hover:bg-green-50"
@@ -71,7 +71,7 @@ export default function FaqRow({ faq, onEdit, onDelete, onToggle }) {
           </p>
           <button
             onClick={() => onToggle(faq.id)}
-            className={`sm:hidden mt-3 text-[10px] px-2 py-1 rounded-lg border font-medium transition Rs{
+            className={`sm:hidden mt-3 text-[10px] px-2 py-1 rounded-lg border font-medium transition ${
               faq.active
                 ? "border-gray-200 text-gray-400 hover:border-red-200 hover:text-red-400"
                 : "border-green-200 text-green-500 hover:bg-green-50"
