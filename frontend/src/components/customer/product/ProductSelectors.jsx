@@ -30,7 +30,7 @@ const ProductSelectors = ({
                 w-10
                 rounded-full
 
-                ${
+                Rs{
                   activeColor === color
                     ? "ring-2 ring-[#6C63FF] ring-offset-2"
                     : ""
@@ -61,7 +61,7 @@ const ProductSelectors = ({
                 font-medium
                 transition-all
 
-                ${
+                Rs{
                   activeSize === size
                     ? "border-[#6C63FF] bg-[#6C63FF]/10 text-[#6C63FF]"
                     : "border-gray-200 text-gray-500"

@@ -1,5 +1,5 @@
 import ProductCard from "../product/ProductCard";
-import products from "../../data/products";
+import products from "../../../data/products";
 
 const ProductSection = () => {
   return (

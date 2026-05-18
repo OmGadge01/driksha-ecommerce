@@ -1,4 +1,4 @@
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/customer/layout/MainLayout";
 
 import { useCheckout } from "../../context/CheckoutContext";
 
@@ -161,7 +161,7 @@ const Checkout = () => {
                 <div className="flex justify-between">
                   <span>Subtotal</span>
 
-                  <span>${subtotal}</span>
+                  <span>Rs{subtotal}</span>
                 </div>
 
                 <div className="flex justify-between">
@@ -170,7 +170,7 @@ const Checkout = () => {
                   <span>
                     {shipping === 0
                       ? "Free"
-                      : `$${shipping}`}
+                      : `RsRs{shipping}`}
                   </span>
                 </div>
 
@@ -178,7 +178,7 @@ const Checkout = () => {
                   <span>Tax</span>
 
                   <span>
-                    ${tax.toFixed(2)}
+                    Rs{tax.toFixed(2)}
                   </span>
                 </div>
 
@@ -195,7 +195,7 @@ const Checkout = () => {
                 >
                   <span>Total</span>
 
-                  <span>${total.toFixed(2)}</span>
+                  <span>Rs{total.toFixed(2)}</span>
                 </div>
               </div>
 

@@ -1,4 +1,4 @@
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/customer/layout/MainLayout";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../../context/CheckoutContext";
@@ -180,7 +180,7 @@ const Cart = () => {
                       text-[#6C63FF]
                     "
                   >
-                    ${totalPrice}
+                    Rs{totalPrice}
                   </span>
                 </div>
 

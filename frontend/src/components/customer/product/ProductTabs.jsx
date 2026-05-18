@@ -35,7 +35,7 @@ const ProductTabs = ({
               text-sm
               font-medium
 
-              ${
+              Rs{
                 activeTab === tab
                   ? "text-[#6C63FF]"
                   : "text-gray-500"

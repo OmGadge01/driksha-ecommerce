@@ -67,7 +67,7 @@ const FilterSidebar = () => {
                     border-2
                     transition-all
 
-                    ${
+                    Rs{
                       selectedCategory === item
                         ? "border-[#6C63FF] bg-[#6C63FF]"
                         : "border-gray-300"
@@ -81,7 +81,7 @@ const FilterSidebar = () => {
                     md:text-sm
                     transition-colors
 
-                    ${
+                    Rs{
                       selectedCategory === item
                         ? "text-gray-900 font-medium"
                         : "text-gray-500"
@@ -127,7 +127,7 @@ const FilterSidebar = () => {
                   transition-all
                   duration-200
 
-                  ${
+                  Rs{
                     selectedSize === size
                       ? "border-[#6C63FF] bg-[#6C63FF]/10 text-[#6C63FF] shadow-md"
                       : "border-gray-200 text-gray-500 hover:border-[#6C63FF] hover:text-gray-700"
@@ -169,7 +169,7 @@ const FilterSidebar = () => {
                   transition-all
                   duration-200
 
-                  ${
+                  Rs{
                     selectedColor === color
                       ? "ring-2 ring-[#6C63FF] ring-offset-2 scale-110"
                       : "hover:scale-105 opacity-80 hover:opacity-100"

@@ -1,13 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/customer/layout/MainLayout";
 
-import CollectionHeader from "../../components/Collections/CollectionHeader";
-import FilterSidebar from "../../components/Collections/FilterSidebar";
-import ProductGrid from "../../components/Collections/ProductGrid";
-import Pagination from "../../components/Collections/Pagination";
+import CollectionHeader from "../../components/customer/Collections/CollectionHeader";
+import FilterSidebar from "../../components/customer/Collections/FilterSidebar";
+import ProductGrid from "../../components/customer/Collections/ProductGrid";
+import Pagination from "../../components/customer/Collections/Pagination";
 
-import Footer from "../../components/layout/Footer";
+import Footer from "../../components/customer/layout/Footer";
 
 import products from "../../data/products";
 

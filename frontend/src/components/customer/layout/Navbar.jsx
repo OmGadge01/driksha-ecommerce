@@ -1,56 +1,66 @@
 import { useState } from "react";
 
-import {
-  Search,
-  ShoppingBag,
-  ArrowLeft,
-} from "lucide-react";
+import { Search, ShoppingBag, Heart, ArrowLeft } from "lucide-react";
 
-import {
-  useNavigate,
-} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../../context/CartContext";
+
+import { useWishlist } from "../../../context/WishlistContext";
 
 const categories = [
-  "Home",
-  "Collections",
-  "New Arrivals",
-  "Best Sellers",
-  "Essentials",
-  "Luxury",
-  "Accessories",
-  "Lifestyle",
-  "Exclusive Deals",
+  {
+    name: "Home",
+    path: "/home",
+  },
+
+  {
+    name: "Collections",
+    path: "/collections",
+  },
+
+  {
+    name: "New Arrivals",
+    path: "/new-arrivals",
+  },
+
+  {
+    name: "Best Sellers",
+    path: "/best-sellers",
+  },
+
+  {
+    name: "Luxury",
+    path: "/luxury",
+  },
+
+  {
+    name: "Accessories",
+    path: "/accessories",
+  },
 ];
 
 const Navbar = () => {
-  const [activeIndex, setActiveIndex] =
-    useState(0);
-
-  const [searchQuery, setSearchQuery] =
-    useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
+  const { wishlistItems } = useWishlist();
+
+  const wishlistCount = wishlistItems.length;
+
   const { cartItems } = useCart();
 
-  const cartCount = cartItems.reduce(
-    (total, item) =>
-      total + item.quantity,
-    0
-  );
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
     if (!searchQuery.trim()) return;
 
-    navigate(
-      `/collections?search=${encodeURIComponent(
-        searchQuery
-      )}`
-    );
+    navigate(`/collections?search=${encodeURIComponent(searchQuery)}`);
   };
 
   return (
@@ -77,7 +87,6 @@ const Navbar = () => {
         "
       >
         <div className="flex items-center">
-          
           <button
             onClick={() => navigate(-1)}
             className="
@@ -100,9 +109,7 @@ const Navbar = () => {
           </button>
 
           <div
-            onClick={() =>
-              navigate("/home")
-            }
+            onClick={() => navigate("/home")}
             className="
               min-w-fit
               cursor-pointer
@@ -151,15 +158,12 @@ const Navbar = () => {
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => {
-              const value =
-                e.target.value;
+              const value = e.target.value;
 
               setSearchQuery(value);
 
               if (!value.trim()) {
-                navigate(
-                  "/collections"
-                );
+                navigate("/collections");
               }
             }}
             className="
@@ -170,23 +174,6 @@ const Navbar = () => {
               outline-none
             "
           />
-
-          <select
-            className="
-              w-44
-              cursor-pointer
-              border-l
-              border-gray-300
-              bg-white
-              px-4
-              text-sm
-              outline-none
-            "
-          >
-            <option>
-              All categories
-            </option>
-          </select>
 
           <button
             type="submit"
@@ -206,18 +193,17 @@ const Navbar = () => {
         </form>
 
         <div className="flex items-center gap-8">
-          
           <div
-            onClick={() =>
-              navigate("/login")
-            }
             className="
               hidden
               cursor-pointer
               md:block
             "
           >
-            <p className="text-sm text-gray-500">
+            <p
+              className="text-sm text-gray-500"
+              onClick={() => navigate("/login")}
+            >
               Login / Signup
             </p>
 
@@ -226,15 +212,45 @@ const Navbar = () => {
                 font-medium
                 text-black
               "
+              onClick={() => navigate("/account")}
             >
               My account
             </p>
           </div>
 
           <button
-            onClick={() =>
-              navigate("/cart")
-            }
+            onClick={() => navigate("/wishlist")}
+            className="
+              relative
+              cursor-pointer
+            "
+          >
+            <Heart size={26} strokeWidth={1.7} className="text-[#6C63FF]" />
+
+            {wishlistCount > 0 && (
+              <span
+                className="
+                  absolute
+                  -right-2
+                  -top-2
+                  flex
+                  h-5
+                  w-5
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-[#6C63FF]
+                  text-[10px]
+                  text-white
+                "
+              >
+                {wishlistCount}
+              </span>
+            )}
+          </button>
+
+          <button
+            onClick={() => navigate("/cart")}
             className="
               relative
               cursor-pointer
@@ -283,28 +299,13 @@ const Navbar = () => {
             px-6
           "
         >
-          {categories.map(
-            (item, index) => (
+          {categories.map((item) => {
+            const isActive = location.pathname === item.path;
+
+            return (
               <button
-                key={item}
-                onClick={() => {
-                  setActiveIndex(index);
-
-                  if (
-                    item === "Home"
-                  ) {
-                    navigate("/home");
-                  }
-
-                  if (
-                    item ===
-                    "Collections"
-                  ) {
-                    navigate(
-                      "/collections"
-                    );
-                  }
-                }}
+                key={item.name}
+                onClick={() => navigate(item.path)}
                 className={`
                   relative
                   whitespace-nowrap
@@ -312,17 +313,15 @@ const Navbar = () => {
                   transition-colors
 
                   ${
-                    index ===
-                    activeIndex
+                    isActive
                       ? "font-medium text-[#6C63FF]"
                       : "text-gray-600 hover:text-[#6C63FF]"
                   }
                 `}
               >
-                {item}
+                {item.name}
 
-                {index ===
-                  activeIndex && (
+                {isActive && (
                   <span
                     className="
                       absolute
@@ -335,8 +334,8 @@ const Navbar = () => {
                   />
                 )}
               </button>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
     </header>

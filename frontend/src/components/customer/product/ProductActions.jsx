@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 
-import { useCart } from "../../context/CartContext";
-import { useCheckout } from "../../context/CheckoutContext";
+import { useCart } from "../../../context/CartContext";
+import { useCheckout } from "../../../context/CheckoutContext";
 
 const ProductActions = ({
   product,
