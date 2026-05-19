@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('images')->latest()->get();
+        $products = Product::with(['images', 'topCategory', 'midCategory', 'endCategory'])->latest()->get();
 
         return response()->json([
             'success' => true,
@@ -30,17 +30,17 @@ class ProductController extends Controller
         ]);
 
         $product = Product::create([
-            'name'           => $request->name,
-            'description'    => $request->description,
-            'price'          => $request->price,
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
             'original_price' => $request->original_price,
-            'stock'          => $request->stock,
-            'top_category'   => $request->top_category,
-            'mid_category'   => $request->mid_category,
-            'end_category'   => $request->end_category,
-            'is_featured'    => $request->is_featured ?? false,
-            'is_latest'      => $request->is_latest ?? false,
-            'is_popular'     => $request->is_popular ?? false,
+            'stock' => $request->stock,
+            'top_category_id' => $request->top_category_id,
+            'mid_category_id' => $request->mid_category_id,
+            'end_category_id' => $request->end_category_id,
+            'is_featured' => $request->is_featured ?? false,
+            'is_latest' => $request->is_latest ?? false,
+            'is_popular' => $request->is_popular ?? false,
         ]);
 
         if ($request->hasFile('images')) {
@@ -90,17 +90,17 @@ class ProductController extends Controller
         }
 
         $product->update([
-            'name'           => $request->name ?? $product->name,
-            'description'    => $request->description ?? $product->description,
-            'price'          => $request->price ?? $product->price,
+            'name' => $request->name ?? $product->name,
+            'description' => $request->description ?? $product->description,
+            'price' => $request->price ?? $product->price,
             'original_price' => $request->original_price ?? $product->original_price,
-            'stock'          => $request->stock ?? $product->stock,
-            'top_category'   => $request->top_category ?? $product->top_category,
-            'mid_category'   => $request->mid_category ?? $product->mid_category,
-            'end_category'   => $request->end_category ?? $product->end_category,
-            'is_featured'    => $request->is_featured ?? $product->is_featured,
-            'is_latest'      => $request->is_latest ?? $product->is_latest,
-            'is_popular'     => $request->is_popular ?? $product->is_popular,
+            'stock' => $request->stock ?? $product->stock,
+            'top_category_id' => $request->top_category ?? $product->top_category_id,
+            'mid_category_id'  => $request->mid_category ?? $product->mid_category_id,
+            'end_category_id' => $request->end_category ?? $product->end_category_id,
+            'is_featured' => $request->is_featured ?? $product->is_featured,
+            'is_latest' => $request->is_latest ?? $product->is_latest,
+            'is_popular' => $request->is_popular ?? $product->is_popular,
         ]);
 
         if ($request->hasFile('images')) {
