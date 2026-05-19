@@ -18,10 +18,12 @@ return new class extends Migration
             $table->decimal('price', 10 , 2);
             $table->decimal('original_price', 10 , 2)->nullable();
             $table->integer('stock')->default(0);
-            $table->string('top_category')->nullable();
-            $table->string('mid_category')->nullable();
-            $table->string('end_category')->nullable();
-            $table->boolean('is_featured')->default(false);
+            $table->unsignedBigInteger('top_category_id')->nullable();
+            $table->unsignedBigInteger('mid_category_id')->nullable();
+            $table->unsignedBigInteger('end_category_id')->nullable();
+            $table->foreign('top_category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('mid_category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('end_category_id')->references('id')->on('categories')->onDelete('set null');            $table->boolean('is_featured')->default(false);
             $table->boolean('is_latest')->default(false);
             $table->boolean('is_popular')->default(false);
             $table->timestamps();
