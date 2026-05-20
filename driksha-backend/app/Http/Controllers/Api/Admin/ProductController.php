@@ -1,26 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\ProductResource;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 
-class ProductController extends Controller 
+
+class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['images', 'topCategory', 'midCategory', 'endCategory'])->latest()->get();
+        $products = Product::with([
+            'images',
+            'topCategory',
+            'midCategory',
+            'endCategory'
+        ])->latest()->get();
 
         return response()->json([
             'success' => true,
-            'data' => $products
+            'data' => ProductResource::collection($products)
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $request->validate([
             'name' => 'required|string',
@@ -58,14 +67,15 @@ class ProductController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Product created successfully',
-            'data' => $product->load('images')
+            'data' => new ProductResource($product->load('images'))
         ], 201);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $product = Product::with('images')->find($id);
 
-        if(!$product) {
+        if (!$product) {
             return response()->json([
                 'success' => false,
                 'message' => 'Product not found'
@@ -74,15 +84,15 @@ class ProductController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $product
+            'data' => new ProductResource($product)
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::find($id);
 
-        if(!$product) {
+        if (!$product) {
             return response()->json([
                 'success' => false,
                 'message' => 'Product not found'
@@ -96,7 +106,7 @@ class ProductController extends Controller
             'original_price' => $request->original_price ?? $product->original_price,
             'stock' => $request->stock ?? $product->stock,
             'top_category_id' => $request->top_category ?? $product->top_category_id,
-            'mid_category_id'  => $request->mid_category ?? $product->mid_category_id,
+            'mid_category_id' => $request->mid_category ?? $product->mid_category_id,
             'end_category_id' => $request->end_category ?? $product->end_category_id,
             'is_featured' => $request->is_featured ?? $product->is_featured,
             'is_latest' => $request->is_latest ?? $product->is_latest,
@@ -105,7 +115,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('products' , 'public');
+                $path = $image->store('products', 'public');
 
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -118,14 +128,15 @@ class ProductController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Product updated successfully',
-            'data' => $product->load('images')
+            'data' => new ProductResource($product->load('images'))
         ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $product = Product::find($id);
 
-        if(!$product) {
+        if (!$product) {
             return response()->json([
                 'success' => false,
                 'message' => 'Product not found'
