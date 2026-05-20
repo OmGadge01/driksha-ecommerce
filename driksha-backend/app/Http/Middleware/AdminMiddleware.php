@@ -11,15 +11,11 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->user()) {
+
             return response()->json([
+                'success' => false,
                 'message' => 'Unauthenticated'
             ], 401);
-        }
-
-        if ($request->user()->email !== 'admin@example.com') {
-            return response()->json([
-                'message' => 'Unauthorized. Admin access only.'
-            ], 403);
         }
 
         return $next($request);
