@@ -6,10 +6,37 @@ use App\Models\ProductImage;
 class Product extends Model 
 {
     protected $fillable = [
-        'name', 'description', 'price', 'original_price',
-        'stock', 'top_category_id', 'mid_category_id', 'end_category_id',
-        'is_featured', 'is_latest', 'is_popular'
-    ];
+
+    'name',
+
+    'slug',
+
+    'sku',
+
+    'description',
+
+    'brand',
+
+    'price',
+
+    'original_price',
+
+    'stock',
+
+    'top_category_id',
+
+    'mid_category_id',
+
+    'end_category_id',
+
+    'is_featured',
+
+    'is_latest',
+
+    'is_popular',
+
+    'status'
+];
 
     public function topCategory()
     {

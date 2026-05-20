@@ -37,6 +37,13 @@ class UpdateProductRequest extends FormRequest
             'is_popular' => 'boolean',
 
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+            'slug' => 'sometimes|string|max:255',
+
+            'sku' => 'nullable|string|max:255',
+
+            'brand' => 'nullable|string|max:255',
+
+            'status' => 'boolean',
         ];
     }
 }

@@ -37,6 +37,13 @@ class StoreProductRequest extends FormRequest
             'is_popular' => 'boolean',
 
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+            'slug' => 'required|string|max:255|unique:products,slug',
+
+            'sku' => 'nullable|string|max:255|unique:products,sku',
+
+            'brand' => 'nullable|string|max:255',
+
+            'status' => 'boolean',
         ];
     }
 }

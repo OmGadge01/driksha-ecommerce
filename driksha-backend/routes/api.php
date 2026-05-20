@@ -8,7 +8,6 @@ use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\AdminAuthController;
-
 use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
 
 

@@ -46,6 +46,13 @@ class ProductResource extends JsonResource
             }),
 
             'created_at' => $this->created_at,
+            'slug' => $this->slug,
+
+            'sku' => $this->sku,
+
+            'brand' => $this->brand,
+
+            'status' => $this->status,
         ];
     }
 }
