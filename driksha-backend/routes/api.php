@@ -1,22 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Admin\ProductController;
-use App\Http\Controllers\Api\Admin\CategoryController;
-use App\Http\Controllers\Api\Admin\OrderController;
- use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
-
-
-// Public Auth Routes
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CustomerController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+        Route::prefix('admin')->group(function () {
+            Route::apiResource('products', ProductController::class);
+            Route::apiResource('categories', CategoryController::class);
 
-// Authenticated User Routes
+            Route::get('orders', [OrderController::class, 'index']);
+            Route::get('orders/stats', [OrderController::class, 'stats']);
+            Route::Get('orders/{id}', [OrderController::class, 'show']);
+            Route::put('orders/{id}', [OrderController::class, 'updateStatus']);
 
+            Route::get('customers', [CustomerController::class, 'index']);
+            Route::get('customers/{id}', [CustomerController::class, 'show']);
+
+    });
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -24,29 +31,20 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
-});
+    //         Route::prefix('admin')->group(function () {
+    //         Route::apiResource('products', ProductController::class);
+    //         Route::apiResource('categories', CategoryController::class);
 
+    //         Route::get('orders', [OrderController::class, 'index']);
+    //         Route::get('orders/stats', [OrderController::class, 'stats']);
+    //         Route::Get('orders/{id}', [OrderController::class, 'show']);
+    //         Route::put('orders/{id}', [OrderController::class, 'updateStatus']);
 
-// Admin Routes
+    //         Route::get('customers', [CustomerController::class, 'index']);
+    //         Route::get('customers/{id}', [CustomerController::class, 'show']);
 
+    // });
 
-Route::middleware(['auth:sanctum', 'admin'])
-    ->prefix('admin')
-    ->group(function () {
-
-        Route::apiResource('products', ProductController::class);
-
-        Route::apiResource('categories', CategoryController::class);
-
-        Route::get('orders', [OrderController::class, 'index']);
-
-        Route::get('orders/stats', [OrderController::class, 'stats']);
-
-        Route::get('orders/{id}', [OrderController::class, 'show']);
-
-        Route::put('orders/{id}', [OrderController::class, 'updateStatus']);
-
-    });
 
 
     //customer routes
