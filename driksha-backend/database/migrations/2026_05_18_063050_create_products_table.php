@@ -6,26 +6,58 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+   
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
+
             $table->id();
+
             $table->string('name');
+
+            $table->string('slug')->unique();
+
+            $table->string('sku')->nullable()->unique();
+
             $table->text('description')->nullable();
-            $table->decimal('price', 10 , 2);
-            $table->decimal('original_price', 10 , 2)->nullable();
+
+            $table->string('brand')->nullable();
+
+            $table->decimal('price', 10, 2);
+
+            $table->decimal('original_price', 10, 2)->nullable();
+
             $table->integer('stock')->default(0);
+
             $table->unsignedBigInteger('top_category_id')->nullable();
+
             $table->unsignedBigInteger('mid_category_id')->nullable();
+
             $table->unsignedBigInteger('end_category_id')->nullable();
-            $table->foreign('top_category_id')->references('id')->on('categories')->onDelete('set null');
-            $table->foreign('mid_category_id')->references('id')->on('categories')->onDelete('set null');
-            $table->foreign('end_category_id')->references('id')->on('categories')->onDelete('set null');            $table->boolean('is_featured')->default(false);
+
+            $table->foreign('top_category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null');
+
+            $table->foreign('mid_category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null');
+
+            $table->foreign('end_category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('set null');
+
+            $table->boolean('is_featured')->default(false);
+
             $table->boolean('is_latest')->default(false);
+
             $table->boolean('is_popular')->default(false);
+
+            $table->boolean('status')->default(true);
+
             $table->timestamps();
         });
     }
