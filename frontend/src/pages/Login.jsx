@@ -76,7 +76,7 @@ const Login = () => {
                 onChange={handleChange}
               />
               <div className="text-right mt-1">
-                <span className="text-xs text-white/60 hover:text-white cursor-pointer transition">
+                <span className="text-xs font-medium text-gray-700 cursor-pointer transition">
                   Forgot password?
                 </span>
               </div>

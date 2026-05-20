@@ -25,7 +25,7 @@ export const CheckoutProvider = ({
     (total, item) =>
       total +
       Number(
-        item.price.replace("$", "")
+        item.price.replace("Rs", "")
       ) *
         item.quantity,
     0

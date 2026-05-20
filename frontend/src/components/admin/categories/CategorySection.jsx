@@ -74,7 +74,7 @@ export default function CategorySection({
               className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-[#f5f5ff] transition group"
             >
               <span className="text-sm text-gray-700">{item.name}</span>
-              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+              <div className="flex items-center gap-1">
                 <button
                   onClick={() => openEditModal(item)}
                   className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#e0e0ff] text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-white transition"

@@ -37,7 +37,7 @@ const NAV_SECTIONS = [
   {
     label: "Content",
     items: [
-      { name: "Banner / Slider", icon: MdOutlinePhoto, path: "/admin/banner"     },
+      { name: "Banner", icon: MdOutlinePhoto, path: "/admin/banner"     },
       { name: "FAQ Manager",     icon: MdOutlineHelp,  path: "/admin/faq"        },
       { name: "Newsletter",      icon: MdOutlineMail,  path: "/admin/newsletter" },
     ],

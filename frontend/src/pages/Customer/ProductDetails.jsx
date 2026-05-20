@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
 
-import MainLayout from "../../components/layout/MainLayout";
+import MainLayout from "../../components/customer/layout/MainLayout";
 
-import ProductGallery from "../../components/product/ProductGallery";
-import ProductInfo from "../../components/product/ProductInfo";
-import ProductSelectors from "../../components/product/ProductSelectors";
-import ProductActions from "../../components/product/ProductActions";
+import ProductGallery from "../../components/customer/product/ProductGallery";
+import ProductInfo from "../../components/customer/product/ProductInfo";
+import ProductSelectors from "../../components/customer/product/ProductSelectors";
+import ProductActions from "../../components/customer/product/ProductActions";
 
-import ProductShipping from "../../components/product/ProductShipping";
-import ProductTabs from "../../components/product/ProductTabs";
-import RelatedProducts from "../../components/product/RelatedProducts";
+import ProductShipping from "../../components/customer/product/ProductShipping";
+import ProductTabs from "../../components/customer/product/ProductTabs";
+import RelatedProducts from "../../components/customer/product/RelatedProducts";
 
-import Footer from "../../components/layout/Footer";
+import Footer from "../../components/customer/layout/Footer";
 
 import products from "../../data/products";
 
