@@ -1,25 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Api\Auth\AuthController;
-
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
-use App\Http\Controllers\Api\Admin\AdminAuthController;
-use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
+use App\Http\Controllers\Api\Admin\CustomerController;
+ use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
 
 
-// Customer Auth Routes
+// Public Auth Routes
 
 
 Route::post('/register', [AuthController::class, 'register']);
-
 Route::post('/login', [AuthController::class, 'login']);
 
 
-//Customer Protected Routes
+// Authenticated User Routes
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -31,26 +28,12 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-// Admin Auth Routes
-
-
-Route::prefix('admin')->group(function () {
-
-    Route::post('/login', [AdminAuthController::class, 'login']);
-
-});
-
-
-// Admin Protected Routes
+// Admin Routes
 
 
 Route::middleware(['auth:sanctum', 'admin'])
     ->prefix('admin')
     ->group(function () {
-
-        Route::get('/profile', [AdminAuthController::class, 'profile']);
-
-        Route::post('/logout', [AdminAuthController::class, 'logout']);
 
         Route::apiResource('products', ProductController::class);
 
@@ -62,14 +45,18 @@ Route::middleware(['auth:sanctum', 'admin'])
 
         Route::get('orders/{id}', [OrderController::class, 'show']);
 
-        Route::put('orders/{id}', [OrderController::class, 'updateStatus']);
+        Route::put('orders/{id}/status', [OrderController::class, 'updateStatus']);
+
+        Route::get('customers', [CustomerController::class, 'index']);
+
+        Route::get('customers/{id}', [CustomerController::class, 'show']);
 
     });
 
 
-// Customer Product Routes
-
-Route::prefix('customer')->group(function () {
+    //customer routes
+   
+    Route::prefix('customer')->group(function () {
 
     Route::get('products', [CustomerProductController::class, 'index']);
 
