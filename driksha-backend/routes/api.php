@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\CustomerController;
+use App\Http\COntrollers\Api\Admin\AdminAuthController;
  use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
 
 
@@ -31,6 +32,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Admin Routes
 
+Route::prefix('admin')->group(function () {
+
+    Route::post('/login', [AdminAuthController::class, 'login']);
+
+});
 
 Route::middleware(['auth:sanctum', 'admin'])
     ->prefix('admin')
