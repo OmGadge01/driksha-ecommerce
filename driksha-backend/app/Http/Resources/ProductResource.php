@@ -31,16 +31,25 @@ class ProductResource extends JsonResource
 
             'is_popular' => $this->is_popular,
 
-            'top_category' => $this->topCategory?->name,
+            'top_category' => $this->topCategory ? [
+                'id'   => $this->topCategory->id,
+                'name' => $this->topCategory->name,
+            ] : null,
 
-            'mid_category' => $this->midCategory?->name,
+            'mid_category' => $this->midCategory ? [
+                'id'   => $this->midCategory->id,
+                'name' => $this->midCategory->name,
+            ] : null,
 
-            'end_category' => $this->endCategory?->name,
+            'end_category' => $this->endCategory ? [
+                'id'   => $this->endCategory->id,
+                'name' => $this->endCategory->name,
+            ] : null,
 
             'images' => $this->images->map(function ($image) {
                 return [
                     'id' => $image->id,
-                    'image_path' => asset('storage/' . $image->image_path),
+                    'image_path' => $image->image_path,
                     'is_main' => $image->is_main,
                 ];
             }),

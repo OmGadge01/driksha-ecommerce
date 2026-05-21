@@ -3,6 +3,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductImage;
+use App\Models\Category;
+
 class Product extends Model 
 {
     protected $fillable = [

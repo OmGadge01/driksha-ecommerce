@@ -8,7 +8,9 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\CustomerController;
 use App\Http\COntrollers\Api\Admin\AdminAuthController;
- use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
+use App\Http\Controllers\Api\Admin\BannerController;
+use App\Http\Controllers\Api\Admin\FaqController;
+use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
 
 
 // Public Auth Routes
@@ -49,16 +51,14 @@ Route::middleware(['auth:sanctum', 'admin'])
         Route::apiResource('categories', CategoryController::class);
 
         Route::get('orders', [OrderController::class, 'index']);
-
         Route::get('orders/stats', [OrderController::class, 'stats']);
-
         Route::get('orders/{id}', [OrderController::class, 'show']);
-
         Route::put('orders/{id}/status', [OrderController::class, 'updateStatus']);
 
         Route::get('customers', [CustomerController::class, 'index']);
-
         Route::get('customers/{id}', [CustomerController::class, 'show']);
+
+        Route::apiResource('banners',  BannerController::class);
 
     });
 

@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use App\Http\Resources\ProductResource;
 
@@ -72,14 +73,21 @@ class ProductController extends Controller
 
 
         if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            if (!is_array($images)) {
+                    $images = [$images]; 
+            }
 
-            foreach ($request->file('images') as $index => $image) {
+            foreach ($images as $index => $image) {
 
-                $path = $image->store('products', 'public');
+                $uploaded = cloudinary()->uploadApi()->upload($image->getRealPath(), [
+                    'folder' => 'driksha/products'
+                ]);
 
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image_path' => $path,
+                    'image_path' => $uploaded['secure_url'],
+                    'public_id'  => $uploaded['public_id'],
                     'is_main' => $index === 0,
                 ]);
             }
@@ -173,14 +181,21 @@ class ProductController extends Controller
 
 
         if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            if (!is_array($images)) {
+                $images = [$images]; 
+            }
 
-            foreach ($request->file('images') as $image) {
+            foreach ($images as $index => $image) {
 
-                $path = $image->store('products', 'public');
+                $uploaded = cloudinary()->uploadApi()->upload($image->getRealPath(), [
+                    'folder' => 'driksha/products'
+                ]);
 
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image_path' => $path,
+                    'image_path' => $uploaded['secure_url'],
+                    'public_id'  => $uploaded['public_id'],
                     'is_main' => false,
                 ]);
             }
@@ -216,8 +231,9 @@ class ProductController extends Controller
 
         foreach ($product->images as $image) {
 
-            Storage::disk('public')->delete($image->image_path);
-
+            if($image->public_id) {
+               cloudinary()->uploadApi()->destroy($image->public_id);
+            }
             $image->delete();
         }
 
