@@ -49,7 +49,7 @@ class ProductResource extends JsonResource
             'images' => $this->images->map(function ($image) {
                 return [
                     'id' => $image->id,
-                    'image_path' => $image->image_path,
+                    'image_path' => stripcslashes($image->image_path),
                     'is_main' => $image->is_main,
                 ];
             }),
