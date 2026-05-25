@@ -1,8 +1,8 @@
 const STATUS_STYLES = {
-  Delivered:  "bg-green-100 text-green-600",
-  Processing: "bg-purple-100 text-purple-600",
-  Pending:    "bg-orange-100 text-orange-600",
-  Cancelled:  "bg-red-100 text-red-600",
+  Delivered:  "bg-success-light text-success",
+  Processing: "bg-info-light text-info",
+  Pending:    "bg-warning-light text-warning",
+  Cancelled:  "bg-danger-light text-danger",
 };
 
 export default function StatusBadge({ status }) {

@@ -48,7 +48,7 @@ export default function FaqManager() {
   });
 
   return (
-    <div className="p-4 md:p-6 min-h-screen bg-[#f8f8ff]">
+    <div className="p-4 md:p-6 min-h-screen bg-admin-bg">
       <div className="flex items-center justify-between mb-5 md:mb-6">
         <div>
           <h1 className="text-base md:text-lg font-semibold text-gray-800">FAQ Manager</h1>
@@ -58,9 +58,7 @@ export default function FaqManager() {
         </div>
         <button
           onClick={openAdd}
-          className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5
-                     bg-[#6C63FF] hover:bg-[#5a52e0] text-white text-xs md:text-sm
-                     font-medium rounded-xl transition"
+          className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-primary hover:bg-primary-dark text-white text-xs md:text-sm font-medium rounded-xl transition"
         >
           <MdOutlineAdd size={17} />
           {/* Hide text on very small screens */}
@@ -68,7 +66,7 @@ export default function FaqManager() {
           <span className="inline xs:hidden sm:hidden">Add</span>
         </button>
       </div>
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl p-3 md:p-4 mb-4 md:mb-5 flex flex-col gap-3">
+      <div className="bg-admin-card border border-admin-border rounded-2xl p-3 md:p-4 mb-4 md:mb-5 flex flex-col gap-3">
         <SearchBar
           value={search}
           onChange={setSearch}
@@ -82,8 +80,8 @@ export default function FaqManager() {
               onClick={() => setFilterCat(cat)}
               className={`text-xs px-2.5 md:px-3 py-1 md:py-1.5 rounded-xl font-medium transition ${
                 filterCat === cat
-                  ? "bg-[#6C63FF] text-white"
-                  : "bg-[#f0f0ff] text-[#6C63FF] hover:bg-[#e8e8ff]"
+                  ? "bg-primary text-white"
+                  : "bg-primary-light text-primary hover:bg-admin-border"
               }`}
             >
               {cat}
@@ -92,7 +90,7 @@ export default function FaqManager() {
         </div>
       </div>
       {filtered.length === 0 ? (
-        <div className="bg-white border border-dashed border-[#e0e0ff] rounded-2xl p-8 md:p-10 text-center">
+        <div className="bg-admin-card border border-dashed border-admin-border rounded-2xl p-8 md:p-10 text-center">
           <MdOutlineQuestionAnswer size={36} className="text-gray-200 mx-auto mb-2" />
           <p className="text-sm text-gray-400">
             {search || filterCat !== "All"

@@ -10,7 +10,7 @@ function Field({ label, type = "text", placeholder, value, onChange }) {
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="border border-[#e0e0ff] rounded-xl px-3 py-2.5 text-sm text-gray-700 outline-none focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/10 transition placeholder:text-gray-300 bg-white"
+        className="border border-admin-border rounded-xl px-3 py-2.5 text-sm text-gray-700 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition placeholder:text-gray-300 bg-white"
       />
     </div>
   );
@@ -49,7 +49,7 @@ export default function BannerModal({ banner, onClose, onSave }) {
         <div className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-gray-600">Banner Image</label>
           <div
-            className="relative w-full h-28 rounded-xl border-2 border-dashed border-[#e0e0ff] flex flex-col items-center justify-center cursor-pointer hover:border-[#6C63FF] hover:bg-[#f8f8ff] transition overflow-hidden"
+            className="relative w-full h-28 rounded-xl border-2 border-dashed border-admin-border flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-primary-light transition overflow-hidden"
             style={{ backgroundColor: form.image ? "transparent" : form.bgColor + "15" }}
             onClick={() => imageRef.current.click()}
           >
@@ -61,7 +61,7 @@ export default function BannerModal({ banner, onClose, onSave }) {
               />
             ) : (
               <>
-                <MdOutlineCloudUpload size={24} className="text-[#6C63FF]" />
+                <MdOutlineCloudUpload size={24} className="text-primary" />
                 <span className="text-xs text-gray-400 mt-1">Click to upload image</span>
               </>
             )}
@@ -83,7 +83,7 @@ export default function BannerModal({ banner, onClose, onSave }) {
             type="color"
             value={form.bgColor}
             onChange={(e) => update("bgColor", e.target.value)}
-            className="w-10 h-8 rounded-lg border border-[#e0e0ff] cursor-pointer"
+            className="w-10 h-8 rounded-lg border border-admin-border cursor-pointer"
           />
           <span className="text-xs text-gray-400">{form.bgColor}</span>
         </div>
@@ -113,11 +113,11 @@ export default function BannerModal({ banner, onClose, onSave }) {
           onChange={(v) => update("buttonLink", v)}
         />
 
-        <div className="flex items-center justify-between p-3 bg-[#f8f8ff] rounded-xl border border-[#e0e0ff]">
+        <div className="flex items-center justify-between p-3 bg-admin-bg rounded-xl border border-admin-border">
           <span className="text-sm text-gray-700">Show on site</span>
           <button
             onClick={() => update("active", !form.active)}
-            className={`relative w-11 h-6 rounded-full transition-colors ${form.active ? "bg-[#6C63FF]" : "bg-gray-200"}`}
+            className={`relative w-11 h-6 rounded-full transition-colors ${form.active ? "bg-primary" : "bg-gray-200"}`}
           >
             <div
               className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${form.active ? "translate-x-5" : "translate-x-0.5"}`}
@@ -127,7 +127,7 @@ export default function BannerModal({ banner, onClose, onSave }) {
 
         <button
           onClick={() => onSave(form)}
-          className="flex items-center justify-center gap-2 w-full py-2.5 bg-[#6C63FF] hover:bg-[#5a52e0] text-white text-sm font-medium rounded-xl transition"
+          className="flex items-center justify-center gap-2 w-full py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-xl transition"
         >
           <MdOutlineSave size={16} />
           {banner.id ? "Save Changes" : "Add Banner"}

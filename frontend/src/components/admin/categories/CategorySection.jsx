@@ -41,7 +41,7 @@ export default function CategorySection({
   }
 
   return (
-    <div className={`bg-white border border-[#e0e0ff] rounded-2xl p-5 flex flex-col gap-4 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
+    <div className={`bg-admin-card border border-admin-border rounded-2xl p-5 flex flex-col gap-4 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
@@ -49,7 +49,7 @@ export default function CategorySection({
         </div>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-[#6C63FF] hover:bg-[#5a52e0] text-white text-xs font-medium rounded-xl transition"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-primary hover:bg-primary-dark text-white text-xs font-medium rounded-xl transition"
         >
           <MdOutlineAdd size={15} />
           Add
@@ -71,20 +71,20 @@ export default function CategorySection({
           {items.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-[#f5f5ff] transition group"
+              className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-primary-light transition group"
             >
               <span className="text-sm text-gray-700">{item.name}</span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => openEditModal(item)}
-                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#e0e0ff] text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-white transition"
+                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-admin-border text-gray-400 hover:border-primary hover:text-primary hover:bg-white transition"
                   title="Edit"
                 >
                   <MdOutlineEdit size={14} />
                 </button>
                 <button
                   onClick={() => setDeleteTarget(item)}
-                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-[#e0e0ff] text-gray-400 hover:border-red-400 hover:text-red-400 hover:bg-red-50 transition"
+                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-admin-border text-gray-400 hover:border-danger hover:text-danger hover:bg-danger-light transition"
                   title="Delete"
                 >
                   <MdOutlineDelete size={14} />

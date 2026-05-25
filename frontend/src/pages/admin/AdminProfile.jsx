@@ -26,7 +26,7 @@ function InputField({
         {label}
       </label>
 
-      <div className="flex items-center gap-3 border border-[#e4e4ff] rounded-xl px-3 py-3 bg-white focus-within:border-[#6C63FF]">
+      <div className="flex items-center gap-3 border border-admin-border rounded-xl px-3 py-3 bg-white focus-within:border-primary">
         <Icon className="text-gray-400 text-lg shrink-0" />
 
         <input
@@ -67,7 +67,7 @@ export default function AdminProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f8ff] p-4 sm:p-6">
+    <div className="min-h-screen bg-admin-bg p-4 sm:p-6">
       <div className="mb-6">
         <h1 className="text-xl font-semibold text-gray-800">
           My Profile
@@ -86,9 +86,9 @@ export default function AdminProfile() {
           </div>
         )}
 
-        <div className="bg-white border border-[#e4e4ff] rounded-2xl p-4 sm:p-6">
+        <div className="bg-white border border-admin-border rounded-2xl p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
-            <div className="w-16 h-16 rounded-full bg-[#6C63FF] flex items-center justify-center text-white text-2xl font-semibold shrink-0">
+            <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-2xl font-semibold shrink-0">
               {form.name.charAt(0)}
             </div>
 
@@ -103,7 +103,7 @@ export default function AdminProfile() {
             </div>
           </div>
 
-          <div className="h-px bg-[#f1f1ff] mb-5" />
+          <div className="h-px bg-admin-border mb-5" />
 
           <div className="flex flex-col gap-4">
             <InputField
@@ -141,7 +141,7 @@ export default function AdminProfile() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full flex items-center justify-center gap-2 bg-[#6C63FF] hover:bg-[#5d55f6] text-white py-3 rounded-xl text-sm font-medium transition disabled:opacity-60 mt-2"
+              className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white py-3 rounded-xl text-sm font-medium transition disabled:opacity-60 mt-2"
             >
               {saving ? (
                 <>

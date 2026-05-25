@@ -82,7 +82,7 @@ export default function Customers() {
   const topSpender     = customers.reduce((a, b) => (a.totalSpent > b.totalSpent ? a : b));
 
   return (
-    <div className="p-4 sm:p-6 min-h-screen bg-[#f8f8ff]">
+    <div className="p-4 sm:p-6 min-h-screen bg-admin-bg">
 
       <div className="mb-5">
         <h1 className="text-lg font-semibold text-gray-800">Customers</h1>
@@ -90,24 +90,9 @@ export default function Customers() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-5">
-        <StatCard
-          icon={MdOutlinePeopleAlt}
-          label="Total Customers"
-          count={totalCustomers}
-          color="bg-[#6C63FF]"
-        />
-        <StatCard
-          icon={MdOutlinePersonAdd}
-          label="New This Month"
-          count={newThisMonth}
-          color="bg-[#FF6584]"
-        />
-        <StatCard
-          icon={MdOutlineStarBorder}
-          label="Top Spender"
-          count={`₹${topSpender.totalSpent.toLocaleString()}`}
-          color="bg-amber-400"
-        />
+        <StatCard icon={MdOutlinePeopleAlt} label="Total Customers" value={totalCustomers} color="bg-primary" />
+        <StatCard icon={MdOutlinePersonAdd} label="New This Month" value={newThisMonth} color="bg-info" />
+        <StatCard icon={MdOutlineStarBorder} label="Top Spender" value={`₹${topSpender.totalSpent.toLocaleString()}`} color="bg-warning" />
       </div>
 
       <div className="mb-4">

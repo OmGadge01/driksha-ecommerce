@@ -21,7 +21,7 @@ function PasswordField({
         {label}
       </label>
 
-      <div className="flex items-center gap-3 border border-[#e4e4ff] rounded-xl px-3 py-3 bg-white focus-within:border-[#6C63FF]">
+      <div className="flex items-center gap-3 border border-admin-border rounded-xl px-3 py-3 bg-white focus-within:border-primary">
         <MdOutlineLock className="text-gray-400 text-lg shrink-0" />
 
         <input
@@ -121,7 +121,7 @@ export default function AdminChangePassword() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f8ff] p-4 sm:p-6">
+    <div className="min-h-screen bg-admin-bg p-4 sm:p-6">
       <div className="mb-6">
         <h1 className="text-xl font-semibold text-gray-800">
           Change Password
@@ -147,7 +147,7 @@ export default function AdminChangePassword() {
           </div>
         )}
 
-        <div className="bg-white border border-[#e4e4ff] rounded-2xl p-4 sm:p-6">
+        <div className="bg-white border border-admin-border rounded-2xl p-4 sm:p-6">
           <div className="flex flex-col gap-5">
             <PasswordField
               label="Current Password"
@@ -158,7 +158,7 @@ export default function AdminChangePassword() {
               }
             />
 
-            <div className="h-px bg-[#f1f1ff]" />
+            <div className="h-px bg-admin-border" />
 
             <PasswordField
               label="New Password"
@@ -179,7 +179,7 @@ export default function AdminChangePassword() {
             />
 
             {form.newPassword && (
-              <div className="bg-[#f8f8ff] border border-[#e4e4ff] rounded-xl p-4">
+              <div className="bg-admin-bg border border-admin-border rounded-xl p-4">
                 <p className="text-sm font-medium text-gray-700 mb-3">
                   Password Strength
                 </p>
@@ -230,7 +230,7 @@ export default function AdminChangePassword() {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="w-full flex items-center justify-center gap-2 bg-[#6C63FF] hover:bg-[#5d55f6] text-white py-3 rounded-xl text-sm font-medium transition disabled:opacity-60 mt-1"
+              className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white py-3 rounded-xl text-sm font-medium transition disabled:opacity-60 mt-1"
             >
               {saving ? (
                 <>

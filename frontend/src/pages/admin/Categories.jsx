@@ -85,22 +85,22 @@ export default function Categories() {
   const currentEndItems = selectedMid ? (endCategories[selectedMid.id] || []) : [];
 
   return (
-    <div className="p-4 sm:p-6 min-h-screen bg-[#f8f8ff]">
+    <div className="p-4 sm:p-6 min-h-screen bg-admin-bg">
 
       <div className="mb-5">
         <h1 className="text-lg font-semibold text-gray-800">Categories</h1>
         <p className="text-xs text-gray-400 mt-0.5">Manage your 3-level category structure</p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 sm:gap-3 bg-[#f0efff] border border-[#e0e0ff] rounded-xl px-3 sm:px-4 py-3 mb-5">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3 bg-primary-light border border-admin-border rounded-xl px-3 sm:px-4 py-3 mb-5">
         {[
           { step: 1, label: "Select a Top Category" },
           { step: 2, label: "Select a Mid Category" },
           { step: 3, label: "Manage End Categories" },
         ].map((item, index) => (
           <div key={item.step} className="flex items-center gap-1.5 sm:gap-2">
-            <div className="flex items-center gap-1.5 text-xs text-[#6C63FF] font-medium">
-              <span className="w-5 h-5 bg-[#6C63FF] text-white rounded-full flex items-center justify-center text-[10px] shrink-0">
+            <div className="flex items-center gap-1.5 text-xs text-primary font-medium">
+              <span className="w-5 h-5 bg-primary text-white rounded-full flex items-center justify-center text-[10px] shrink-0">
                 {item.step}
               </span>
               <span className="hidden sm:inline">{item.label}</span>
@@ -110,15 +110,13 @@ export default function Categories() {
         ))}
       </div>
 
-      <div className="sm:hidden flex border border-[#e0e0ff] rounded-xl overflow-hidden mb-4 bg-white">
+      <div className="sm:hidden flex border border-admin-border rounded-xl overflow-hidden mb-4 bg-admin-card">
         {["Top", "Mid", "End"].map((tab, i) => (
           <button
             key={tab}
             onClick={() => setActiveStep(i + 1)}
             className={`flex-1 py-2.5 text-xs font-medium transition ${
-              activeStep === i + 1
-                ? "bg-[#6C63FF] text-white"
-                : "text-gray-500 hover:bg-[#f5f5ff]"
+              activeStep === i + 1 ? "bg-primary text-white" : "text-gray-500 hover:bg-primary-light"
             }`}
           >
             {tab} Level
@@ -138,7 +136,7 @@ export default function Categories() {
             disabled={false}
           />
           {selectedTop && (
-            <div className="bg-[#f0efff] border border-[#e0e0ff] rounded-xl px-3 py-2 text-xs text-[#6C63FF] font-medium text-center">
+            <div className="bg-primary-light border border-admin-border rounded-xl px-3 py-2 text-xs text-primary font-medium text-center">
               Selected: {selectedTop.name}
             </div>
           )}
@@ -146,7 +144,7 @@ export default function Categories() {
 
         <div className="flex flex-col gap-3">
           {!selectedTop ? (
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5">
+            <div className="bg-admin-card border border-admin-border rounded-2xl p-5">
               <p className="text-xs text-gray-400 text-center py-4">Select a top category first</p>
             </div>
           ) : (
@@ -161,7 +159,7 @@ export default function Categories() {
             />
           )}
           {selectedMid && (
-            <div className="bg-[#f0efff] border border-[#e0e0ff] rounded-xl px-3 py-2 text-xs text-[#6C63FF] font-medium text-center">
+            <div className="bg-primary-light border border-admin-border rounded-xl px-3 py-2 text-xs text-primary font-medium text-center">
               Selected: {selectedMid.name}
             </div>
           )}
@@ -169,7 +167,7 @@ export default function Categories() {
 
         <div>
           {!selectedMid ? (
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5">
+            <div className="bg-admin-card border border-admin-border rounded-2xl p-5">
               <p className="text-xs text-gray-400 text-center py-4">Select a mid category first</p>
             </div>
           ) : (
@@ -200,7 +198,7 @@ export default function Categories() {
         )}
         {activeStep === 2 && (
           !selectedTop ? (
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5">
+            <div className="bg-admin-card border border-admin-border rounded-2xl p-5">
               <p className="text-xs text-gray-400 text-center py-4">Select a top category first</p>
             </div>
           ) : (
@@ -217,7 +215,7 @@ export default function Categories() {
         )}
         {activeStep === 3 && (
           !selectedMid ? (
-            <div className="bg-white border border-[#e0e0ff] rounded-2xl p-5">
+            <div className="bg-admin-card border border-admin-border rounded-2xl p-5">
               <p className="text-xs text-gray-400 text-center py-4">Select a mid category first</p>
             </div>
           ) : (
@@ -234,7 +232,7 @@ export default function Categories() {
         )}
       </div>
 
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 sm:p-5">
+      <div className="bg-admin-card border border-admin-border rounded-2xl p-4 sm:p-5">
         <h2 className="text-sm font-semibold text-gray-700 mb-3">
           Click a top category to manage its mid categories
         </h2>
@@ -242,15 +240,11 @@ export default function Categories() {
           {topCategories.map((item) => (
             <button
               key={item.id}
-              onClick={() => {
-                setSelectedTop(item);
-                setSelectedMid(null);
-                setActiveStep(2);
-              }}
+              onClick={() => { setSelectedTop(item); setSelectedMid(null); setActiveStep(2); }}
               className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition ${
                 selectedTop?.id === item.id
-                  ? "bg-[#6C63FF] text-white border-[#6C63FF]"
-                  : "bg-white text-gray-500 border-gray-200 hover:border-[#6C63FF] hover:text-[#6C63FF]"
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white text-gray-500 border-gray-200 hover:border-primary hover:text-primary"
               }`}
             >
               {item.name}
@@ -267,14 +261,11 @@ export default function Categories() {
               {currentMidItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => {
-                    setSelectedMid(item);
-                    setActiveStep(3);
-                  }}
+                  onClick={() => { setSelectedMid(item); setActiveStep(3); }}
                   className={`px-3 py-1.5 rounded-xl text-xs font-medium border transition ${
                     selectedMid?.id === item.id
-                      ? "bg-[#FF6584] text-white border-[#FF6584]"
-                      : "bg-white text-gray-500 border-gray-200 hover:border-[#FF6584] hover:text-[#FF6584]"
+                      ? "bg-danger text-white border-danger"
+                      : "bg-white text-gray-500 border-gray-200 hover:border-danger hover:text-danger"
                   }`}
                 >
                   {item.name}

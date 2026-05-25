@@ -5,14 +5,14 @@ import BannerModal from "../../components/admin/banner/BannerModal";
 import DeleteModal from "../../components/admin/shared/DeleteModal";
 
 const INITIAL_BANNERS = [
-  { id: 1, title: "Summer Sale is Live!", subtitle: "Up to 50% off on selected items", buttonText: "Shop Now", buttonLink: "/sale", image: null, bgColor: "#6C63FF", active: true },
-  { id: 2, title: "New Arrivals", subtitle: "Check out the latest products just added", buttonText: "Explore", buttonLink: "/new", image: null, bgColor: "#f472b6", active: true },
-  { id: 3, title: "Free Shipping", subtitle: "On all orders above ₹499", buttonText: "Learn More", buttonLink: "/shipping", image: null, bgColor: "#a78bfa", active: false },
+  { id: 1, title: "Summer Sale is Live!", subtitle: "Up to 50% off on selected items", buttonText: "Shop Now", buttonLink: "/sale", image: null, bgColor: "#F97316", active: true },
+  { id: 2, title: "New Arrivals", subtitle: "Check out the latest products just added", buttonText: "Explore", buttonLink: "/new", image: null, bgColor: "#8888bf", active: true },
+  { id: 3, title: "Free Shipping", subtitle: "On all orders above ₹499", buttonText: "Learn More", buttonLink: "/shipping", image: null, bgColor: "#EF4444", active: false },
 ];
 
 const EMPTY_BANNER = {
   id: null, title: "", subtitle: "", buttonText: "", buttonLink: "",
-  image: null, bgColor: "#6C63FF", active: true,
+  image: null, bgColor: "#F97316", active: true,
 };
 
 export default function Banner() {
@@ -47,7 +47,7 @@ export default function Banner() {
   const activeCount = banners.filter((b) => b.active).length;
 
   return (
-    <div className="p-4 sm:p-6 min-h-screen bg-[#f8f8ff]">
+    <div className="p-4 sm:p-6 min-h-screen bg-admin-bg">
 
       <div className="flex items-center justify-between mb-5">
         <div>
@@ -58,14 +58,14 @@ export default function Banner() {
         </div>
         <button
           onClick={openAdd}
-          className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-[#6C63FF] hover:bg-[#5a52e0] text-white text-sm font-medium rounded-xl transition"
+          className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-xl transition"
         >
           <MdOutlineAdd size={18} />
           <span>Add Banner</span>
         </button>
       </div>
 
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 mb-5">
+      <div className="bg-admin-card border border-admin-border rounded-2xl p-4 mb-5">
         <p className="text-xs text-gray-500 leading-relaxed">
           💡 <span className="font-medium text-gray-700">Tip: </span>
           Banners will appear on the homepage as a slider in the order shown below.
@@ -74,7 +74,7 @@ export default function Banner() {
       </div>
 
       {banners.length === 0 ? (
-        <div className="bg-white border border-dashed border-[#e0e0ff] rounded-2xl p-10 text-center">
+        <div className="bg-admin-card border border-dashed border-admin-border rounded-2xl p-10 text-center">
           <MdOutlineImage size={36} className="text-gray-200 mx-auto mb-2" />
           <p className="text-sm text-gray-400">No banner found. Click "Add Banner".</p>
         </div>

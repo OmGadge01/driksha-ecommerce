@@ -1,6 +1,6 @@
 export default function StatCard({ icon: Icon, label, value, color, change }) {
   return (
-    <div className="bg-white border border-[#e0e0ff] rounded-2xl p-4 flex items-center gap-3">
+    <div className="bg-admin-card border border-admin-border rounded-2xl p-4 flex items-center gap-3">
       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
         {Icon && <Icon size={20} className="text-white" />}
       </div>

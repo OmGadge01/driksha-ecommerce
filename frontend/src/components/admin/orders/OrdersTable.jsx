@@ -5,7 +5,7 @@ export default function OrdersTable({ orders, onView }) {
 
   if (orders.length === 0) {
     return (
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl py-16 text-center">
+      <div className="bg-admin-card border border-admin-border rounded-2xl py-16 text-center">
         <MdOutlineInbox size={36} className="text-gray-200 mx-auto mb-2" />
         <p className="text-sm text-gray-400">No orders found</p>
         <p className="text-xs text-gray-300 mt-1">Try changing the search or filter</p>
@@ -18,10 +18,7 @@ export default function OrdersTable({ orders, onView }) {
       {/* Mobile — Card View */}
       <div className="flex flex-col gap-3 md:hidden">
         {orders.map((order) => (
-          <div
-            key={order.id}
-            className="bg-white border border-[#e0e0ff] rounded-2xl p-4 flex flex-col gap-3"
-          >
+          <div key={order.id} className="bg-admin-card border border-admin-border rounded-2xl p-4 flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <span className="text-sm font-semibold text-gray-700">#{order.id}</span>
               <StatusBadge status={order.status} />
@@ -37,13 +34,13 @@ export default function OrdersTable({ orders, onView }) {
               <span>{order.date}</span>
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-[#f5f5ff]">
+            <div className="flex items-center justify-between pt-2 border-t border-admin-border">
               <span className="text-sm font-semibold text-gray-700">
                 ₹{order.amount.toLocaleString()}
               </span>
               <button
                 onClick={() => onView(order)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e0e0ff] text-xs text-gray-500 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-admin-border text-xs text-gray-500 hover:border-primary hover:text-primary hover:bg-primary-light transition"
               >
                 <MdOutlineVisibility size={14} />
                 View Details
@@ -54,10 +51,10 @@ export default function OrdersTable({ orders, onView }) {
       </div>
 
       {/* Desktop — Table View */}
-      <div className="hidden md:block bg-white border border-[#e0e0ff] rounded-2xl overflow-hidden">
+      <div className="hidden md:block bg-admin-card border border-admin-border rounded-2xl overflow-hidden">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="bg-[#f5f5ff] border-b border-[#e0e0ff]">
+            <tr className="bg-primary-light border-b border-admin-border">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Order ID</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Customer</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Items</th>
@@ -71,7 +68,7 @@ export default function OrdersTable({ orders, onView }) {
             {orders.map((order, idx) => (
               <tr
                 key={order.id}
-                className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${
+                className={`border-b border-admin-border hover:bg-primary-light transition ${
                   idx === orders.length - 1 ? "border-b-0" : ""
                 }`}
               >
@@ -101,7 +98,7 @@ export default function OrdersTable({ orders, onView }) {
                 <td className="px-4 py-3">
                   <button
                     onClick={() => onView(order)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#e0e0ff] text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-admin-border text-gray-400 hover:border-primary hover:text-primary hover:bg-primary-light transition"
                     title="View order details"
                   >
                     <MdOutlineVisibility size={16} />

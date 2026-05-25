@@ -13,7 +13,7 @@ export default function DeleteModal({ isOpen, title, message, onCancel, onConfir
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-2.5 border border-[#e0e0ff] rounded-xl text-sm text-gray-600 hover:bg-gray-50 transition"
+            className="flex-1 py-2.5 border border-admin-border rounded-xl text-sm text-gray-600 hover:bg-gray-50 transition"
           >
             Cancel
           </button>

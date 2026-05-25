@@ -7,7 +7,7 @@ export default function BannerCard({ banner, index, onEdit, onDelete, onToggle }
   return (
     <div
       className={`bg-white rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 border transition ${
-        banner.active ? "border-[#e0e0ff]" : "border-gray-200 opacity-60"
+        banner.active ? "border-admin-border" : "border-gray-200 opacity-60"
       }`}
     >
       <MdOutlineDragIndicator size={20} className="text-gray-300 shrink-0 cursor-grab hidden sm:block" />
@@ -31,7 +31,7 @@ export default function BannerCard({ banner, index, onEdit, onDelete, onToggle }
           {banner.subtitle || "No subtitle"}
         </p>
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-[10px] bg-[#f0f0ff] text-[#6C63FF] px-2 py-0.5 rounded-full font-medium shrink-0">
+          <span className="text-[10px] bg-primary-light text-primary px-2 py-0.5 rounded-full font-medium shrink-0">
             {banner.buttonText || "No button"}
           </span>
           <span className="text-[10px] text-gray-300 truncate hidden sm:block">
@@ -48,7 +48,7 @@ export default function BannerCard({ banner, index, onEdit, onDelete, onToggle }
         <button
           onClick={() => onToggle(banner.id)}
           title={banner.active ? "Hide banner" : "Show banner"}
-          className="p-1.5 sm:p-2 rounded-xl hover:bg-[#f5f5ff] text-gray-400 hover:text-[#6C63FF] transition"
+          className="p-1.5 sm:p-2 rounded-xl hover:bg-primary-light text-gray-400 hover:text-primary transition"
         >
           {banner.active
             ? <MdOutlineVisibility size={17} />
@@ -58,7 +58,7 @@ export default function BannerCard({ banner, index, onEdit, onDelete, onToggle }
 
         <button
           onClick={() => onEdit(banner)}
-          className="p-1.5 sm:p-2 rounded-xl hover:bg-[#f5f5ff] text-gray-400 hover:text-[#6C63FF] transition"
+          className="p-1.5 sm:p-2 rounded-xl hover:bg-primary-light text-gray-400 hover:text-primary transition"
         >
           <MdOutlineEdit size={17} />
         </button>

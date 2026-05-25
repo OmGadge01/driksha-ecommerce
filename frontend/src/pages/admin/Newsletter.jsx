@@ -52,7 +52,7 @@ export default function Newsletter() {
   }
 
   return (
-    <div className="p-4 md:p-6 min-h-screen bg-[#f8f8ff]">
+    <div className="p-4 md:p-6 min-h-screen bg-admin-bg">
 
       <div className="flex items-center justify-between mb-5 md:mb-6">
         <div>
@@ -63,9 +63,7 @@ export default function Newsletter() {
         </div>
         <button
           onClick={handleExport}
-          className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5
-                     border border-[#6C63FF] text-[#6C63FF] text-xs md:text-sm
-                     font-medium rounded-xl hover:bg-[#f5f5ff] transition"
+          className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 border border-primary text-primary text-xs md:text-sm font-medium rounded-xl hover:bg-primary-light transition"
         >
           <MdOutlineDownload size={16} />
           <span className="hidden sm:inline">Export CSV</span>
@@ -78,7 +76,7 @@ export default function Newsletter() {
           icon={MdOutlinePeopleAlt}
           label="Total Subscribers"
           value={subscribers.length}
-          color="bg-[#6C63FF]"
+          color="bg-primary"
         />
       </div>
 
@@ -91,15 +89,15 @@ export default function Newsletter() {
 
       <div className="hidden md:block">
         {filtered.length === 0 ? (
-          <div className="bg-white border border-[#e0e0ff] rounded-2xl py-16 text-center">
+          <div className="bg-admin-card border border-admin-border rounded-2xl py-16 text-center">
             <MdOutlineEmail size={36} className="text-gray-200 mx-auto mb-2" />
             <p className="text-sm text-gray-400">No subscribers found</p>
           </div>
         ) : (
-          <div className="bg-white border border-[#e0e0ff] rounded-2xl overflow-hidden">
+          <div className="bg-admin-card border border-admin-border rounded-2xl overflow-hidden">
             <table className="w-full border-collapse text-sm">
               <thead>
-                <tr className="bg-[#f5f5ff] border-b border-[#e0e0ff]">
+                <tr className="bg-primary-light border-b border-admin-border">
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">#</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Name</th>
                   <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Email</th>
@@ -111,14 +109,14 @@ export default function Newsletter() {
                 {filtered.map((subscriber, idx) => (
                   <tr
                     key={subscriber.id}
-                    className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${
+                    className={`border-b border-admin-border hover:bg-primary-light transition ${
                       idx === filtered.length - 1 ? "border-b-0" : ""
                     }`}
                   >
                     <td className="px-4 py-3 text-xs text-gray-400">{idx + 1}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-[#6C63FF] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+                        <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold shrink-0">
                           {subscriber.name.charAt(0)}
                         </div>
                         <span className="text-sm font-medium text-gray-700">{subscriber.name}</span>
@@ -133,9 +131,7 @@ export default function Newsletter() {
                     <td className="px-4 py-3">
                       <button
                         onClick={() => setDeleteTarget(subscriber)}
-                        className="w-8 h-8 flex items-center justify-center rounded-lg
-                                   border border-[#e0e0ff] text-gray-400 hover:border-red-400
-                                   hover:text-red-400 hover:bg-red-50 transition"
+                        className="w-8 h-8 flex items-center justify-center rounded-lg border border-admin-border text-gray-400 hover:border-danger hover:text-danger hover:bg-danger-light transition"
                         title="Remove subscriber"
                       >
                         <MdOutlineDelete size={16} />
@@ -151,7 +147,7 @@ export default function Newsletter() {
 
       <div className="flex flex-col gap-2 md:hidden">
         {filtered.length === 0 ? (
-          <div className="bg-white border border-[#e0e0ff] rounded-2xl py-12 text-center">
+          <div className="bg-admin-card border border-admin-border rounded-2xl py-12 text-center">
             <MdOutlineEmail size={32} className="text-gray-200 mx-auto mb-2" />
             <p className="text-sm text-gray-400">No subscribers found</p>
           </div>
@@ -159,10 +155,10 @@ export default function Newsletter() {
           filtered.map((subscriber) => (
             <div
               key={subscriber.id}
-              className="bg-white border border-[#e0e0ff] rounded-2xl p-3 md:p-4 flex items-center justify-between gap-3"
+              className="bg-admin-card border border-admin-border rounded-2xl p-3 md:p-4 flex items-center justify-between gap-3"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-full bg-[#6C63FF] flex items-center justify-center text-white text-sm font-bold shrink-0">
+                <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold shrink-0">
                   {subscriber.name.charAt(0)}
                 </div>
                 <div className="min-w-0">
@@ -179,9 +175,7 @@ export default function Newsletter() {
               </div>
               <button
                 onClick={() => setDeleteTarget(subscriber)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#e0e0ff]
-                           text-gray-400 hover:border-red-400 hover:text-red-400 hover:bg-red-50
-                           transition shrink-0"
+                className="w-8 h-8 flex items-center justify-center rounded-lg border border-admin-border text-gray-400 hover:border-danger hover:text-danger hover:bg-danger-light transition shrink-0"
               >
                 <MdOutlineDelete size={16} />
               </button>

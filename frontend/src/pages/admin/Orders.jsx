@@ -79,7 +79,7 @@ export default function Orders() {
   const deliveredCount  = orders.filter((o) => o.status === "Delivered").length;
 
   return (
-    <div className="p-4 sm:p-6 min-h-screen bg-[#f8f8ff]">
+    <div className="p-4 sm:p-6 min-h-screen bg-admin-bg">
 
       <div className="mb-5">
         <h1 className="text-lg font-semibold text-gray-800">Orders</h1>
@@ -87,10 +87,10 @@ export default function Orders() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4 mb-5">
-        <StatCard icon={MdOutlineShoppingCart} label="Total Orders"  count={totalOrders} color="bg-[#6C63FF]"  />
-        <StatCard icon={MdOutlineHourglassEmpty} label="Pending" count={pendingCount} color="bg-orange-400" />
-        <StatCard icon={MdOutlineLocalShipping} label="Processing" count={processingCount} color="bg-purple-400" />
-        <StatCard icon={MdOutlineLocalShipping} label="Delivered" count={deliveredCount} color="bg-green-500"  />
+        <StatCard icon={MdOutlineShoppingCart} label="Total Orders" value={totalOrders} color="bg-primary" />
+        <StatCard icon={MdOutlineHourglassEmpty} label="Pending" value={pendingCount} color="bg-warning" />
+        <StatCard icon={MdOutlineLocalShipping} label="Processing" value={processingCount} color="bg-info" />
+        <StatCard icon={MdOutlineLocalShipping} label="Delivered" value={deliveredCount} color="bg-success" />
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
@@ -107,8 +107,8 @@ export default function Orders() {
               onClick={() => setFilter(filter)}
               className={`text-xs px-3 py-1.5 rounded-xl border transition-all duration-150 ${
                 activeFilter === filter
-                  ? "bg-[#6C63FF] text-white border-[#6C63FF]"
-                  : "bg-white text-gray-500 border-gray-200 hover:border-[#6C63FF] hover:text-[#6C63FF]"
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white text-gray-500 border-gray-200 hover:border-primary hover:text-primary"
               }`}
             >
               {filter}

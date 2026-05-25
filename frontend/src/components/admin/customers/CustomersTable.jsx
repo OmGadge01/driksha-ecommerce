@@ -3,7 +3,7 @@ import { MdOutlineVisibility, MdOutlinePeopleAlt } from "react-icons/md";
 export default function CustomersTable({ customers, onView }) {
   if (customers.length === 0) {
     return (
-      <div className="bg-white border border-[#e0e0ff] rounded-2xl py-16 text-center">
+      <div className="bg-admin-card border border-admin-border rounded-2xl py-16 text-center">
         <MdOutlinePeopleAlt size={36} className="text-gray-200 mx-auto mb-2" />
         <p className="text-sm text-gray-400">No customers found</p>
         <p className="text-xs text-gray-300 mt-1">Try changing the search</p>
@@ -16,12 +16,9 @@ export default function CustomersTable({ customers, onView }) {
       {/* Mobile — Card View */}
       <div className="flex flex-col gap-3 md:hidden">
         {customers.map((customer) => (
-          <div
-            key={customer.id}
-            className="bg-white border border-[#e0e0ff] rounded-2xl p-4 flex flex-col gap-3"
-          >
+          <div key={customer.id} className="bg-admin-card border border-admin-border rounded-2xl p-4 flex flex-col gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#6C63FF] flex items-center justify-center text-white text-sm font-bold shrink-0">
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold shrink-0">
                 {customer.name.charAt(0)}
               </div>
               <div>
@@ -31,27 +28,27 @@ export default function CustomersTable({ customers, onView }) {
             </div>
 
             <div className="grid grid-cols-2 gap-2">
-              <div className="bg-[#f8f8ff] rounded-xl px-3 py-2">
+              <div className="bg-admin-bg rounded-xl px-3 py-2">
                 <p className="text-[10px] text-gray-400 mb-0.5">Phone</p>
                 <p className="text-xs font-medium text-gray-700">{customer.phone}</p>
               </div>
-              <div className="bg-[#f8f8ff] rounded-xl px-3 py-2">
+              <div className="bg-admin-bg rounded-xl px-3 py-2">
                 <p className="text-[10px] text-gray-400 mb-0.5">Joined</p>
                 <p className="text-xs font-medium text-gray-700">{customer.joinedDate}</p>
               </div>
-              <div className="bg-[#f8f8ff] rounded-xl px-3 py-2">
+              <div className="bg-admin-bg rounded-xl px-3 py-2">
                 <p className="text-[10px] text-gray-400 mb-0.5">Total Orders</p>
                 <p className="text-xs font-medium text-gray-700">{customer.totalOrders}</p>
               </div>
-              <div className="bg-[#f8f8ff] rounded-xl px-3 py-2">
+              <div className="bg-admin-bg rounded-xl px-3 py-2">
                 <p className="text-[10px] text-gray-400 mb-0.5">Total Spent</p>
-                <p className="text-xs font-semibold text-[#6C63FF]">₹{customer.totalSpent.toLocaleString()}</p>
+                <p className="text-xs font-semibold text-primary">₹{customer.totalSpent.toLocaleString()}</p>
               </div>
             </div>
 
             <button
               onClick={() => onView(customer)}
-              className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl border border-[#e0e0ff] text-xs text-gray-500 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
+              className="w-full flex items-center justify-center gap-1.5 py-2 rounded-xl border border-admin-border text-xs text-gray-500 hover:border-primary hover:text-primary hover:bg-primary-light transition"
             >
               <MdOutlineVisibility size={14} />
               View Details
@@ -61,10 +58,10 @@ export default function CustomersTable({ customers, onView }) {
       </div>
 
       {/* Desktop — Table View */}
-      <div className="hidden md:block bg-white border border-[#e0e0ff] rounded-2xl overflow-hidden">
+      <div className="hidden md:block bg-admin-card border border-admin-border rounded-2xl overflow-hidden">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="bg-[#f5f5ff] border-b border-[#e0e0ff]">
+            <tr className="bg-primary-light border-b border-admin-border">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Customer</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Phone</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Total Orders</th>
@@ -77,13 +74,13 @@ export default function CustomersTable({ customers, onView }) {
             {customers.map((customer, idx) => (
               <tr
                 key={customer.id}
-                className={`border-b border-[#f5f5ff] hover:bg-[#fafaff] transition ${
+                className={`border-b border-admin-border hover:bg-primary-light transition ${
                   idx === customers.length - 1 ? "border-b-0" : ""
                 }`}
               >
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-[#6C63FF] flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">
                       {customer.name.charAt(0)}
                     </div>
                     <div>
@@ -99,7 +96,7 @@ export default function CustomersTable({ customers, onView }) {
                   <span className="text-sm font-medium text-gray-700">{customer.totalOrders}</span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="text-sm font-semibold text-[#6C63FF]">
+                  <span className="text-sm font-semibold text-primary">
                     ₹{customer.totalSpent.toLocaleString()}
                   </span>
                 </td>
@@ -109,7 +106,7 @@ export default function CustomersTable({ customers, onView }) {
                 <td className="px-4 py-3">
                   <button
                     onClick={() => onView(customer)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#e0e0ff] text-gray-400 hover:border-[#6C63FF] hover:text-[#6C63FF] hover:bg-[#f5f5ff] transition"
+                    className="w-8 h-8 flex items-center justify-center rounded-lg border border-admin-border text-gray-400 hover:border-primary hover:text-primary hover:bg-primary-light transition"
                     title="View customer details"
                   >
                     <MdOutlineVisibility size={16} />

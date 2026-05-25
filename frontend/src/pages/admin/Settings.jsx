@@ -41,7 +41,7 @@ function InputField({
         {label}
       </label>
 
-      <div className="flex items-center gap-3 border border-[#e4e4ff] rounded-xl px-3 py-3 bg-white focus-within:border-[#6C63FF]">
+    <div className="flex items-center gap-3 border border-admin-border rounded-xl px-3 py-3 bg-white focus-within:border-primary">
         {Icon && (
           <Icon className="text-gray-400 text-lg shrink-0" />
         )}
@@ -60,7 +60,7 @@ function InputField({
 
 function Card({ title, subtitle, children }) {
   return (
-    <div className="bg-white border border-[#e4e4ff] rounded-2xl p-4 sm:p-5">
+    <div className="bg-white border border-admin-border rounded-2xl p-4 sm:p-5">
       <div className="mb-5">
         <h2 className="text-base font-semibold text-gray-800">
           {title}
@@ -121,7 +121,7 @@ export default function Settings() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f8ff] p-4 sm:p-6">
+    <div className="min-h-screen bg-admin-bg p-4 sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold text-gray-800">
@@ -136,7 +136,7 @@ export default function Settings() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#6C63FF] hover:bg-[#5d55f6] text-white px-5 py-3 rounded-xl text-sm font-medium transition disabled:opacity-60"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-3 rounded-xl text-sm font-medium transition disabled:opacity-60"
         >
           {saving ? (
             <>
@@ -169,7 +169,7 @@ export default function Settings() {
             </label>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <div className="w-20 h-20 border border-[#e4e4ff] rounded-xl overflow-hidden bg-[#f8f8ff] flex items-center justify-center shrink-0">
+              <div className="w-20 h-20 border border-admin-border rounded-xl overflow-hidden bg-admin-bg flex items-center justify-center shrink-0">
                 {logo ? (
                   <img
                     src={logo}
@@ -187,7 +187,7 @@ export default function Settings() {
                 <button
                   type="button"
                   onClick={() => logoInputRef.current.click()}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 border border-[#e4e4ff] hover:border-[#6C63FF] hover:text-[#6C63FF] px-4 py-3 rounded-xl text-sm text-gray-600 transition"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 border border-admin-border hover:border-primary hover:text-primary px-4 py-3 rounded-xl text-sm text-gray-600 transition"
                 >
                   <MdOutlineCloudUpload size={18} />
                   Upload Logo
@@ -260,7 +260,7 @@ export default function Settings() {
               Address
             </label>
 
-            <div className="flex gap-3 border border-[#e4e4ff] rounded-xl px-3 py-3 bg-white focus-within:border-[#6C63FF]">
+            <div className="flex gap-3 border border-admin-border rounded-xl px-3 py-3 bg-white focus-within:border-primary">
               <MdOutlineLocationOn className="text-gray-400 text-lg mt-1 shrink-0" />
 
               <textarea
