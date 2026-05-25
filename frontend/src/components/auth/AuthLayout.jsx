@@ -13,8 +13,8 @@ const AuthLayout = ({ children }) => {
         relative
         overflow-hidden
         bg-gradient-to-br
-        from-[#6C63FF]
-        to-[#FF6584]
+        from-primary
+        to-secondary
       "
     >
    

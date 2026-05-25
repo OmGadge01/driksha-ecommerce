@@ -31,9 +31,9 @@ const PasswordInput = ({
             outline-none
             transition-all
             duration-300
-            focus:border-[#6C63FF]
+            focus:border-primary
             focus:ring-4
-            focus:ring-purple-100
+            focus:ring-primary/10
             bg-white
           "
         />

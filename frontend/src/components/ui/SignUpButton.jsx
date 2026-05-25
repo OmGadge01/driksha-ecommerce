@@ -16,11 +16,11 @@ const Button = ({
         w-full
         h-10
         rounded-xl
-        bg-[#6C63FF]
+        bg-primary
         text-white
         text-sm
         font-medium
-        hover:bg-[#5b52f5]
+        hover:bg-primary-dark
         transition-all
         "
     >

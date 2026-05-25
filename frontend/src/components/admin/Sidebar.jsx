@@ -37,9 +37,9 @@ const NAV_SECTIONS = [
   {
     label: "Content",
     items: [
-      { name: "Banner / Slider", icon: MdOutlinePhoto, path: "/admin/banner"     },
-      { name: "FAQ Manager",     icon: MdOutlineHelp,  path: "/admin/faq"        },
-      { name: "Newsletter",      icon: MdOutlineMail,  path: "/admin/newsletter" },
+      { name: "Banner",       icon: MdOutlinePhoto, path: "/admin/banner"     },
+      { name: "FAQ Manager",  icon: MdOutlineHelp,  path: "/admin/faq"        },
+      { name: "Newsletter",   icon: MdOutlineMail,  path: "/admin/newsletter" },
     ],
   },
   {
@@ -60,16 +60,13 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   }
 
   const SidebarContent = () => (
-    <aside className="w-56 h-full bg-white border-r border-[#e0e0ff] flex flex-col px-3 py-5">
+    <aside className="w-64 h-full bg-admin-sidebar border-r border-white/10 flex flex-col px-3 py-5">
       <div className="px-2 mb-6 flex items-center justify-between">
         <div>
-          <p className="text-[#6C63FF] text-base font-semibold tracking-tight">Admin Panel</p>
-          <p className="text-gray-400 text-xs mt-0.5">Driksha Infotech</p>
+          <p className="text-primary text-base font-semibold tracking-tight">Admin Panel</p>
+          <p className="text-gray-500 text-xs mt-0.5">Driksha Infotech</p>
         </div>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="md:hidden text-gray-400 hover:text-gray-600"
-        >
+        <button onClick={() => setIsOpen(false)} className="md:hidden text-gray-400 hover:text-gray-600">
           <MdOutlineClose size={20} />
         </button>
       </div>
@@ -77,7 +74,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         {NAV_SECTIONS.map((section, si) => (
           <div key={si}>
             {section.label && (
-              <p className="text-[10px] font-medium uppercase tracking-widest text-gray-300 px-3 pt-4 pb-1">
+              <p className="text-[10px] font-medium uppercase tracking-widest text-gray-500 px-3 pt-4 pb-1">
                 {section.label}
               </p>
             )}
@@ -91,15 +88,15 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-150 w-full
-                     ${isActive ? "bg-[#6C63FF] text-white font-medium" : "text-gray-500 hover:bg-[#f5f5ff] hover:text-[#6C63FF]"}`
+                     ${isActive ? "bg-primary text-white font-medium" : "text-gray-400 hover:bg-admin-sidebar-hover hover:text-white"}`
                   }
                 >
                   {({ isActive }) => (
                     <>
-                      <Icon size={19} className={`shrink-0 ${isActive ? "text-white" : "text-gray-400"}`} />
+                      <Icon size={19} className={`shrink-0 ${isActive ? "text-white" : "text-gray-500"}`} />
                       <span className="flex-1">{item.name}</span>
                       {item.badge && (
-                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${isActive ? "bg-white/30 text-white" : "bg-[#FF6584] text-white"}`}>
+                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${isActive ? "bg-white/30 text-white" : "bg-danger text-white"}`}>
                           {item.badge}
                         </span>
                       )}
@@ -111,20 +108,20 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           </div>
         ))}
       </nav>
-      <div className="mt-4 border-t border-[#e0e0ff] pt-4 flex flex-col gap-1">
-        <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl hover:bg-[#f5f5ff] cursor-pointer transition">
-          <div className="w-7 h-7 rounded-full bg-[#6C63FF] flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+      <div className="mt-4 border-t border-white/10 pt-4 flex flex-col gap-1">
+        <div className="flex items-center gap-2.5 px-2 py-2 rounded-xl hover:bg-admin-sidebar-hover cursor-pointer transition">
+          <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-[10px] font-bold shrink-0">
             AD
           </div>
           <div className="leading-tight">
-            <p className="text-gray-700 text-xs font-medium">Admin</p>
-            <p className="text-gray-400 text-[10px]">Super admin</p>
+            <p className="text-white text-xs font-medium">Admin</p>
+            <p className="text-gray-500 text-[10px]">Super admin</p>
           </div>
         </div>
         <button
           onClick={handleLogout}
           disabled={loggingOut}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[#FF6584] hover:bg-[#fff0f3] transition-all duration-150 w-full text-left disabled:opacity-50"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-danger hover:bg-admin-sidebar-hover transition-all duration-150 w-full text-left disabled:opacity-50"
         >
           <MdOutlineLogout size={19} className="shrink-0" />
           {loggingOut ? "Logging out..." : "Logout"}
@@ -138,9 +135,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       <div className="hidden md:block shrink-0 h-screen overflow-y-auto">
         <SidebarContent />
       </div>
-      <div
-        className={`md:hidden fixed inset-0 z-40 flex transition-all duration-300 ${isOpen ? "visible" : "invisible"}`}
-      >
+      <div className={`md:hidden fixed inset-0 z-40 flex transition-all duration-300 ${isOpen ? "visible" : "invisible"}`}>
         <div
           className={`fixed inset-0 bg-black/30 transition-opacity duration-300 ${isOpen ? "opacity-100" : "opacity-0"}`}
           onClick={() => setIsOpen(false)}
