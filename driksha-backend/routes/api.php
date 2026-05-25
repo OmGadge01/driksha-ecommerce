@@ -13,6 +13,11 @@ use App\Http\Controllers\Api\Admin\FaqController;
 use App\Http\Controllers\Api\Admin\NewsletterController;
 use App\Http\Controllers\Api\Admin\SettingsController;
 use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
+use App\Http\Controllers\Api\Customer\CategoryController as CustomerCategoryController;
+use App\Http\Controllers\Api\Customer\CartController;
+use App\Http\Controllers\Api\Customer\CheckoutController;
+use App\Http\Controllers\Api\Customer\OrderController as CustomerOrderController;
+use App\Http\Controllers\Api\Customer\AddressController;
 
 
 // Public Auth Routes
@@ -60,7 +65,7 @@ Route::middleware(['auth:sanctum', 'admin'])
         Route::get('customers', [CustomerController::class, 'index']);
         Route::get('customers/{id}', [CustomerController::class, 'show']);
 
-        Route::apiResource('banners',  BannerController::class);
+        Route::apiResource('banners', BannerController::class);
 
         Route::get('newsletter', [NewsletterController::class, 'index']);
         Route::get('newsletter/export', [NewsletterController::class, 'export']);
@@ -69,12 +74,14 @@ Route::middleware(['auth:sanctum', 'admin'])
         Route::get('settings', [SettingsController::class, 'index']);
         Route::put('settings', [SettingsController::class, 'update']);
 
+
+
     });
 
 
-    //customer routes
-   
-    Route::prefix('customer')->group(function () {
+//customer routes
+
+Route::prefix('customer')->group(function () {
 
     Route::get('products', [CustomerProductController::class, 'index']);
 
@@ -82,6 +89,63 @@ Route::middleware(['auth:sanctum', 'admin'])
 
     Route::get('products/latest', [CustomerProductController::class, 'latestProducts']);
 
-    Route::get('products/{id}', [CustomerProductController::class, 'show']);
+    Route::get('products/{slug}', [CustomerProductController::class, 'show']);
+
+    Route::get('categories', [CustomerCategoryController::class, 'index']);
+
+    Route::get(
+        'categories/{slug}/products',
+        [CustomerCategoryController::class, 'products']
+    );
+
+    //cart routes
+    Route::middleware('auth:sanctum')->group(function () {
+
+        Route::get('/cart', [CartController::class, 'index']);
+
+        Route::post('/cart', [CartController::class, 'store']);
+
+        Route::put('/cart/{id}', [CartController::class, 'update']);
+
+        Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+
+        Route::post(
+            '/checkout',
+            [CheckoutController::class, 'store']
+        );
+        Route::get(
+            '/orders',
+            [CustomerOrderController::class, 'index']
+        );
+
+        Route::get(
+            '/orders/{id}',
+            [CustomerOrderController::class, 'show']
+        );
+
+        //addressed routes
+        Route::get(
+            '/customer/addresses',
+            [AddressController::class, 'index']
+        );
+
+        Route::post(
+            '/customer/addresses',
+            [AddressController::class, 'store']
+        );
+
+        Route::put(
+            '/customer/addresses/{id}',
+            [AddressController::class, 'update']
+        );
+
+        Route::delete(
+            '/customer/addresses/{id}',
+            [AddressController::class, 'destroy']
+        );
+
+    });
+
+
 
 });
