@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\Admin\CustomerController;
 use App\Http\COntrollers\Api\Admin\AdminAuthController;
 use App\Http\Controllers\Api\Admin\BannerController;
 use App\Http\Controllers\Api\Admin\FaqController;
+use App\Http\Controllers\Api\Admin\NewsletterController;
+use App\Http\Controllers\Api\Admin\SettingsController;
 use App\Http\Controllers\Api\Customer\ProductController as CustomerProductController;
 
 
@@ -59,6 +61,13 @@ Route::middleware(['auth:sanctum', 'admin'])
         Route::get('customers/{id}', [CustomerController::class, 'show']);
 
         Route::apiResource('banners',  BannerController::class);
+
+        Route::get('newsletter', [NewsletterController::class, 'index']);
+        Route::get('newsletter/export', [NewsletterController::class, 'export']);
+        Route::delete('newsletter/{id}', [NewsletterController::class, 'destroy']);
+
+        Route::get('settings', [SettingsController::class, 'index']);
+        Route::put('settings', [SettingsController::class, 'update']);
 
     });
 
