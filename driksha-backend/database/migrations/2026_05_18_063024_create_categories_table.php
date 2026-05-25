@@ -12,11 +12,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
+
             $table->id();
+
             $table->string('name');
+
+            $table->string('slug')->unique();
+
             $table->enum('type', ['top', 'mid', 'end']);
+
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
+
+            $table->string('image')->nullable();
+
+            $table->boolean('status')->default(true);
+
+            $table->integer('sort_order')->default(0);
+
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

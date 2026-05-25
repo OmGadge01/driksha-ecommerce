@@ -2,105 +2,235 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Http\Request;
+
+use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Storage;
+
+use App\Http\Controllers\Controller;
+
+use App\Http\Resources\CategoryResource;
+
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
-   public function index() 
-   {
-    $top = Category::where('type', 'top')->get();
-    $mid = Category::where('type', 'mid')->get();
-    $end = Category::where('type', 'end')->get();
+    /*
+    |--------------------------------------------------------------------------
+    | Get All Categories
+    |--------------------------------------------------------------------------
+    */
 
-    return response()->json([
-        'success' => true,
-        'data' => [
-            'top' => $top,
-            'mid' => $mid,
-            'end' => $end,
-        ]
-    ]);
-   }
+    public function index()
+    {
+        $categories = Category::with('parent')
+            ->orderBy('sort_order')
+            ->latest()
+            ->get();
 
-   public function store(Request $request) 
-   {
-    $request->validate([
-        'name' => 'required|string',
-        'type' => 'required|in:top,mid,end',
-        'parent_id' => 'nullable|exists:categories,id'
-    ]);
+        return response()->json([
 
-    $category = Category::create([
-        'name' => $request->name,
-        'type' => $request->type,
-        'parent_id' => $request->parent_id,
-    ]);
+            'success' => true,
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Category created successfully',
-        'data' => $category
-    ], 201);
-   }
+            'data' => CategoryResource::collection($categories)
 
-   public function show($id) 
-   {
-        $category = Category::find($id);
+        ]);
+    }
 
-        if(!$category) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Create Category
+    |--------------------------------------------------------------------------
+    */
+
+    public function store(StoreCategoryRequest $request)
+    {
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+
+            $imagePath = $request->file('image')
+                ->store('categories', 'public');
+        }
+
+
+        $category = Category::create([
+
+            'name' => $request->name,
+
+            'slug' => $request->slug
+                ? Str::slug($request->slug)
+                : Str::slug($request->name),
+
+            'type' => $request->type,
+
+            'parent_id' => $request->parent_id,
+
+            'image' => $imagePath,
+
+            'status' => $request->status ?? true,
+
+            'sort_order' => $request->sort_order ?? 0,
+        ]);
+
+
+        return response()->json([
+
+            'success' => true,
+
+            'message' => 'Category created successfully',
+
+            'data' => new CategoryResource(
+                $category->load('parent')
+            )
+
+        ], 201);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Show Single Category
+    |--------------------------------------------------------------------------
+    */
+
+    public function show($id)
+    {
+        $category = Category::with('parent')->find($id);
+
+        if (!$category) {
+
             return response()->json([
+
                 'success' => false,
+
                 'message' => 'Category not found'
+
             ], 404);
         }
 
+
         return response()->json([
+
             'success' => true,
-            'data' => $category
+
+            'data' => new CategoryResource($category)
+
         ]);
-   }
-
-   public function update(Request $request , $id) 
-   {
-    $category = Category::find($id);
-
-    if(!$category) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Category not found'
-        ], 404);
     }
 
-    $category->update([
-        'name' => $request->name ?? $category->name,
-        'type' => $request->type ?? $category->type,
-        'parent_id' => $request->parent_id ?? $category->parent_id,
-    ]);
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Category updated successfully',
-        'data' => $category
-    ]);
-   }
+    /*
+    |--------------------------------------------------------------------------
+    | Update Category
+    |--------------------------------------------------------------------------
+    */
 
-   public function destroy($id) {
-    $category = Category::find($id);
+    public function update(UpdateCategoryRequest $request, $id)
+    {
+        $category = Category::find($id);
 
-    if (!$category) {
+        if (!$category) {
+
+            return response()->json([
+
+                'success' => false,
+
+                'message' => 'Category not found'
+
+            ], 404);
+        }
+
+
+        $imagePath = $category->image;
+
+
+        if ($request->hasFile('image')) {
+
+            if ($category->image) {
+
+                Storage::disk('public')->delete($category->image);
+            }
+
+            $imagePath = $request->file('image')
+                ->store('categories', 'public');
+        }
+
+
+        $category->update([
+
+            'name' => $request->name ?? $category->name,
+
+            'slug' => $request->slug
+                ? Str::slug($request->slug)
+                : $category->slug,
+
+            'type' => $request->type ?? $category->type,
+
+            'parent_id' => $request->parent_id ?? $category->parent_id,
+
+            'image' => $imagePath,
+
+            'status' => $request->status ?? $category->status,
+
+            'sort_order' => $request->sort_order ?? $category->sort_order,
+        ]);
+
+
         return response()->json([
-            'success' => false,
-            'message' => 'Category not found'
-        ], 404);
+
+            'success' => true,
+
+            'message' => 'Category updated successfully',
+
+            'data' => new CategoryResource(
+                $category->load('parent')
+            )
+
+        ]);
     }
 
-    $category->delete();
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Category deleted successfully'
-    ]);
-   }
+    /*
+    |--------------------------------------------------------------------------
+    | Delete Category
+    |--------------------------------------------------------------------------
+    */
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+
+        if (!$category) {
+
+            return response()->json([
+
+                'success' => false,
+
+                'message' => 'Category not found'
+
+            ], 404);
+        }
+
+
+        if ($category->image) {
+
+            Storage::disk('public')->delete($category->image);
+        }
+
+
+        $category->delete();
+
+
+        return response()->json([
+
+            'success' => true,
+
+            'message' => 'Category deleted successfully'
+
+        ]);
+    }
 }
