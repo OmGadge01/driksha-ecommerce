@@ -1,13 +1,13 @@
 import { Route } from "react-router-dom";
 
-import Home from "../pages/customer/Home";
-import Collections from "../pages/customer/Collection";
-import ProductDetails from "../pages/customer/ProductDetails";
-import Cart from "../pages/customer/Cart";
-import Checkout from "../pages/customer/Checkout";
-import NewArrivals from "../pages/customer/NewArrivals";
-import Wishlist from "../pages/customer/Wishlist";
-import Account from "../pages/customer/Account";
+import Home from "../pages/Customer/Home";
+import Collections from "../pages/Customer/Collection";
+import ProductDetails from "../pages/Customer/ProductDetails";
+import Cart from "../pages/Customer/Cart";
+import Checkout from "../pages/Customer/Checkout";
+import NewArrivals from "../pages/Customer/NewArrivals";
+import Wishlist from "../pages/Customer/Wishlist";
+import Account from "../pages/Customer/Account";
 
 const CustomerRoutes = () => {
   return (
