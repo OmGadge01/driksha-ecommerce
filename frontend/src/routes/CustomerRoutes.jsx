@@ -2,7 +2,7 @@ import { Route } from "react-router-dom";
 
 import Home from "../pages/customer/Home";
 import Collections from "../pages/customer/Collection";
-import ProductDetails from "../pages/Customer/ProductDetails";
+import ProductDetails from "../pages/customer/ProductDetails";
 import Cart from "../pages/customer/Cart";
 import Checkout from "../pages/customer/Checkout";
 import NewArrivals from "../pages/customer/NewArrivals";
